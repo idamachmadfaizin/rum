@@ -1,5 +1,5 @@
 
-<footer class="bg-gray" style="margin-top: 100px;">
+<footer class="bg-gray" style="margin-top: 50px;">
    <div class="container">
       <div class="row" style="padding-bottom: 50px;">
          <div class="col-sm-5 row-footer">

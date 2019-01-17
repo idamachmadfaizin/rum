@@ -38,13 +38,13 @@
 
 						<div class="item-slick3" data-thumb="<?php echo base_url()?>assets/img/banner_carousel/card 338.png">
 							<div class="wrap-pic-w">
-								<img src="<?php echo base_url()?>assets/fashe/images/product-detail-02.jpg" alt="IMG-PRODUCT">
+								<img src="<?php echo base_url()?>assets/img/banner_carousel/card 338.png">
 							</div>
 						</div>
 
 						<div class="item-slick3" data-thumb="<?php echo base_url()?>assets/img/banner_carousel/card 338.png">
 							<div class="wrap-pic-w">
-								<img src="<?php echo base_url()?>assets/fashe/images/product-detail-03.jpg" alt="IMG-PRODUCT">
+								<img src="<?php echo base_url()?>assets/img/banner_carousel/card 338.png">
 							</div>
 						</div>
 					</div>
