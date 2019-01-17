@@ -66,21 +66,19 @@ a.nounderline {
 	text-transform: uppercase;
 }
 
-.detail-image-product{
-
-}
-
-.mini-card{
+.mini-card {
 	width: 100px;
 	height: 100px;
 	max-width: 100px;
 	max-height: 100px;
 	margin-bottom: 23px;
 }
-.margin-none{
+
+.margin-none {
 	margin: 0;
 }
-.big-card{
+
+.big-card {
 	width: 346px;
 	height: 346px;
 	max-width: 346px;
@@ -98,8 +96,19 @@ a.nounderline {
 	}
 
 	.logorum {
+		display: block;
+		position: absolute;
+		left: 52px;
+		top: 70%;
+		-webkit-transform: translateY(-50%);
+		-moz-transform: translateY(-50%);
+		-ms-transform: translateY(-50%);
+		-o-transform: translateY(-50%);
+		transform: translateY(-50%)
+	}
+	.logorum img{
 		width: auto !important;
-		height: 100px !important;
+		max-height: 70px !important;
 	}
 
 	/* Navigation */
