@@ -5,6 +5,6 @@ class Detail_product extends CI_Controller {
 
 	public function index()
 	{
-        $this->load->view('detail_product');
+        $this->load->view('detail_product_v');
 	}
 }

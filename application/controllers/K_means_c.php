@@ -11,6 +11,7 @@ class K_means_c extends CI_Controller {
 
 	public function index()
 	{
+      $data['totKmeans'] = $this->Rum_model->getTotalKmeans();
       $query = $this->Rum_model->getAllTable('detail_kmeans');
       $data['k_means'] = $query->result_array();
 
