@@ -1,4 +1,4 @@
-<?php $this->load->view('partials/header2'); ?>
+<?php $this->load->view('partials/header2');?>
 
 	<!-- breadcrumb -->
 	<div class="bread-crumb bgwhite flex-w p-l-52 p-r-15 p-t-30 p-l-15-sm">
@@ -30,39 +30,25 @@
 					<div class="wrap-slick3-dots"></div>
 
 					<div class="slick3">
-						<div class="item-slick3" data-thumb="<?php echo base_url()?>assets/img/banner_carousel/card 338.png">
-							<div class="wrap-pic-w">
-								<img src="<?php echo base_url()?>assets/img/banner_carousel/card 338.png" alt="IMG-PRODUCT">
+						<?php foreach ($detailProduk as $key => $detail): ?>
+							<div class="item-slick3" data-thumb="<?php echo base_url() . $detail['url_image'];?>">
+								<div class="wrap-pic-w">
+									<img src="<?php echo base_url() . $detail['url_image'];?>" alt="IMG-PRODUCT">
+								</div>
 							</div>
-						</div>
-
-						<div class="item-slick3" data-thumb="<?php echo base_url()?>assets/img/banner_carousel/card 338.png">
-							<div class="wrap-pic-w">
-								<img src="<?php echo base_url()?>assets/img/banner_carousel/card 338.png">
-							</div>
-						</div>
-
-						<div class="item-slick3" data-thumb="<?php echo base_url()?>assets/img/banner_carousel/card 338.png">
-							<div class="wrap-pic-w">
-								<img src="<?php echo base_url()?>assets/img/banner_carousel/card 338.png">
-							</div>
-						</div>
+						<?php endforeach ?>
 					</div>
 				</div>
 			</div>
 
 			<div class="w-size14 p-t-30 respon5">
 				<h4 class="product-detail-name m-text16 p-b-13">
-					Boxy T-Shirt with Roll Sleeve Detail
+					<?php echo $detailProduk[0]['nama_produk'] ?>
 				</h4>
 
 				<span class="m-text17">
-					$22
+					Rp <?php echo $detailProduk[0]['harga_produk'] ?>
 				</span>
-
-				<p class="s-text8 p-t-10">
-					Nulla eget sem vitae eros pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare feugiat.
-				</p>
 
 				<!--  -->
 				<div class="p-t-33 p-b-60">
@@ -92,8 +78,8 @@
 				</div>
 
 				<div class="p-b-45">
-					<span class="s-text8 m-r-35">SKU: MUG-01</span>
-					<span class="s-text8">Categories: Mug, Design</span>
+					<!-- <span class="s-text8 m-r-35">SKU: MUG-01</span> -->
+					<span class="s-text8">Categories: <?php echo $detailProduk[0]['nama_kategori'] ?></span>
 				</div>
 
 				<!--  -->
@@ -106,7 +92,7 @@
 
 					<div class="dropdown-content dis-none p-t-15 p-b-23">
 						<p class="s-text8">
-							Fusce ornare mi vel risus porttitor dignissim. Nunc eget risus at ipsum blandit ornare vel sed velit. Proin gravida arcu nisl, a dignissim mauris placerat
+							<?php echo $detailProduk[0]['deskripsi_produk'] ?>
 						</p>
 					</div>
 				</div>

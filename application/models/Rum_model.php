@@ -17,4 +17,16 @@ class Rum_model extends CI_Model
         
         return $this->db->query($query);
     }
+    public function getDetailProduk($id_produk)
+    {
+        $this->db->select('produk.id_produk, nama_kategori, nama_produk, harga_produk, deskripsi_produk, url_image');
+        $this->db->from('produk');
+        $this->db->join('image', 'image.id_produk = produk.id_produk');
+        $this->db->join('kategori', 'kategori.id_kategori = produk.id_produk');
+        $this->db->where('produk.id_produk', $id_produk);
+        // $this->db->where('produk.nama_produk', $id_produk);
+
+        $query = $this->db->get();
+        return $query;
+    }
 }
