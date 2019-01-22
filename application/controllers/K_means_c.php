@@ -17,9 +17,7 @@ class K_means_c extends CI_Controller {
       // $data['totKmeans'] = $this->Rum_model->getTotalKmeans();
       $query = $this->Rum_model->getAllTable('detail_kmeans');
       
-      $totKmeans = array();
       $totKmeans = $this->Rum_model->getTotalKmeans();
-      $k_means = array();
       $k_means = $query->result_array();
 
       // Get length of  array $k_means
@@ -51,5 +49,11 @@ class K_means_c extends CI_Controller {
       // $data['k_means'] = $query->result_array();
 
 	   $this->load->view('k_means_v');
-	}
+   }
+   
+   public function coba()
+   {
+
+      $this->load->view('k_means_v');
+   }
 }
