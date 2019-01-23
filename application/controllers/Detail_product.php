@@ -34,10 +34,11 @@ class Detail_product extends CI_Controller {
         $k_means = $query->result_array();
 
         // Get length of  array $k_means
-        $arrLength = 0;
-        foreach ($k_means as $key => $value) {
-            $arrLength += 1;
-        };
+        // Embo iki digawe ta gak koyok e gak
+        // $arrLength = 0;
+        // foreach ($k_means as $key => $value) {
+        //     $arrLength += 1;
+        // };
 
         // Insert array from db format k-means
         $sample = array();
@@ -50,42 +51,104 @@ class Detail_product extends CI_Controller {
             }else {
                 $j++;
                 array_push($arr1, $value['nilai']);
+                // Push to arr $sample
                 $sample[$j] = $arr1;
+                // reset arr1
                 $arr1 = array();
             }
         }
-
+        
+        // Script to clustering
         // Number of cluster
         $numCluster = 2;
         $k_means = new KMeans($numCluster);
         // cluster result in array
         $cluster = $k_means->cluster($sample);
+        // print_r($cluster);
+        
+        // script for passing data $insT_Cluster to Model
+        $insT_Cluster = array();
+        $arr1 = array('group_cluster' => '', 'id_detail_kmeans' => '');
+        for ($numC=0; $numC < $numCluster; $numC++) {
+            foreach ($cluster[$numC] as $key => $iddetail) {
+                $arr1['group_cluster'] = $numC;
+                $arr1['id_detail_kmeans'] = $key;
+                array_push($insT_Cluster, $arr1);
+            }
+        }
 
-        $query = $this->Rum_model->getAllTable('detail_kmeans');
-        $detail_kmeans = $query->result_array();
+        $affected = $this->Rum_model->insMultiRows('cluster', $insT_Cluster);
+        print_r($affected);
+
+
+
+
+        // foreach ($cluster as $key => $value) {
+        //     echo '<br>cluster'.$key.'<br>';
+        //     foreach ($cluster[$key] as $key2 => $value2) {
+        //         echo 'id detail '.$key2.'<br>';
+        //     }
+        // };
 
         
-        // convert id_detail_kmeans to id_produk
-        for ($i=0; $i < $numCluster; $i++) {
-            echo 'cluster ' . $i . '<br>';
-            foreach ($cluster[$i] as $key => $value) {
-                $j = 0;
-                while ($key-1 != $detail_kmeans[$j]['id_detail_kmeans']) {
-                    $j++;
-                }
-                // echo 'j=' . $j.'<br>';
-                $idpro = $detail_kmeans[$j]['id_produk'];
-                // echo 'id produk = ' . $idpro .'<br>';
-                // print_r($key);
-                // echo '<br>';
-            }
-            // $arr[$newkey] = $arr[$oldkey];
-            $cluster[$i][$idpro] = $cluster[$i][$key];
-            // unset($arr[$oldkey]);
-            unset($cluster[$i][$key]);
-        }
-        echo 'cluster ini';
-        print_r($cluster);
+        // foreach ($cluster as $key => $value) {
+        //     if ($value['id_kmeans'] < $totKmeans) {
+        //         $j++;
+        //         array_push($arr1, $value['nilai']);
+        //     }else {
+        //         $j++;
+        //         array_push($arr1, $value['nilai']);
+        //         $sample[$j] = $arr1;
+        //         $arr1 = array();
+        //     }
+        // }
+
+        // $data = array(
+        //     foreach ($cluster as $key => $value) {
+        //         'group_cluster' => 'a'
+        //     }
+        // );
+
+        // array(
+        //     'a' => 'A',
+        //     'b' => 'B',
+        //     'c' => 'C',
+        // )
+        // print_r($data);
+        $this->load->view('blank');
+
+
+
+
+
+
+        // COOOKKK
+        // $query = $this->Rum_model->getAllTable('detail_kmeans');
+        // $detail_kmeans = $query->result_array();
+
+        
+        // // convert id_detail_kmeans to id_produk
+        // for ($i=0; $i < $numCluster; $i++) {
+        //     echo 'cluster ' . $i . '<br>';
+        //     foreach ($cluster[$i] as $key => $value) {
+        //         $j = 0;
+        //         while ($key-1 != $detail_kmeans[$j]['id_detail_kmeans']) {
+        //             $j++;
+        //         }
+        //         // echo 'j=' . $j.'<br>';
+        //         $idpro = $detail_kmeans[$j]['id_produk'];
+        //         // echo 'id produk = ' . $idpro .'<br>';
+        //         // print_r($key);
+        //         // echo '<br>';
+        //     }
+        //     // $arr[$newkey] = $arr[$oldkey];
+        //     $cluster[$i][$idpro] = $cluster[$i][$key];
+        //     // unset($arr[$oldkey]);
+        //     unset($cluster[$i][$key]);
+        // }
+        // echo 'cluster ini';
+        // print_r($cluster);
+
         // distinct array
         // for ($i=0; $i < $numCluster; $i++) { 
         //     array_unique($cluster[$i]);

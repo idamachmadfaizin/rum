@@ -24,4 +24,12 @@ class Rum_model extends CI_Model
         $query = $this->db->get();
         return $query;
     }
+
+    public function insMultiRows($table_name, $data)
+    {
+        $this->db->truncate($table_name);//to delete and reset autoincrement
+        print_r($data);
+        $this->db->insert_batch($table_name, $data);
+        return $this->db->affected_rows();
+    }
 }
