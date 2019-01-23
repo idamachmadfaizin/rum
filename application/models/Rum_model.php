@@ -28,8 +28,18 @@ class Rum_model extends CI_Model
     public function insMultiRows($table_name, $data)
     {
         $this->db->truncate($table_name);//to delete and reset autoincrement
-        print_r($data);
         $this->db->insert_batch($table_name, $data);
         return $this->db->affected_rows();
+    }
+
+    public function getK_Produk()
+    {
+        $this->db->select('c.group_cluster, p.id_produk');
+        $this->db->from('cluster c');
+        $this->db->join('detail_kmeans dk', 'c.id_detail_kmeans = dk.id_detail_kmeans');
+        $this->db->join('produk p', 'p.id_produk = dk.id_produk');
+        $this->db->where('c.group_cluster', 0);
+        $this->db->distinct();
+        return $this->db->get();
     }
 }

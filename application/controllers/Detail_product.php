@@ -79,6 +79,8 @@ class Detail_product extends CI_Controller {
 
         $affected = $this->Rum_model->insMultiRows('cluster', $insT_Cluster);
         print_r($affected);
+        $produk = $this->Rum_model->getK_Produk();
+        print_r($produk->result_array());
 
 
 
