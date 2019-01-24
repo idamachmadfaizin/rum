@@ -18,10 +18,14 @@ class Detail_product extends CI_Controller {
         // Get Detail Produk
         $query = $this->Rum_model->getDetailProduk($id_produk);
         $data['detailProduk'] = $query->result_array();
-        
+
         $relatedP = $this->Rum_model->getRelatedProduk($id_produk);
-        $data['relatedP'] = $relatedP->result_array();
-        
+        if (empty($relatedP)) {
+            $data['relatedP'] = '';
+        }else {
+            $data['relatedP'] = $relatedP->result_array();
+        }
+
         // print_r($data);
         $this->load->view('detail_product', $data);
     }

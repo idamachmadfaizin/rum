@@ -101,7 +101,7 @@
 		</div>
 	</div>
 
-
+  <?php if($relatedP): ?>
 	<!-- Relate Product -->
 	<section class="relateproduct bgwhite p-t-45 p-b-138">
 		<div class="container">
@@ -143,13 +143,13 @@
               </div>
             </div>
           <?php endforeach; ?>
-					
 					<!-- end card -->
 				</div>
 			</div>
 
 		</div>
 	</section>
+  <?php endif ?>
 
 
 	<?php $this->load->view('partials/footer'); ?>

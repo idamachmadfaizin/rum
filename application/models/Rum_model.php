@@ -17,7 +17,7 @@ class Rum_model extends CI_Model
         $this->db->select('produk.id_produk, nama_kategori, nama_produk, harga_produk, deskripsi_produk, url_image');
         $this->db->from('produk');
         $this->db->join('image', 'image.id_produk = produk.id_produk');
-        $this->db->join('kategori', 'kategori.id_kategori = produk.id_produk');
+        $this->db->join('kategori', 'kategori.id_kategori = produk.id_kategori');
         $this->db->where('produk.id_produk', $id_produk);
 
         // echo $this->db->get_compiled_select();
@@ -34,31 +34,46 @@ class Rum_model extends CI_Model
     // Select join distinct id_produk
     public function getRelatedProduk($id_produk)
     {
-        // $this->db->select('c.group_cluster, p.id_produk');
+        // get group_cluster
+        $this->db->select('group_cluster');
+        $this->db->from('cluster c');
+        $this->db->join('detail_kmeans dk', 'c.id_detail_kmeans = dk.id_detail_kmeans');
+        $this->db->join('produk p', 'p.id_produk = dk.id_produk');
+        $this->db->where('p.id_produk', $id_produk);
+        $gcluster = $this->db->get();
+        $gcluster = $gcluster->row_array();
+        
+        $this->db->reset_query();
+
+        // get semua id_produk dalam cluster
         $this->db->select('p.id_produk');
         $this->db->from('cluster c');
         $this->db->join('detail_kmeans dk', 'c.id_detail_kmeans = dk.id_detail_kmeans');
         $this->db->join('produk p', 'p.id_produk = dk.id_produk');
-        $this->db->where('c.group_cluster', 0);
+        $this->db->where($gcluster);
         $this->db->where('dk.id_produk <>', $id_produk);
         // echo $this->db->get_compiled_select();
         $this->db->distinct();
         $id = $this->db->get();
         
-        // print_r($id->result_array());
-
         $this->db->reset_query();
-
-        $this->db->select('produk.id_produk, nama_produk, harga_produk, deskripsi_produk, url_image');
-        $this->db->from('produk');
-        $this->db->join('image', 'image.id_produk = produk.id_produk');
-        $wherein = array();
-        foreach ($id->result_array() as $key => $value) {
-            array_push($wherein, $value['id_produk']);
+        
+        // Cek if group cluster hanya satu produk
+        if (empty($id->result_array())) {
+            $kosong = array();
+            return $kosong;
+        }else {
+            $this->db->select('produk.id_produk, nama_produk, harga_produk, deskripsi_produk, url_image');
+            $this->db->from('produk');
+            $this->db->join('image', 'image.id_produk = produk.id_produk');
+            $wherein = array();
+            foreach ($id->result_array() as $key => $value) {
+                array_push($wherein, $value['id_produk']);
+            }
+            $this->db->where_in('produk.id_produk', $wherein);
+            $this->db->group_by('produk.id_produk');
+            // echo $this->db->get_compiled_select();
+            return $this->db->get();
         }
-        $this->db->where_in('produk.id_produk', $wherein);
-        $this->db->group_by('produk.id_produk');
-        // echo $this->db->get_compiled_select();
-        return $this->db->get();
     }
 }
