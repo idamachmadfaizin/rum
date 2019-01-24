@@ -22,7 +22,7 @@ class Detail_product extends CI_Controller {
         $relatedP = $this->Rum_model->getRelatedProduk($id_produk);
         $data['relatedP'] = $relatedP->result_array();
         
-        print_r($data);
+        // print_r($data);
         $this->load->view('detail_product', $data);
     }
 }
