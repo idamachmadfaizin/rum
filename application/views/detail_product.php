@@ -124,7 +124,7 @@
                   <div class="block2-overlay trans-0-4">
                     <div class="block2-btn-addcart w-size1 trans-0-4">
                       <!-- Button -->
-                      <button onclick="window.location.href='<?php echo base_url().'detail_product/detail/'. $value['id_produk'] ?>'" class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
+                      <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
                         Add to Cart
                       </button>
                     </div>
@@ -132,7 +132,7 @@
                 </div>
 
                 <div class="block2-txt p-t-20">
-                  <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
+                  <a href="<?php echo base_url().'detail_product/detail/'. $value['id_produk'] ?>" class="block2-name dis-block s-text3 p-b-5">
                     <?php echo $value['nama_produk'] ?>
                   </a>
 
