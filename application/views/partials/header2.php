@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Home</title>
+	<title>RUM Seafood</title>
 	<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
@@ -36,6 +36,8 @@
 <!--==========================================================================================-->
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/fashe/vendor/slick/slick.css">
 <!--==========================================================================================-->
+<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/fashe/vendor/lightbox2/css/lightbox.min.css">
+<!--==========================================================================================-->
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/fashe/css/util.css">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/fashe/css/main.css">
 <!--==========================================================================================-->
@@ -58,7 +60,7 @@
 					<nav class="menu">
 						<ul class="main_menu">
 							<li>
-								<a href="#">Home</a>
+								<a href="<?php echo base_url()?>">Home</a>
 							</li>
 
 							<li>

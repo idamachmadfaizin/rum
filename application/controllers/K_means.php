@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 require APPPATH . '/libraries/php-ml/vendor/autoload.php';
 use Phpml\Clustering\KMeans;
 
-class K_means_c extends CI_Controller {
+class K_means extends CI_Controller {
    public function __construct()
    {
       parent::__construct();

@@ -21,9 +21,26 @@ class Rum_model extends CI_Model
         $this->db->where('produk.id_produk', $id_produk);
 
         // echo $this->db->get_compiled_select();
-        return $this->db->get();;
+        return $this->db->get();
     }
 
+    // using in landing page our produk
+    public function selectProdukImage($our)
+    {
+        $this->db->select('p.id_produk, p.id_kategori, p.nama_produk, p.harga_produk, p.deskripsi_produk, p.url_produk, p.produk_created_at, p.produk_updated_at, i.url_image');
+        $this->db->from('produk p');
+        $this->db->join('image i', 'i.id_produk = p.id_produk');
+        $this->db->group_by('1');
+        $this->db->limit(8);
+        if ($our == 'new') {
+            $this->db->order_by('p.produk_updated_at', 'desc');
+        }
+
+        return $this->db->get();
+    }
+
+
+    // insert to cluster
     public function insMultiRows($table_name, $data)
     {
         $this->db->truncate($table_name);//to delete and reset autoincrement
