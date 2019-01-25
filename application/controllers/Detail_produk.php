@@ -1,25 +1,22 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-require APPPATH . '/libraries/php-ml/vendor/autoload.php';
-use Phpml\Clustering\KMeans;
-
 class Detail_produk extends CI_Controller {
 
 	public function __construct()
     {
         parent::__construct();
 
-        $this->load->model('Rum_model');
+        $this->load->model('rum_model');   
     }
 
-	public function detail($uri)
+	public function detail($url_produk)
 	{
         // Get Detail Produk
-        $query = $this->Rum_model->getDetailProduk($uri);
+        $query = $this->rum_model->getDetailProduk($url_produk);
         $data['detailProduk'] = $query->result_array();
 
-        $relatedP = $this->Rum_model->getRelatedProduk($uri);
+        $relatedP = $this->rum_model->getRelatedProduk($url_produk);
         if (empty($relatedP)) {
             $data['relatedP'] = '';
         }else {

@@ -1,6 +1,6 @@
 <?php 
 
-class Rum_model extends CI_Model
+class rum_model extends CI_Model
 {
     public function getAllTable($table_name)
     {

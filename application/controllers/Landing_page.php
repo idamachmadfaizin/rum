@@ -7,20 +7,20 @@ class Landing_page extends CI_Controller {
     {
         parent::__construct();
 
-        $this->load->model('Rum_model');   
+        $this->load->model('rum_model');   
 	}
 	
 	public function index()
 	{
-		$kategori = $this->Rum_model->getAllTable('kategori');
+		$kategori = $this->rum_model->getAllTable('kategori');
 		$kategori = $kategori->result_array();
 		$data['kategori'] = $kategori;
 
-		$bestseller = $this->Rum_model->selectProdukImage('bestseller');
+		$bestseller = $this->rum_model->selectProdukImage('bestseller');
 		$bestseller = $bestseller->result_array();
 		$data['bestseller'] = $bestseller;
 
-		$new = $this->Rum_model->selectProdukImage('new');
+		$new = $this->rum_model->selectProdukImage('new');
 		$new = $new->result_array();
 		$data['new'] = $new;
 

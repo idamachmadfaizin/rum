@@ -101,7 +101,7 @@
                   </div>
 
                   <div class="block2-txt p-t-20">
-                    <a href="<?php echo base_url().'detail_produk/detail/'.$value['id_produk'] ?>" class="block2-name dis-block s-text3 p-b-5">
+                    <a href="<?php echo site_url().'/detail_produk/detail/'.$value['id_produk'] ?>" class="block2-name dis-block s-text3 p-b-5">
                       Rp <?php echo $value['nama_produk'] ?>
                     </a>
 
@@ -139,7 +139,7 @@
                   </div>
 
                   <div class="block2-txt p-t-20">
-                    <a href="<?php echo base_url().'detail_produk/detail/'.$value['id_produk'] ?>" class="block2-name dis-block s-text3 p-b-5">
+                    <a href="<?php echo site_url().'/detail_produk/detail/'.$value['id_produk'] ?>" class="block2-name dis-block s-text3 p-b-5">
                       Rp <?php echo $value['nama_produk'] ?>
                     </a>
 
