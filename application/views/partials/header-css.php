@@ -28,6 +28,8 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/fashe/vendor/select2/select2.min.css">
 <!--==========================================================================================-->
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/fashe/vendor/slick/slick.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/fashe/vendor/noui/nouislider.min.css">
 <!--==========================================================================================-->
 <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/fashe/vendor/lightbox2/css/lightbox.min.css">
 <!--==========================================================================================-->

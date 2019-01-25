@@ -55,7 +55,7 @@
 </script>
 
 <!--===============================================================================================-->
-<script type="text/javascript" src="<?php echo base_url() ?>/assets/fashe/vendor/noui/nouislider.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>/assets/fashe/vendor/noui/nouislider.min.js"></script>
 <script type="text/javascript">
 	/*[ No ui ]
 	    ===========================================================*/

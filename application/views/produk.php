@@ -56,7 +56,7 @@
 								</div>
 
 								<div class="s-text3 p-t-10 p-b-10">
-									Range: $<span id="value-lower">610</span> - $<span id="value-upper">980</span>
+									Range: $<span id="value-lower">60</span> - $<span id="value-upper">200</span>
 								</div>
 							</div>
 						</div>
