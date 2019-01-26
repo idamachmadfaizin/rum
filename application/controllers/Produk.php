@@ -17,7 +17,7 @@ class Produk extends CI_Controller {
 
     $config['base_url'] = site_url('produk/index');
     $config['total_rows'] = $this->produk_model->getTotalProduk($cari);
-    $config['per_page'] = 6;
+    $config['per_page'] = 9;
 
     // Pagination
     // <div class="pagination flex-m flex-w p-t-26">
