@@ -7,11 +7,6 @@ class produk_model extends CI_Model
         return $this->db->get($table_name);
     }
 
-    // $this->db->like('title', $filter);
-    // $this->db->limit($limit, $offset);
-    // $this->db->order_by('date', 'desc');
-    // return $this->db->get("blog");
-
     public function getProdukImage($cari, $sorting, $kategori, $limit, $offset)
     {
         $this->db->select('p.id_produk, p.nama_produk, p.harga_produk, p.deskripsi_produk, p.url_produk,p.produk_created_at, p.produk_updated_at, i.url_image');
@@ -32,15 +27,8 @@ class produk_model extends CI_Model
         }
         
         $this->db->group_by('p.id_produk');
-        // if ($limit == $offset) {
-        //   $this->db->limit($limit);
-        // } else {
-        //   $this->db->limit($limit, $offset);
-        // }
         $this->db->limit($limit, $offset);
         
-
-        // echo $this->db->get_compiled_select();
         return $this->db->get();
     }
     public function getTotalProduk($cari, $kategori)
