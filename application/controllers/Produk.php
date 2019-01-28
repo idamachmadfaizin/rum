@@ -13,29 +13,22 @@ class Produk extends CI_Controller {
     
 	public function index($offset = 0)
 	{
-    $cari = $this->input->get('search-product');
+    $search = $this->input->get('search-product');
+    $sorting = $this->input->get('sorting');
+    $kategori2 = $this->input->get('kategori');
 
+    
     $config['base_url'] = site_url('produk/index');
-    $config['total_rows'] = $this->produk_model->getTotalProduk($cari);
+    $config['total_rows'] = $this->produk_model->getTotalProduk($search, $kategori2);
     $config['per_page'] = 9;
-
-    // Pagination
-    // <div class="pagination flex-m flex-w p-t-26">
-    // <span>
-    //   <a href="#" class="item-pagination flex-c-m trans-0-4 active-pagination">1</a>
-    // </span>
-    // <span>
-    //   <a href="#" class="item-pagination flex-c-m trans-0-4">2</a>
-    // </span>
-    // </div>
-
+    
     // tag pagination
     $config['full_tag_open'] = '<div class="pagination flex-m flex-w p-t-26">';
     $config['full_tag_close'] = '</div>';
     
     $config['num_tag_open'] = false;
     $config['num_tag_close'] = false;
-
+    
     $config['cur_tag_open'] = '<a href="#" class="item-pagination flex-c-m trans-0-4 active-pagination">';
     $config['cur_tag_close'] = '</a>';
     
@@ -43,16 +36,18 @@ class Produk extends CI_Controller {
     $config['prev_link'] = false;
     
     $config['attributes'] = array('class' => 'item-pagination flex-c-m trans-0-4');
-    // end tag pagination
-
+    
     $this->pagination->initialize($config);
-
+    // end tag pagination
+    
+    
+    $limit = $config['per_page'];
     $kategori = $this->produk_model->getAllTable('kategori');
     $kategori = $kategori->result_array();
     $data['kategori'] = $kategori;
+    array_unshift($data['kategori'], array("id_kategori" => "0", "nama_kategori" => "All", "url_image_kategori" => "0"));
         
-    $limit = $config['per_page'];
-    $produk = $this->produk_model->getProdukImage($cari, $limit, $offset);
+    $produk = $this->produk_model->getProdukImage($search, $sorting, $kategori2, $limit, $offset);
     $produk = $produk->result_array();
     $data['produk'] = $produk;
 
