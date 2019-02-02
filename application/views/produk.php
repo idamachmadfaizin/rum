@@ -1,7 +1,7 @@
 <?php $this->load->view('partials/header2'); ?>
 
 	<!-- Title Page -->
-	<section class="bg-title-page p-t-50 p-b-40 flex-col-c-m" style="background-image: url(<?php echo base_url() ?>assets/fashe/images/banner_carousel_product.jpg);">
+	<section class="bg-title-page p-t-50 p-b-40 flex-col-c-m slide" style="background-image: url(<?php echo base_url() ?>assets/fashe/images/banner_carousel_product.jpg);">
 	</section>
 
 
