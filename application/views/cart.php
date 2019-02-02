@@ -1,7 +1,7 @@
 <?php $this->load->view('partials/header2'); ?>
 
 <!-- Title Page -->
-<section class="bg-title-page p-t-40 p-b-50 flex-col-c-m slide" style="background-image: url(<?php echo base_url() ?>assets/fashe/images/heading-pages-01.jpg);">
+<section class="bg-title-page p-t-40 p-b-50 flex-col-c-m" style="background-image: url(<?php echo base_url() ?>assets/fashe/images/heading-pages-01.jpg);">
 	<h2 class="l-text2 t-center">
 		Cart
 	</h2>

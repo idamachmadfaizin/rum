@@ -53,21 +53,10 @@ class cart_model extends CI_Model
     return $this->db->query($query);
   }
 
-  public function coba_update_batch()
+  public function count()
   {
-    $data = array(
-      array(
-        'title' => 'My title' ,
-        'name' => 'My Name 2' ,
-        'date' => 'My date 2'
-      ),
-      array(
-        'title' => 'Another title' ,
-        'name' => 'Another Name 2' ,
-        'date' => 'Another date 2'
-      )
-    );
-    
-    $this->db->update_batch('mytable', $data, 'title');
+    $this->db->join('cart', 'detail_cart.id_cart = cart.id_cart');
+    $this->db->where('id_customer', 1);
+    return $this->db->count_all('detail_cart');
   }
 }

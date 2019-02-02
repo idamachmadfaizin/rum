@@ -10,7 +10,6 @@ class Cart extends CI_Controller {
 	}
 
 	function index() {
-		// $data['data']=$this->product_model->get_all_product();
 		$detail_cart = $this->cart_model->get_detail_cart();
 		$detail_cart = $detail_cart->result_array();
 		$data['detail_cart'] = $detail_cart;
@@ -18,10 +17,7 @@ class Cart extends CI_Controller {
 		$grand_total = $this->cart_model->select_cart();
 		$data['grand_total'] = $grand_total->row_array();
 
-		// print_r($data);
-
 		$this->load->view('cart', $data);
-		
 	}
 
 	public function delete($id_detail_cart)
