@@ -2,23 +2,23 @@
 
 	<!-- breadcrumb -->
 	<div class="bread-crumb bgwhite flex-w p-l-52 p-r-15 p-t-30 p-l-15-sm">
-		<a href="index.html" class="s-text16">
+		<a href="<?php echo base_url() ?>" class="s-text16">
 			Home
 			<i class="fa fa-angle-right m-l-8 m-r-9" aria-hidden="true"></i>
 		</a>
 
-		<a href="product.html" class="s-text16">
-			Women
+		<a href="<?php echo site_url().'/produk' ?>" class="s-text16">
+			Product
 			<i class="fa fa-angle-right m-l-8 m-r-9" aria-hidden="true"></i>
 		</a>
 
-		<a href="#" class="s-text16">
-			T-Shirt
+		<a href="<?= site_url().'/produk?kategori='.$detailProduk[0]['id_kategori'] ?>" class="s-text16">
+			<?php echo $detailProduk[0]['nama_kategori'] ?>
 			<i class="fa fa-angle-right m-l-8 m-r-9" aria-hidden="true"></i>
 		</a>
 
 		<span class="s-text17">
-			Boxy T-Shirt with Roll Sleeve Detail
+			<?php echo $detailProduk[0]['nama_produk'] ?>
 		</span>
 	</div>
 
