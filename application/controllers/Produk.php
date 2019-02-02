@@ -52,5 +52,10 @@ class Produk extends CI_Controller {
     $data['produk'] = $produk;
 
 		$this->load->view('produk', $data);
-	}
+  }
+  
+  public function addtocart()
+  {
+    
+  }
 }

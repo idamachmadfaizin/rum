@@ -40,6 +40,7 @@
 <script type="text/javascript">
 	$('.block2-btn-addcart').each(function () {
 		var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
+		// var idproduk = $(this).parent().parent().parent().find('.hidden-id_produk').html();
 		$(this).on('click', function () {
 			swal(nameProduct, "is added to cart !", "success");
 		});

@@ -46,4 +46,10 @@ class produk_model extends CI_Model
         }
         return $this->db->count_all_results();
     }
+
+    public function add_to_cart()
+    {
+      $this->db->insert('cart', $data_cart);
+      $this->db->insert('detail_cart', $data_detail_cart);
+    }
 }
