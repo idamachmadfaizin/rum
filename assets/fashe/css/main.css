@@ -140,7 +140,8 @@ ul, li {
 /* ------------------------------------ */
 input {
 	outline: none;
-	border: none !important;
+	border: none;
+	/* border: none !important; edited*/
 }
 
 textarea {
