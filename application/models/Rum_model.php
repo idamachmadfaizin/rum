@@ -93,4 +93,28 @@ class rum_model extends CI_Model
             return $this->db->get();
         }
     }
+
+    public function addToCart($data)
+    {
+      $this->db->insert('cart', $data);
+    }
+
+    public function product_exist($where)
+    {
+      return $this->db->get_where('cart', $where)->result_array()[0]['id_cart'];
+    }
+
+    public function getQty($where)
+    {
+      $this->db->select('qty_cart');
+      $this->db->where($where);
+      return $this->db->get('cart')->result_array()[0]['qty_cart'];
+    }
+
+    public function tambah_qty($id_cart, $updateQty)
+    {
+      $this->db->where('id_cart', $id_cart);
+      $this->db->update('cart', $updateQty);
+      return $this->db->affected_rows();
+    }
 }

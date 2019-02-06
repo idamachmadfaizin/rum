@@ -3,11 +3,11 @@ $CI =& get_instance();
 
 $CI->load->model('cart_model');
 
-$detail_cart = $CI->cart_model->get_detail_cart();
-$detail_cart = $detail_cart->result_array();
-$data['detail_cart'] = $detail_cart;
+$cart = $CI->cart_model->get_cart();
+$cart = $cart->result_array();
+$data['cart'] = $cart;
 
-$grand_total = $CI->cart_model->select_cart();
+$grand_total = $CI->cart_model->grand_total();
 $data['grand_total'] = $grand_total->row_array();
 
 $num_notif = $CI->cart_model->count();
@@ -69,9 +69,10 @@ $num_notif = $CI->cart_model->count();
 				<span class="header-icons-noti"><?= $num_notif ?></span>
 
 				<!-- Header cart noti -->
+				<?php if($this->session->id_customer): ?>
 				<div class="header-cart header-dropdown">
 					<ul class="header-cart-wrapitem">
-					<?php foreach($detail_cart as $key => $value): ?>
+					<?php foreach($cart as $key => $value): ?>
 						<li class="header-cart-item">
 							<div class="header-cart-item-img">
 								<img src="<?php echo base_url()?>assets/fashe/images/item-cart-01.jpg" alt="IMG">
@@ -83,7 +84,7 @@ $num_notif = $CI->cart_model->count();
 								</a>
 
 								<span class="header-cart-item-info">
-									<?= $value['qty_detail_cart']?> x <?= $value['harga_produk']?>
+									<?= $value['qty_cart']?> x <?= $value['harga_produk']?>
 								</span>
 							</div>
 						</li>
@@ -91,7 +92,7 @@ $num_notif = $CI->cart_model->count();
 					</ul>
 
 					<div class="header-cart-total">
-						Total: RP <?= $data['grand_total']['total_harga_cart'] ?>
+						Total: RP <?= $data['grand_total']['grand_total'] ?>
 					</div>
 
 					<div class="header-cart-buttons">
@@ -111,6 +112,7 @@ $num_notif = $CI->cart_model->count();
 						</div>
 					</div>
 				</div>
+				<?php endif; ?>
 			</div>
 			
 			<?php if($this->session->id_customer): ?>
@@ -178,10 +180,11 @@ $num_notif = $CI->cart_model->count();
 						<img src="<?php echo base_url()?>assets/fashe/images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
 						<span class="header-icons-noti"><?= $num_notif ?></span>
 
+						<?php if($this->session->id_customer): ?>
 						<!-- Header cart noti -->
 						<div class="header-cart header-dropdown">
 							<ul class="header-cart-wrapitem">
-							<?php foreach($detail_cart as $key => $value): ?>
+							<?php foreach($cart as $key => $value): ?>
 								<li class="header-cart-item">
 									<div class="header-cart-item-img">
 										<img src="<?php echo base_url()?>assets/fashe/images/item-cart-01.jpg" alt="IMG">
@@ -193,7 +196,7 @@ $num_notif = $CI->cart_model->count();
 										</a>
 
 										<span class="header-cart-item-info">
-										<?= $value['qty_detail_cart']?> x <?= $value['harga_produk']?>
+										<?= $value['qty_cart']?> x <?= $value['harga_produk']?>
 										</span>
 									</div>
 								</li>
@@ -201,7 +204,7 @@ $num_notif = $CI->cart_model->count();
 							</ul>
 
 							<div class="header-cart-total">
-							Total: RP <?= $data['grand_total']['total_harga_cart'] ?>
+							Total: RP <?= $data['grand_total']['grand_total'] ?>
 							</div>
 
 							<div class="header-cart-buttons">
@@ -221,6 +224,7 @@ $num_notif = $CI->cart_model->count();
 								</div>
 							</div>
 						</div>
+						<?php endif; ?>
 					</div>
 
 					
@@ -267,7 +271,7 @@ $num_notif = $CI->cart_model->count();
 						<!-- Header cart noti -->
 						<div class="header-cart header-dropdown">
 							<ul class="header-cart-wrapitem">
-							<?php foreach($detail_cart as $key => $value): ?>
+							<?php foreach($cart as $key => $value): ?>
 								<li class="header-cart-item">
 									<div class="header-cart-item-img">
 										<img src="<?php echo base_url()?>assets/fashe/images/item-cart-01.jpg" alt="IMG">
@@ -279,7 +283,7 @@ $num_notif = $CI->cart_model->count();
 										</a>
 
 										<span class="header-cart-item-info">
-											<?= $value['qty_detail_cart']?> x <?= $value['harga_produk']?>
+											<?= $value['qty_cart']?> x <?= $value['harga_produk']?>
 										</span>
 									</div>
 								</li>
@@ -287,7 +291,7 @@ $num_notif = $CI->cart_model->count();
 							</ul>
 
 							<div class="header-cart-total">
-							Total: RP <?= $data['grand_total']['total_harga_cart'] ?>
+							Total: RP <?= $data['grand_total']['grand_total'] ?>
 							</div>
 
 							<div class="header-cart-buttons">

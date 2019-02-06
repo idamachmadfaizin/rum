@@ -54,8 +54,41 @@ class Produk extends CI_Controller {
 		$this->load->view('produk', $data);
   }
   
-  public function addtocart()
+  public function addtocart($id_produk)
   {
-    
+    if ($this->session->id_customer) {
+      $id_customer = $this->session->id_customer;
+
+      $data['id_customer'] = $id_customer;
+      $data['id_produk'] = $id_produk;
+      $data['qty_cart'] = 1;
+  
+      // cek barang wes onok nang cart?
+      $where = array(
+        'id_customer' => $id_customer,
+        'id_produk' => $id_produk
+      );
+
+      $id_cart = $this->produk_model->product_exist($where);
+
+      if ($id_cart > 0) {
+        $old_qty = $this->produk_model->getQty($where);
+        $new_qty = $old_qty + 1;
+
+        $updateQty['qty_cart'] = $new_qty;
+
+        $this->produk_model->tambah_qty($id_cart, $updateQty);        
+        redirect('/produk');
+      }else{
+        $this->produk_model->addToCart($data);
+        redirect('/produk');
+      }
+
+
+    } else {
+      redirect('/login');
+    }
   }
+
+  
 }

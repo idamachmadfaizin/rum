@@ -25,10 +25,10 @@
             </tr>
           </thead>
           <tbody>
-            <?php foreach($detail_cart as $key => $value): ?>
+            <?php foreach($cart as $key => $value): ?>
               <tr class="table-row">
                 <td class="column-1">
-                  <div class="cart-img-product b-rad-4 o-f-hidden" onclick="window.location = '<?php echo site_url().'/cart/delete/'.$value['id_detail_cart']?>'">
+                  <div class="cart-img-product b-rad-4 o-f-hidden" onclick="window.location = '<?php echo site_url().'/cart/delete/'.$value['id_cart']?>'">
                   <a href="">
                     <img src="<?php echo base_url().$value['url_image'] ?>" alt="IMG-<?php $value['nama_produk']?>">
                   </a>
@@ -42,14 +42,14 @@
                       <i class="fs-12 fa fa-minus" aria-hidden="true"></i>
                     </button>
 
-                    <input class="size8 m-text18 t-center num-product" type="number" name="<?php echo $value['id_detail_cart']?>" min="1" value="<?php echo $value['qty_detail_cart']?>">
+                    <input class="size8 m-text18 t-center num-product" type="number" name="<?php echo $value['id_cart']?>" min="1" value="<?php echo $value['qty_cart']?>">
 
                     <button class="btn-num-product-up color1 flex-c-m size7 bg8 eff2">
                       <i class="fs-12 fa fa-plus" aria-hidden="true"></i>
                     </button>
                   </div>
                 </td>
-                <td class="column-5">RP <?php echo $value['qty_detail_cart']*$value['harga_produk'] ?></td>
+                <td class="column-5">RP <?php echo $value['qty_cart']*$value['harga_produk'] ?></td>
               </tr>
             <?php endforeach ?>
           </tbody>
@@ -59,7 +59,7 @@
               <th class="column-2"></th>
               <th class="column-3"></th>
               <th class="column-3 p-l-70">GRAND TOTAL</th>
-              <th class="column-4">RP <?php echo $grand_total['total_harga_cart'] ?></th>
+              <th class="column-4">RP <?php echo $grand_total['grand_total'] ?></th>
             </tr>
           </thead>
 				</table>

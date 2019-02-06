@@ -93,20 +93,22 @@
                     <div class="block2-overlay trans-0-4">
                       <div class="block2-btn-addcart w-size1 trans-0-4">
                         <!-- Button -->
-                        <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
-                          Add to Cart
-                        </button>
+                        <a href="<?= site_url().'/landing_page/addtocart/'.$value['id_produk']?>">
+                          <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
+                            Add to Cart
+                          </button>
+                        </a>
                       </div>
                     </div>
                   </div>
 
                   <div class="block2-txt p-t-20">
-                    <a href="<?php echo site_url().'/detail_produk/detail/'.$value['id_produk'] ?>" class="block2-name dis-block s-text3 p-b-5">
-                      Rp <?php echo $value['nama_produk'] ?>
+                    <a href="<?php echo site_url().'/detail_produk/detail/'.$value['id_produk'] ?>" class="block2-name dis-block s-text3 p-b-5 nounderline">
+                      <?php echo $value['nama_produk'] ?>
                     </a>
 
                     <span class="block2-price m-text6 p-r-5">
-                      <?php echo $value['harga_produk'] ?>
+                      Rp <?php echo $value['harga_produk'] ?>
                     </span>
                   </div>
                 </div>

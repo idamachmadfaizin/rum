@@ -3,60 +3,66 @@
 class cart_model extends CI_Model 
 {
   
-  function get_detail_cart(){
-    $this->db->select('dc.id_detail_cart, c.id_cart, dc.id_produk, dc.qty_detail_cart, c.total_harga_cart, p.nama_produk, p.harga_produk, p.url_produk, i.url_image');
-    // $this->db->select('id_detail_cart, id_cart, dc.id_produk, dc.qty_detail_cart, p.nama_produk, p.harga_produk, url_produk, i.url_image');
-    $this->db->from('detail_cart dc');
-    $this->db->join('produk p', 'dc.id_produk = p.id_produk');
-    $this->db->join('cart c', 'c.id_cart = dc.id_cart');
-    $this->db->join('image i', 'i.id_produk = p.id_produk');
-    $this->db->where('c.id_customer', '1');//edit id customer
-    $this->db->group_by('dc.id_produk');
-    // echo $this->db->get_compiled_select();
+  function get_cart(){
+    $id_customer = $this->session->id_customer;
 
-    // print_r ($this->db->get()->result_array());
+    $this->db->select('c.id_cart, p.nama_produk, c.qty_cart, p.harga_produk, (p.harga_produk * c.qty_cart) AS total_harga_produk, p.id_produk, p.url_produk, i.url_image');
+
+    $this->db->from('cart c');
+    $this->db->join('produk p', 'c.id_produk = p.id_produk');
+    // $this->db->join('cart c', 'c.id_cart = dc.id_cart');
+    $this->db->join('image i', 'i.id_produk = p.id_produk');
+    $this->db->where('c.id_customer', $id_customer);
+    $this->db->group_by('c.id_produk');
+
     return $this->db->get();
   }
 
-  public function update_qty($data_qty)
+  function update_qty($data_qty)
   {
     // $this->db->where_in('id_detail_cart', $id_details);
-    $this->db->update_batch('detail_cart', $data_qty, 'id_detail_cart');
+    $this->db->update_batch('cart', $data_qty, 'id_cart');
   }
 
-  public function delete_produk($id_detail_cart)
+  function delete_produk($id_cart)
   {
-    $this->db->where('id_detail_cart', $id_detail_cart);
-    $this->db->delete('detail_cart');
+    $this->db->where('id_cart', $id_cart);
+    $this->db->delete('cart');
     return $this->db->affected_rows();
   }
 
-  public function update_total_cart($id_customer)
+  function update_total_cart($id_customer)
   {
-    $total_harga_cart = $this->get_grand_total()->result_array();
-    $data['total_harga_cart'] = $total_harga_cart[0]['grand_total'];
-    print_r($data);
+    $total_harga_cart = $this->grand_total()->result_array();
+    $data['grand_total'] = $total_harga_cart[0]['grand_total'];
+    // print_r($data);
     $this->db->where('id_customer', $id_customer);
     $this->db->update('cart', $data);
   }
 
-  public function select_cart($id_customer = 1)
+  function grand_total()
   {
+    $id_customer = $this->session->id_customer;
+
+    $this->db->select('sum(harga_produk * qty_cart) as grand_total');
+    $this->db->from('cart c');
+    $this->db->join('produk p', 'c.id_produk = p.id_produk');
     $this->db->where('id_customer', $id_customer);
-    return $this->db->get('cart');
+    return $this->db->get();
   }
 
-  public function get_grand_total()
+  function get_grand_total()
   {
-    $query = "SELECT SUM(total) AS grand_total FROM (SELECT (qty_detail_cart*harga_produk) total FROM detail_cart JOIN produk ON detail_cart.id_produk = produk.id_produk) AS total";
+    $query = "SELECT SUM(total) AS grand_total FROM (SELECT (qty_cart*harga_produk) total FROM cart JOIN produk ON cart.id_produk = produk.id_produk) AS total";
     
     return $this->db->query($query);
   }
 
-  public function count()
+  function count()
   {
-    $this->db->join('cart', 'detail_cart.id_cart = cart.id_cart');
-    $this->db->where('id_customer', 1);
-    return $this->db->count_all('detail_cart');
+    $id_customer = $this->session->id_customer;
+
+    $this->db->where('id_customer', $id_customer);
+    return $this->db->count_all_results('cart');
   }
 }

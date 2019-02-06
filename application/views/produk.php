@@ -92,7 +92,7 @@
 
 							<!-- Form Cari -->
 							<div class="search-product pos-relative bo4 of-hidden">
-								<input class="s-text7 size6 p-l-23 p-r-50" type="text" name="search-product" placeholder="Search Products...">
+								<input class="s-text7 size6 p-l-23 p-r-50" type="text" name="search-product" placeholder="Search Products..." value="<?= $this->input->get('search-product');?>">
 								
 								<button class="flex-c-m size5 ab-r-m color2 color0-hov trans-0-4">
 									<i class="fs-12 fa fa-search" aria-hidden="true"></i>
@@ -123,7 +123,7 @@
                     <div class="block2-overlay trans-0-4">
                       <div class="block2-btn-addcart w-size1 trans-0-4">
 												<!-- Button -->
-												<a href="<?= site_url().'/'?>">
+												<a href="<?= site_url().'/produk/addtocart/'.$value['id_produk']?>">
 													<button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
 														Add to Cart
 													</button>

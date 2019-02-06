@@ -1,13 +1,13 @@
 
 
-<!--================================================================================-->
+
 <script type="text/javascript" src="<?php echo base_url()?>assets/fashe/vendor/jquery/jquery-3.2.1.min.js"></script>
-<!--================================================================================-->
+
 <script type="text/javascript" src="<?php echo base_url()?>assets/fashe/vendor/animsition/js/animsition.min.js"></script>
-<!--================================================================================-->
+
 <script type="text/javascript" src="<?php echo base_url()?>assets/fashe/vendor/bootstrap/js/popper.js"></script>
 <script type="text/javascript" src="<?php echo base_url()?>assets/fashe/vendor/bootstrap/js/bootstrap.min.js"></script>
-<!--================================================================================-->
+
 <script type="text/javascript" src="<?php echo base_url()?>assets/fashe/vendor/select2/select2.min.js"></script>
 <script type="text/javascript">
 	$(".selection-1").select2({
@@ -21,18 +21,17 @@
 	});
 	
 	</script>
-<!--================================================================================-->
+
 <script type="text/javascript" src="vendor/daterangepicker/moment.min.js"></script>
 <script type="text/javascript" src="vendor/daterangepicker/daterangepicker.js"></script>
-<!--===============================================================================================-->
+
 <script type="text/javascript" src="<?php echo base_url()?>assets/fashe/vendor/slick/slick.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url()?>assets/fashe/js/slick-custom.js"></script>
-<!--================================================================================-->
+
 <script type="text/javascript" src="<?php echo base_url()?>assets/fashe/vendor/sweetalert/sweetalert.min.js"></script>
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 	$('.block2-btn-addcart').each(function () {
 		var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
-		// var idproduk = $(this).parent().parent().parent().find('.hidden-id_produk').html();
 		$(this).on('click', function () {
 			swal(nameProduct, "is added to cart !", "success");
 		});
@@ -45,7 +44,7 @@
 		});
 	});
 	
-	</script>
+	</script> -->
 
 <!--===============================================================================================-->
 <script type="text/javascript" src="<?php echo base_url();?>/assets/fashe/vendor/noui/nouislider.min.js"></script>

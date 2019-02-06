@@ -7,8 +7,8 @@ footer {
 }
 
 a.nounderline {
-	text-decoration: none;
-	color: black;
+	text-decoration: none !important;
+	color: black !important;
 }
 
 .font-12 {
