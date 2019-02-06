@@ -57,7 +57,7 @@ $num_notif = $CI->cart_model->count();
 		<!-- Header Icon -->
 		<div class="header-icons">
 			<?php if($this->session->id_customer): ?>
-				<a href="<?= site_url()?>" class="header-wrapicon1 dis-block">
+				<a href="<?= site_url()."/akun"?>" class="header-wrapicon1 dis-block">
 					<img src="<?php echo base_url()?>assets/fashe/images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
 				</a>
 				
@@ -168,7 +168,7 @@ $num_notif = $CI->cart_model->count();
 				<!-- Header Icon -->
 				<div class="header-icons">
 					<?php if($this->session->id_customer): ?>
-						<a href="<?= site_url()?>" class="header-wrapicon1 dis-block">
+						<a href="<?= site_url()."/akun"?>" class="header-wrapicon1 dis-block">
 							<img src="<?php echo base_url()?>assets/fashe/images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
 						</a>
 
