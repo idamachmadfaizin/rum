@@ -1,4 +1,5 @@
 <?php $this->load->view('partials/header2'); ?>
+
 <div class="d-flex align-items-center" style="margin-top:80px; height:498px;">
   <div class="container-fluid">
     <div class="row">
