@@ -87,5 +87,3 @@
 
 </body>
 </html>
-  
-<?php //$this->load->view('partials/footer'); ?>
