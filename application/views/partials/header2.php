@@ -56,13 +56,15 @@ $num_notif = $CI->cart_model->count();
 
 		<!-- Header Icon -->
 		<div class="header-icons">
-			<a href="#" class="header-wrapicon1 dis-block">
-				<img src="<?php echo base_url()?>assets/fashe/images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
-			</a>
+			<?php if($this->session->id_customer): ?>
+				<a href="<?= site_url()?>" class="header-wrapicon1 dis-block">
+					<img src="<?php echo base_url()?>assets/fashe/images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
+				</a>
+				
+				<span class="linedivide1"></span>
+			<?php endif; ?>
 
-			<span class="linedivide1"></span>
-
-			<div class="header-wrapicon2">
+			<div class="header-wrapicon1">
 				<img src="<?php echo base_url()?>assets/fashe/images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
 				<span class="header-icons-noti"><?= $num_notif ?></span>
 
@@ -110,6 +112,21 @@ $num_notif = $CI->cart_model->count();
 					</div>
 				</div>
 			</div>
+			
+			<?php if($this->session->id_customer): ?>
+				<span class="linedivide1"></span>
+				
+				<a href="<?= site_url()."/logout"?>" class="header-wrapicon2 dis-block">
+					<img src="<?php echo base_url()?>assets/fashe/images/icons/icon-signout.png" class="header-icon1" alt="ICON">
+				</a>
+			<?php else: ?>
+				<span class="linedivide1"></span>
+				
+				<a href="<?= site_url()."/login"?>" class="header-wrapicon2 dis-block">
+					<img src="<?php echo base_url()?>assets/fashe/images/icons/icon-signin.png" class="header-icon1" alt="ICON">
+				</a>
+			<?php endif; ?>
+
 		</div>
 	</div>
 
@@ -148,11 +165,14 @@ $num_notif = $CI->cart_model->count();
 
 				<!-- Header Icon -->
 				<div class="header-icons">
-					<a href="#" class="header-wrapicon1 dis-block">
-						<img src="<?php echo base_url()?>assets/fashe/images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
-					</a>
+					<?php if($this->session->id_customer): ?>
+						<a href="<?= site_url()?>" class="header-wrapicon1 dis-block">
+							<img src="<?php echo base_url()?>assets/fashe/images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
+						</a>
 
-					<span class="linedivide1"></span>
+						<span class="linedivide1"></span>
+					<?php endif; ?>
+
 
 					<div class="header-wrapicon2">
 						<img src="<?php echo base_url()?>assets/fashe/images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
@@ -202,6 +222,22 @@ $num_notif = $CI->cart_model->count();
 							</div>
 						</div>
 					</div>
+
+					
+					<?php if($this->session->id_customer): ?>
+						<span class="linedivide1"></span>
+						
+						<a href="<?= site_url()."/logout"?>" class="header-wrapicon2 dis-block">
+							<img src="<?php echo base_url()?>assets/fashe/images/icons/icon-signout.png" class="header-icon1" alt="ICON">
+						</a>
+					<?php else: ?>
+						<span class="linedivide1"></span>
+
+						<a href="<?= site_url()."/login"?>" class="header-wrapicon2 dis-block">
+							<img src="<?php echo base_url()?>assets/fashe/images/icons/icon-signin.png" class="header-icon1" alt="ICON">
+						</a>
+					<?php endif; ?>
+					
 				</div>
 			</div>
 		</div>
