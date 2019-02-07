@@ -1,4 +1,5 @@
-<footer class="bg-gray" style="margin-top: 50px;">
+<!-- <footer class="bg-gray" style="margin-top: 50px;"> -->
+<footer class="bg-gray">
 	<div class="container">
 		<div class="row" style="padding-bottom: 50px;">
 			<div class="col-sm-5 row-footer">
@@ -12,9 +13,9 @@
 			<div class="col-sm-2 row-footer">
 				<h6><b>MY ACCOUNT</b></h6>
 				<br>
-				<p><a href="#" class="nounderline">My Account</a></p>
-				<p><a href="#" class="nounderline">Order History</a></p>
-				<p><a href="#" class="nounderline">Wishlist</a></p>
+				<p><a href="#" class="text-black text-decoration-none">My Account</a></p>
+				<p><a href="#" class="text-black text-decoration-none">Order History</a></p>
+				<p><a href="#" class="text-black text-decoration-none">Wishlist</a></p>
 			</div>
 			<div class="col-sm-2 row-footer">
 				<h6><b>PAYMENT</b></h6>
