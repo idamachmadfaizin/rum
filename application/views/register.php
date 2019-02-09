@@ -43,7 +43,7 @@
                 </span>  
               </div>
               <div class="col-11">
-                <input type="email" name="email" value="<?= set_value('email')?>" placeholder="Email" class="form-control">
+                <input type="email" name="email_customer" value="<?= set_value('email_customer')?>" placeholder="Email" class="form-control">
               </div>
             </div>
           </div>          
