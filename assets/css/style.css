@@ -44,6 +44,10 @@ body {
 .input-image-profile input[type="file"]{
 	font-size: 14px !important;
 }
+.side-nav:hover{
+	background-color: rgb(231, 231, 231) !important;
+	transition: all 0.5s ease-in-out;
+}
 
 /* end manajement akun */
 
