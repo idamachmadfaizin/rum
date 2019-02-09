@@ -7,9 +7,6 @@
       <a href="<?= site_url()."/profile"?>" class="nav-link text-decoration-none text-secondary ml-4">Profile</a>
     </li>
     <li class="nav-item side-nav">
-      <a href="<?= site_url()."/address"?>" class="nav-link text-decoration-none text-secondary ml-4">Address</a>
-    </li>
-    <li class="nav-item side-nav">
       <a href="<?= site_url()."/change_password"?>" class="nav-link text-decoration-none text-secondary ml-4">Change Password</a>
     </li>
   </ul>
