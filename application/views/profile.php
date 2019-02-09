@@ -3,43 +3,9 @@
 <div class="container-fluid" style="margin-top:80px; background-color:#F3F3F1;">
   <?= form_open_multipart(); ?>
     <div class="row">
-      <div class="col-3" style="margin-top:30px;">
-        <ul class="nav flex-column ml-4">
-          <li class="nav-item">
-            <a href="" class="nav-link text-decoration-none text-black font-weight-bold">My Account</a>
-          </li>
-          <li class="nav-item">
-            <a href="" class="nav-link text-decoration-none text-secondary">Profile</a>
-          </li>
-          <li class="nav-item">
-            <a href="" class="nav-link text-decoration-none text-secondary">Bank</a>
-          </li>
-          <li class="nav-item">
-            <a href="" class="nav-link text-decoration-none text-secondary">Address</a>
-          </li>
-          <li class="nav-item">
-            <a href="" class="nav-link text-decoration-none text-secondary">Change Password</a>
-          </li>
-        </ul>
+      
+      <?php $this->load->view('partials/side_menu_customer'); ?>
 
-        <ul class="nav flex-column ml-4 mt-4">
-          <li class="nav-item">
-            <a href="" class="nav-link text-decoration-none text-black font-weight-bold">My Shopping</a>
-          </li>
-          <li class="nav-item">
-            <a href="" class="nav-link text-decoration-none text-secondary">Order</a>
-          </li>
-          <li class="nav-item">
-            <a href="" class="nav-link text-decoration-none text-secondary">Puschase</a>
-          </li>
-          <li class="nav-item">
-            <a href="" class="nav-link text-decoration-none text-secondary">Delivery of Product</a>
-          </li>
-          <li class="nav-item">
-            <a href="" class="nav-link text-decoration-none text-secondary">Report</a>
-          </li>
-        </ul>
-      </div>
       <div class="col-9">
         <div class="bg-white nav-bar-right-white shadow1">
           <p class="text-black text-18 mb-1 font-weight-bold">My Profile</p>
@@ -57,6 +23,7 @@
               </div>
             </div>
           </div>
+          
           <div class="row">
             <div class="col-3">
               <div class="d-flex align-items-center justify-content-end text-secondary d-block-h-45">Email</div>
@@ -65,6 +32,7 @@
               <div class="d-flex align-items-center justify-content-end text-secondary d-block-h-45">Jenis Kelamin</div>
               <div class="d-flex align-items-center justify-content-end text-secondary d-block-h-45">Tanggal Lahir</div>
             </div>
+
             <div class="col-9">
               <div class="d-flex align-items-center d-block-h-45">
                 <div class="text-dark">customer3@gmail.com</div>
