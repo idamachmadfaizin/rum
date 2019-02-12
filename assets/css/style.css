@@ -28,6 +28,10 @@ body {
 	display: block;
 	height: 45px;
 }
+.d-block-min-h-300{
+	display: block;
+	min-height: 500px !important;
+}
 .d-block-w-100{
 	display: block;
 	width: 100px;
