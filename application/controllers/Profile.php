@@ -26,10 +26,11 @@ class Profile extends CI_Controller {
 
 		if($validation->run()) {
 			$profile->update();
-			$this->session->set_flashdata('message', 'Update Profile Success');
+			$this->session->set_flashdata('updated', 'Update Profile Success');
 		}
 
-		redirect('/profile');
+		// redirect('/profile');
+		$this->index();
 	}
 
 }
