@@ -12,7 +12,25 @@
           <p class="text-12">Kelola informasi profil anda untuk mengontrol, melindungi, dan mengamankan akun</p>
 
           <hr>
-
+          
+          <?php if(validation_errors()): ?>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+              <?= validation_errors(); ?>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          <?php endif; ?>
+          
+          <?php if($this->session->flashdata('updated')): ?>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+              <?= $this->session->flashdata('updated'); ?>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          <?php endif; ?>
+          
           <div class="row justify-content-end mt-30">
             <div class="col-9">
               <img src="<?= base_url()."upload/profile/".$profile->url_img_customer; ?>" class="rounded-circle float-left size-50" alt="IMG-Profile">
