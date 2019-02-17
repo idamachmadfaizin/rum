@@ -218,7 +218,7 @@ $num_notif = $CI->cart_model->count();
 								<div class="header-cart-wrapbtn">
 									<!-- Bookmark -->
 									<!-- Button -->
-									<a href="#" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+									<a href="<?= site_url().'/checkout'?>" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
 										Check Out
 									</a>
 								</div>
