@@ -1,7 +1,9 @@
 body {
 	font-family: 'Montserrat';
 }
-
+.nounderline {
+	text-decoration: none;
+}
 .text-12{
 	font-family: 'Montserrat';
 	font-size: 12px;
@@ -19,6 +21,12 @@ body {
 .mt-30{
 	margin-top: 30px !important;
 }
+.mt-40{
+	margin-top: 40px !important;
+}
+.mt-70{
+	margin-top: 70px;
+}
 .my-15{
 	margin-top: 15px !important;
 	margin-bottom: 15px !important;
@@ -35,6 +43,13 @@ body {
 .d-block-w-100{
 	display: block;
 	width: 100px;
+}
+.border-2{
+	border: 2px solid #e9ecef !important;
+}
+.text-rum{
+	/* color: #FCCF05; */
+	color: #E65540;
 }
 
 /* Manajemen akun */
@@ -54,6 +69,16 @@ body {
 }
 
 /* end manajement akun */
+
+.table-img-product {
+  width: 90px;
+  position: relative;
+}
+.table-img-product img{
+  width: 100%;
+}
+
+
 
 /* Custom Radio */
 /* The custom-radio */
