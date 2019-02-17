@@ -11,7 +11,8 @@
 <section class="cart bgwhite p-t-70 p-b-100">
 	<div class="container">
 		<!-- Cart item -->
-    <form action="<?= site_url().'/cart/update' ?>" method="post">
+    <?= form_open(site_url().'/cart/update') ?>
+    <!-- <form action="<?php // site_url().'/cart/update' ?>" method="post"> -->
 		<div class="container-table-cart pos-relative">
 			<div class="wrap-table-shopping-cart bgwhite">
 				<table id="detail_cart" class="table table-shopping-cart">
@@ -73,12 +74,12 @@
 					Update Cart
 				</button>
       </div>
-      </form>
+    <?= form_close(); ?>
 			<div class="size10 trans-0-4 m-t-10 m-b-10 m-l-70">
 				<!-- Button -->
-				<button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
-					CHECKOUT
-				</button>
+        <a href="<?= site_url().'/checkout'?>" class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
+          CHECKOUT
+        </a>
 			</div>
 		</div>
 

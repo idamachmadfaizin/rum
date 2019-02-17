@@ -36,8 +36,9 @@ class profile_model extends CI_Model
     ];
   }
 
-  public function getById($id)
+  public function getById()
   {
+    $id = $this->session->id_customer;
     return $this->db->get_where($this->_table, ["id_customer" => $id])->row();
   }
 

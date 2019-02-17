@@ -10,9 +10,9 @@ class Profile extends CI_Controller {
 	}
 
 	public function index() {
-    $id = $this->session->id_customer;
+    // $id = $this->session->id_customer;
     
-    $data['profile']=$this->profile_model->getById($id);
+    $data['profile']=$this->profile_model->getById();
     
 		$this->load->view('profile', $data);
 	}
