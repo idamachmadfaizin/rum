@@ -18,6 +18,11 @@ body {
 	max-height: 50px;
 }
 
+.wh-40{
+	width: 40px !important;
+	height: 40px !important;
+}
+
 .mt-30{
 	margin-top: 30px !important;
 }
@@ -49,7 +54,10 @@ body {
 }
 .text-rum{
 	/* color: #FCCF05; */
-	color: #E65540;
+	color: #E65540 !important;
+}
+.text-gray-rum{
+	color: #F3F3F1;
 }
 
 /* Manajemen akun */
