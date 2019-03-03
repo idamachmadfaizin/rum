@@ -82,15 +82,15 @@
 						<a href="<?= site_url().'/admin/dashboard' ?>"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
 					</li>
 					<li class="menu-title">Data Master</li><!-- /.menu-title -->
-					<li><a href="<?= site_url().'/admin/category' ?>" class=""><i class="menu-icon fas fa-tags"></i>Category</a></li>
-					<li><a href="<?= site_url().'/admin/product' ?>" class=""><i class="menu-icon fas fa-fish"></i>Product</a></li>
-					<li><a href="#" class=""><i class="menu-icon fa fa-cogs"></i>Customer</a></li>
+					<li><a href="<?= site_url().'/admin/category' ?>"><i class="menu-icon fas fa-tags"></i>Category</a></li>
+					<li><a href="<?= site_url().'/admin/product' ?>"><i class="menu-icon fas fa-fish"></i>Product</a></li>
+					<li><a href="<?= site_url().'/admin/customer' ?>"><i class="menu-icon fas fa-user"></i>Customer</a></li>
 					
           <li class="menu-title">Data Master</li><!-- /.menu-title -->
-					<li><a href="#" class=""><i class="menu-icon fa fa-cogs"></i>Order</a></li>
-					<li><a href="#" class=""><i class="menu-icon fa fa-cogs"></i>Purchase</a></li>
-					<li><a href="#" class=""><i class="menu-icon fa fa-cogs"></i>Delivery of Product</a></li>
-					<li><a href="#" class=""><i class="menu-icon fa fa-cogs"></i>Report</a></li>
+					<li><a href="<?= site_url().'/admin/order' ?>"><i class="menu-icon fas fa-cart-arrow-down"></i>Order</a></li>
+					<li><a href="<?= site_url().'/admin/purchase' ?>"><i class="menu-icon far fa-credit-card"></i>Purchase</a></li>
+					<li><a href="<?= site_url().'/admin/delivery' ?>"><i class="menu-icon fas fa-truck"></i>Delivery of Product</a></li>
+					<li><a href="<?= site_url().'/admin/report' ?>"><i class="menu-icon fas fa-file-signature"></i>Report</a></li>
 				</ul>
 			</div><!-- /.navbar-collapse -->
 		</nav>
@@ -112,9 +112,10 @@
 					<div class="header-left">
 						<button class="search-trigger"><i class="fa fa-search"></i></button>
 						<div class="form-inline">
-							<form class="search-form">
-								<input class="form-control mr-sm-2" type="text" placeholder="Search ..." aria-label="Search">
-								<button class="search-close" type="submit"><i class="fa fa-close"></i></button>
+							<form action="" method="get" class="search-form">
+								<input name="search" class="form-control mr-sm-2" type="text" placeholder="Search ..." aria-label="Search">
+                <button class="form-control" type="submit"></button>
+                <button class="search-close "><i class="fa fa-close"></i></button>
 							</form>
 						</div>
 
