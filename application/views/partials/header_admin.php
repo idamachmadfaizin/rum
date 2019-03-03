@@ -17,7 +17,8 @@
 	<link rel="shortcut icon" href="https://i.imgur.com/QRAUqs9.png">
 
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css"> -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
@@ -78,11 +79,11 @@
 			<div id="main-menu" class="main-menu collapse navbar-collapse">
 				<ul class="nav navbar-nav">
 					<li class="active">
-						<a href="index.html"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
+						<a href="<?= site_url().'/admin/dashboard' ?>"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
 					</li>
 					<li class="menu-title">Data Master</li><!-- /.menu-title -->
 					<li><a href="<?= site_url().'/admin/category' ?>" class=""><i class="menu-icon fas fa-tags"></i>Category</a></li>
-					<li><a href="#" class=""><i class="menu-icon fa fa-cogs"></i>Product</a></li>
+					<li><a href="<?= site_url().'/admin/product' ?>" class=""><i class="menu-icon fas fa-fish"></i>Product</a></li>
 					<li><a href="#" class=""><i class="menu-icon fa fa-cogs"></i>Customer</a></li>
 					
           <li class="menu-title">Data Master</li><!-- /.menu-title -->
