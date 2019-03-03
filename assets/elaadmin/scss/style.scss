@@ -457,7 +457,8 @@ aside.left-panel {
 .navbar .navbar-nav>.active>a,
 .navbar .navbar-nav>.active>a:focus,
 .navbar .navbar-nav>.active>a:hover {
-    color: $menu-active;
+    // color: $menu-active;
+    color: #E65540;
 }
 .navbar-nav li span.count {
     background: #a9d86e;
