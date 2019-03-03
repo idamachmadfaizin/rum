@@ -1567,7 +1567,7 @@ header .form-inline {
     color: #878787;
     display: inline-block;
     font-size: 16px;
-    float: left;
+    /* float: left; */
     padding: 0 7px;
     width: inherit;
     text-align: center; }
@@ -1609,7 +1609,7 @@ header .form-inline {
   left: 40%; }
 
 .twt-feed {
-  -webkit-border-radius: 4px 4px 0 0;
+  /* -webkit-border-radius: 4px 4px 0 0; */
   color: #FFFFFF;
   padding: 40px 10px 10px;
   position: relative;
@@ -2373,7 +2373,8 @@ footer.site-footer {
       display: inline-block; }
     .card-footer.bg-white [class*="float"].fa {
       display: inline-block;
-      float: left !important; }
+      /* float: left !important;  */
+    }
 
   #traffic-chart {
     height: 232px !important; }
