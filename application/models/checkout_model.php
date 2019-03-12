@@ -18,6 +18,10 @@ class checkout_model extends CI_Model
     return $this->db->insert_id();
   }
 
+  public function insDetailCart($data)
+  {
+    $this->db->insert_batch('detail_order', $data);
+  }
   public function delete_cart()
   {
     $id = $this->session->id_customer;

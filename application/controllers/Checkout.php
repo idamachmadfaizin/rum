@@ -21,6 +21,8 @@ class Checkout extends CI_Controller
     if (empty($data['carts']) ) {
       redirect('/produk');
     }
+    $cart = $this->cart_model->get_cart()->result();
+
     $this->load->view('checkout', $data);
   }
 
@@ -28,15 +30,28 @@ class Checkout extends CI_Controller
   {
     $checkout = $this->checkout_model;
 
+    // get grand total
     $grand_total = $this->cart_model->grand_total()->row();
+    // get id order inserted
     $id_order = $checkout->make_order($grand_total->grand_total);
-
-    // $checkout->delete_cart();
     
     $data['id_order'] = $id_order;
     $data['grand_total'] = $this->cart_model->grand_total()->row();
 
-    print_r($data);
+    // insert to _detail_order
+    $cart = $this->cart_model->get_cart()->result();
+    $detail = array();
+    foreach ($cart as $cart) {
+      $arr['id_order'] = $id_order;
+      $arr['id_produk'] = $cart->id_produk;
+      $arr['jumlah'] = $cart->qty_cart;
+      $arr['harga_satuan'] = $cart->harga_produk;
+      array_push($detail, $arr);
+    }
+    $this->checkout_model->insDetailCart($detail);
+    // end
+
+    $checkout->delete_cart();
 
     $this->load->view('order_received', $data);
   }

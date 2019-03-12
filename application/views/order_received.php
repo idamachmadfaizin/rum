@@ -10,13 +10,13 @@
           <div class="col-2 px-4 d-flex align-items-center">
             <img src="<?= base_url().'assets\img\logos\Logo-BCA-Icon-Only.png'?>" alt="Logo-BCA-Icon-Only.png">
           </div>
-          <div class="col-5 px-2">
+          <div class="col-4 px-2">
             <p class="mb-2">No Rekening RUM</p>
             <p class="mb-2">Berita Acara</p>
             <p class="mb-2">Jumlah</p>
           </div>
-          <div class="col-5 ml-auto">
-            <p class="text-black text-right px-3 mb-2" style="font-size:20px;">1500760910 a/n Rum Seafood</p>
+          <div class="col-6 ml-auto">
+            <p class="text-black text-right px-3 mb-2" style="font-size:20px;">BCA 1500760910 a/n Rum Seafood</p>
             <p class="text-black text-right px-3 mb-2" style="font-size:20px;"><?= $id_order; ?></p>
             <p class="text-black text-right px-3 mb-2 text-rum" style="font-size:20px;">Rp <?= $grand_total->grand_total; ?></p>
           </div>
