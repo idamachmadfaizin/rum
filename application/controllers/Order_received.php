@@ -10,9 +10,9 @@ class Order_received extends CI_Controller
 		$this->load->model('order_received_model');
   }
   
-  public function index()
+  public function index($id_order = 0)
   {
-
+    print_r($id_order);
     $this->load->view('order_received');
   }
 }
