@@ -118,7 +118,7 @@
     <div class="col-12 d-flex justify-content-end">
       <div class="size10 trans-0-4 m-t-10 m-b-10">
         <!-- <a href="" class="nounderline"> -->
-          <button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4" onclick="location.href='<?= site_url().'/order_received';?>'">
+          <button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4" onclick="location.href='<?= site_url().'/checkout/makeorder/' ;?>'">
             MAKE ORDER
           </button>
         <!-- </a> -->

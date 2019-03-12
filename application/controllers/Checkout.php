@@ -18,11 +18,26 @@ class Checkout extends CI_Controller
     $data['carts'] = $this->cart_model->get_cart()->result();
     $data['grand_total'] = $this->cart_model->grand_total()->row();
 
+    if (empty($data['carts']) ) {
+      redirect('/produk');
+    }
     $this->load->view('checkout', $data);
   }
 
   public function makeorder()
   {
+    $checkout = $this->checkout_model;
+
+    $grand_total = $this->cart_model->grand_total()->row();
+    $id_order = $checkout->make_order($grand_total->grand_total);
+
+    // $checkout->delete_cart();
     
+    $data['id_order'] = $id_order;
+    $data['grand_total'] = $this->cart_model->grand_total()->row();
+
+    print_r($data);
+
+    $this->load->view('order_received', $data);
   }
 }
