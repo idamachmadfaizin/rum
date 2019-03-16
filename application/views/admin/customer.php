@@ -29,19 +29,25 @@
                     </tr>
                   </thead>
                   <tbody>
+                  <?php $number = 1; ?>
+                  <?php foreach ($customer as $customer): ?>
                     <tr>
-                      <td class="serial">1</td>
-                      <td><span>customer3@gmail.com</span></td>
-                      <td><span>customer3</span></td>
-                      <td><span>08123456789</span></td>
-                      <td><span>karangploso1</span></td>
-                      <td><span>Pria</span></td>
-                      <td><span>2019-01-01</span></td>
-                      <td><span>2019-02-05 01:48:46</span></td>
-                      <td><span>2019-02-18 00:44:52</span></td>
+                      <td class="serial"><?= $number ?></td>
+                      <td><span><?= $customer->email_customer ?></span></td>
+                      <td><span><?= $customer->nama_customer ?></span></td>
+                      <td><span><?= $customer->nomor_telp ?></span></td>
+                      <td><span><?= $customer->address ?></span></td>
+                      <td><span><?= $customer->jenis_kelamin ?></span></td>
+                      <td><span><?= $customer->tanggal_lahir ?></span></td>
+                      <td><span><?= $customer->customer_created_at ?></span></td>
+                      <td><span><?= $customer->customer_updated_at ?></span></td>
                     </tr>
+                    <?php $number++; ?>
+                  <?php endforeach; ?>
                   </tbody>
                 </table>
+                <hr>
+                <?php echo $this->pagination->create_links(); ?>
               </div> <!-- /.table-stats -->
             </div>
           </div> <!-- /.card -->
@@ -49,7 +55,6 @@
       </div>
     </div>
     <!-- /.orders -->
-
 	</div>
 	<!-- .animated -->
 </div>
