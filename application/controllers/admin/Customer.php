@@ -15,8 +15,8 @@ class Customer extends CI_Controller
     $customer = $this->customer_model;
 
     $config['base_url'] = site_url('admin/customer/index');
-    $config['total_rows'] = $customer->getTotalCustomer();
-    $config['per_page'] = 5;
+    $config['total_rows'] = $customer->getTotalRow();
+    $config['per_page'] = 10;
     
     // tag pagination
     $config['full_tag_open'] = '<nav aria-label="Page navigation customer" class="d-flex justify-content-end pr-5"><ul class="pagination pagination-sm">';

@@ -69,7 +69,7 @@
 							<div class="stat-content">
 								<div class="text-left dib">
 									<div class="stat-text"><span class="count">2986</span></div>
-									<div class="stat-heading">Users</div>
+									<div class="stat-heading">Customer</div>
 								</div>
 							</div>
 						</div>

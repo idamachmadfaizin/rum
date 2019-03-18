@@ -9,15 +9,35 @@
           <div class="card-header">
             <strong>Category</strong> Product
           </div>
-          <?= form_open_multipart(site_url()) ?>
+
+          <?php if(validation_errors()): ?>
+            <div class="sufee-alert alert with-close alert-warning alert-dismissible fade show">
+              <span class="badge badge-pill badge-warning">Warning</span>
+              <?= validation_errors(); ?>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+              </button>
+            </div>
+          <?php endif; ?>
+          
+          <?php if($this->session->flashdata('sukses')): ?>
+            <div class="sufee-alert alert with-close alert-success alert-dismissible fade show">
+              <?= $this->session->flashdata('sukses'); ?>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          <?php endif; ?>
+
+          <?= form_open_multipart('admin/category/insert') ?>
           <!-- <form action="#" method="post" enctype="multipart/form-data" class="form-horizontal"> -->
             <div class="card-body card-block">
               <div class="form-group">
                 <label for="nama_kategori" class="form-control-label">Nama Kategori</label>
-                <input type="text" id="nama_kategori" class="form-control">
+                <input type="text" id="nama_kategori" name="nama_kategori" class="form-control">
               </div>
               <div class="form-group">
-                <label for="file-input" class=" form-control-label">File input</label>
+                <label for="file-input" class=" form-control-label">Gambar Kategori</label>
                 <input type="file" id="file-input" name="file-input" class="form-control-file">
               </div>
             </div>
@@ -51,24 +71,19 @@
                       </tr>
                     </thead>
                     <tbody>
+                    <?php $num = 1; ?>
+                    <?php foreach($kategori as $kategori): ?>
                       <tr>
-                        <td class="serial">1</td>
+                        <td class="serial"><?= $num ?></td>
                         <td class="avatar">
                           <div class="round-img">
-                            <img class="rounded-circle" src="<?= base_url().'assets/elaadmin/images/avatar/1.jpg' ?>" alt="">
+                            <img class="rounded-circle" src="<?= base_url().$kategori->url_image_kategori ?>" alt="">
                           </div>
                         </td>
-                        <td> <span class="invoice">1811S9ONUU</span> </td>
+                        <td> <span class="invoice"><?= $kategori->nama_kategori ?></span> </td>
                       </tr>
-                      <tr class="pb-0">
-                        <td class="serial">2</td>
-                        <td class="avatar">
-                          <div class="round-img">
-                            <img class="rounded-circle" src="<?= base_url().'assets/elaadmin/images/avatar/1.jpg' ?>" alt="">
-                          </div>
-                        </td>
-                        <td> <span class="invoice">1811S9ONUU</span> </td>
-                      </tr>
+                      <?php $num++ ?>
+                    <?php endforeach ?>
                     </tbody>
                   </table>
                 </div> <!-- /.table-stats -->

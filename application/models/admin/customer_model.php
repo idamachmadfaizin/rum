@@ -10,7 +10,7 @@ class customer_model extends CI_Model
     return $this->db->get($this->_table)->result();
   }
 
-  public function getTotalCustomer()
+  public function getTotalRow()
   {
     return $this->db->count_all($this->_table);
   }
