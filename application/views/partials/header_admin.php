@@ -78,13 +78,26 @@
 		<nav class="navbar navbar-expand-sm navbar-default">
 			<div id="main-menu" class="main-menu collapse navbar-collapse">
 				<ul class="nav navbar-nav">
-					<li class="active">
+					<li class="<?php if(current_url() == site_url().'/admin/dashboard'){echo "active";} ?>">
 						<a href="<?= site_url().'/admin/dashboard' ?>"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
 					</li>
 					<li class="menu-title">Data Master</li><!-- /.menu-title -->
-					<li><a href="<?= site_url().'/admin/category' ?>"><i class="menu-icon fas fa-tags"></i>Category</a></li>
-					<li><a href="<?= site_url().'/admin/product' ?>"><i class="menu-icon fas fa-fish"></i>Product</a></li>
-					<li><a href="<?= site_url().'/admin/customer' ?>"><i class="menu-icon fas fa-user"></i>Customer</a></li>
+					<li class="<?php if(current_url() == site_url().'/admin/category'){echo "active";} ?>">
+						<a href="<?= site_url().'/admin/category' ?>"><i class="menu-icon fas fa-tags"></i>Category</a>
+					</li>
+					<li class="<?php if(current_url() == site_url().'/admin/product'){echo "active";} ?>">
+						<a href="<?= site_url().'/admin/product' ?>"><i class="menu-icon fas fa-fish"></i>Product</a>
+					</li>
+					<li class="<?php if(current_url() == site_url().'/admin/customer'){echo "active";} ?>">
+						<a href="<?= site_url().'/admin/customer' ?>"><i class="menu-icon fas fa-user"></i>Customer</a>
+					</li>
+					<li class="<?php if(current_url() == site_url().'/admin/kmeans'){echo "active";} ?>">
+						<a href="<?= site_url().'/admin/kmeans' ?>"><i class="menu-icon fab fa-korvue"></i>K-means</a>
+					</li>
+					<li class="menu-title">Data Order</li><!-- /.menu-title -->
+					<li class="<?php if(current_url() == site_url().'/admin/order'){echo "active";} ?>">
+						<a href="<?= site_url().'/admin/order' ?>"><i class="menu-icon fas fa-shopping-cart"></i></i>Orders</a>
+					</li>
 					
           <li class="menu-title">Report</li><!-- /.menu-title -->
 					<!-- <li><a href="<?= site_url().'/admin/order' ?>"><i class="menu-icon fas fa-cart-arrow-down"></i>Order</a></li> -->
