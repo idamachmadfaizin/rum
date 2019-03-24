@@ -7,7 +7,8 @@ class Payment_conf extends CI_Controller
   public function __construct() {
     parent:: __construct();
     
-		$this->load->model('payment_conf_model');
+    $this->load->model('payment_conf_model');
+    $this->load->helper('file');
   }
   
   public function index()
@@ -39,10 +40,18 @@ class Payment_conf extends CI_Controller
       $this->form_validation->set_rules('buktitf', 'Bukti Transfer', 'required');
     }
     if ($validation->run()) {
-      $cek = $payment->simpan();
-      print_r($cek);
+      if ($payment->cekBuktiTf() > 0) {
+        $path = $payment->getImagePath();
+        $path = './upload/bukti_tf/'.$path[0]->bukti_tf;
+        unlink($path);
+        $payment->update();
+      } else {
+        $payment->simpan();
+      }
+      
       $this->session->set_flashdata('sukses', 'Konfirmasi pembayaran berhasil disimpan');
     }
-    $this->index();
+
+    redirect('payment_conf');
   }
 }
