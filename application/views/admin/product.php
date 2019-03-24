@@ -9,41 +9,41 @@
           <div class="card-header">
             <strong>Product</strong>
           </div>
-          <?= form_open_multipart(site_url()) ?>
+          <?= form_open_multipart(site_url('admin/product/insert')) ?>
           <!-- <form action="#" method="post" enctype="multipart/form-data" class="form-horizontal"> -->
             <div class="card-body card-block">
               <div class="row">
                 <div class="col col-md-6">
                   <div class="form-group">
                     <label for="nama_produk" class="form-control-label">Nama Produk</label>
-                    <input type="text" name="nama_produk" id="nama_produk" value="<?php // echo $profile->nomor_telp; ?>" class="form-control">
+                    <input type="text" name="nama_produk" id="nama_produk" value="<?= set_value('nama_produk') ?>" class="form-control">
                   </div>
                   <div class="form-group">
                     <label for="harga_produk" class="form-control-label">Harga Produk</label>
-                    <input type="number" name="harga_produk" id="harga_produk" value="<?php // echo $profile->nomor_telp; ?>" class="form-control">
+                    <input type="number" name="harga_produk" id="harga_produk" value="<?= set_value('harga_produk') ?>" class="form-control">
                   </div>
                   <div class="form-group">
                     <label for="kategori_produk" class="form-control-label">Kategori Produk</label>
                     <select name="kategori_produk" id="kategori_produk" class="form-control">
                       <option>Please select</option>
-                      <option value="1">Option #1</option>
-                      <option value="2">Option #2</option>
-                      <option value="3">Option #3</option>
+                      <?php foreach($kategori as $kategori): ?>
+                        <option value="<?= $kategori->id_kategori; ?>"><?= $kategori->nama_kategori; ?></option>
+                      <?php endforeach ?>
                     </select>
                   </div>
                 </div>
                 <div class="col col-md-6">
-                  <div class="form-group">
+                  <!-- <div class="form-group">
                     <label for="url_produk" class="form-control-label">URL Produk</label>
                     <input type="text" name="url_produk" id="url_produk" value="<?php // echo $profile->nomor_telp; ?>" class="form-control">
-                  </div>
+                  </div> -->
                   <div class="form-group">
                     <label for="deskripsi_produk" class="form-control-label">Deskripsi Produk</label>
-                    <textarea name="deskripsi_produk" id="deskripsi_produk" class="form-control"></textarea>
+                    <textarea name="deskripsi_produk" id="deskripsi_produk" class="form-control" value="<?= set_value('deskripsi_produk')?>"></textarea>
                   </div>
                   <div class="form-group">
-                    <label for="file-multiple-input" class="form-control-label">Multiple File input</label>
-                    <input type="file" id="file-multiple-input" name="file-multiple-input" multiple="" class="form-control-file">
+                    <label for="file-multiple-input" class="form-control-label">Gambar Produk</label>
+                    <input type="file" id="file-multiple-input" name="file-input" multiple="" class="form-control-file">
                   </div>
                 </div>
               </div>
@@ -78,46 +78,35 @@
                       <th>Nama Produk</th>
                       <th>Harga</th>
                       <th>Kategori</th>
-                      <th>Url Produck</th>
+                      <!-- <th>Url Produck</th> -->
                       <th>Deskripsi</th>
                       <th class="avatar">Images</th>
                     </tr>
                   </thead>
                   <tbody>
+                  <?php $num = 1; ?>
+                  <?php foreach($produk as $produk): ?>
                     <tr>
-                      <td class="serial">1</td>
-                      <td><span>Cumi Kupas</span></td>
-                      <td>Rp <span class="count">90000</span></td>
-                      <td><span>Seafood</span></td>
-                      <td><span>cumi_kupas</span></td>
-                      <td><span>ini deskripsi cumi kupas</span></td>
+                      <td class="serial"><?= $num; ?></td>
+                      <td><span><?= $produk->nama_produk; ?></span></td>
+                      <td>Rp <span class="count"><?= $produk->harga_produk; ?></span></td>
+                      <td><span><?= $produk->nama_kategori; ?></span></td>
+                      <!-- <td><span>cumi_kupas</span></td> -->
+                      <td><span><?= $produk->deskripsi_produk ?></span></td>
                       <td class="avatar">
                         <div class="round-img">
                           <a href="#">
-                            <img class="rounded-circle" src="<?= base_url().'assets/elaadmin/images/avatar/1.jpg' ?>" alt="">
+                            <img class="rounded-circle" src="<?= base_url().$produk->url_produk ?>" alt="">
                           </a>
                         </div>
                       </td>
                     </tr>
-                    
-                    <tr class="pb-0">
-                      <td class="serial">1</td>
-                      <td><span>Cumi Kupas</span></td>
-                      <td>Rp <span class="count">90000</span></td>
-                      <td><span>Seafood</span></td>
-                      <td><span>cumi_kupas</span></td>
-                      <td><span>ini deskripsi cumi kupas</span></td>
-                      <td class="avatar">
-                        <div class="round-img">
-                          <a href="#">
-                            <img class="rounded-circle" src="<?= base_url().'assets/elaadmin/images/avatar/1.jpg' ?>" alt="">
-                          </a>
-                        </div>
-                      </td>
-                    </tr>
-                    
+                    <?php $num++ ?>
+                  <?php endforeach ?>
                   </tbody>
                 </table>
+                <hr>
+                <?php echo $this->pagination->create_links(); ?>
               </div> <!-- /.table-stats -->
             </div>
           </div> <!-- /.card -->
