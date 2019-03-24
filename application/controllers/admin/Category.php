@@ -38,8 +38,8 @@ class Category extends CI_Controller
     
     
     $limit = $config['per_page'];
-    $kategori = $kategori->selectAll($limit, $offset);
-    $data['kategori'] = $kategori;
+    $kategoris = $kategori->selectAll($limit, $offset);
+    $data['kategori'] = $kategoris;
 
     $this->load->view('admin/category', $data);
   }

@@ -51,6 +51,6 @@ class category_model extends CI_Model
       return $this->upload->data("file_name");
     }
     
-    return "default.jpg";
+    // return "default.jpg";
   }
 }

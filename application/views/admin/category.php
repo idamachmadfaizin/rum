@@ -86,6 +86,8 @@
                     <?php endforeach ?>
                     </tbody>
                   </table>
+                  <hr>
+                  <?php echo $this->pagination->create_links(); ?>
                 </div> <!-- /.table-stats -->
               </div>
             </div> <!-- /.card -->
