@@ -12,6 +12,20 @@
 --------------------------------------------------------- */
 /* 
 
+/* edit dewe */
+.color-success{
+	color:#5cb85c !important;
+	border-color:#4cae4c !important;
+}
+
+.color-danger{
+	color:#CB2E25 !important;
+	border-color:#D9534F !important;
+}
+
+.font-16 {
+	font-size: 16pt;
+}
 
 Googel Fonts  */
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700");
