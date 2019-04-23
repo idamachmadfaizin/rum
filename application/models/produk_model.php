@@ -29,7 +29,7 @@ class produk_model extends CI_Model
         $this->db->group_by('p.id_produk');
         $this->db->limit($limit, $offset);
         
-        return $this->db->get();
+        return $this->db->get()->result();
     }
     public function getTotalProduk($cari, $kategori)
     {

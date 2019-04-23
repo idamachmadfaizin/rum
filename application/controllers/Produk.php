@@ -48,7 +48,6 @@ class Produk extends CI_Controller {
     array_unshift($data['kategori'], array("id_kategori" => "0", "nama_kategori" => "All", "url_image_kategori" => "0"));
         
     $produk = $this->produk_model->getProdukImage($search, $sorting, $kategori2, $limit, $offset);
-    $produk = $produk->result_array();
     $data['produk'] = $produk;
 
 		$this->load->view('produk', $data);
