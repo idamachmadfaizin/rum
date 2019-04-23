@@ -9,7 +9,7 @@
         <div class="col-xl-12">
           <div class="card">
             <div class="card-body">
-              <h4 class="box-title">List Product</h4>
+              <h4 class="box-title">List Customer</h4>
             </div>
             <div class="card-body--">
               <div class="table-stats order-table ov-h">
@@ -23,8 +23,8 @@
                       <th>Address</th>
                       <th>Jenis Kelamin</th>
                       <th>Tanggal Lahir</th>
-                      <th>Created at</th>
-                      <th>Updated at</th>
+                      <!-- <th>Created at</th> -->
+                      <!-- <th>Updated at</th> -->
                       <!-- <th>Action</th> -->
                     </tr>
                   </thead>
@@ -39,8 +39,8 @@
                       <td><span><?= $customer->address ?></span></td>
                       <td><span><?= $customer->jenis_kelamin ?></span></td>
                       <td><span><?= $customer->tanggal_lahir ?></span></td>
-                      <td><span><?= $customer->customer_created_at ?></span></td>
-                      <td><span><?= $customer->customer_updated_at ?></span></td>
+                      <!-- <td><span><?// $customer->customer_created_at ?></span></td> -->
+                      <!-- <td><span><?// $customer->customer_updated_at ?></span></td> -->
                     </tr>
                     <?php $number++; ?>
                   <?php endforeach; ?>

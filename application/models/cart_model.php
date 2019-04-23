@@ -15,7 +15,7 @@ class cart_model extends CI_Model
     $this->db->where('c.id_customer', $id_customer);
     $this->db->group_by('c.id_produk');
 
-    return $this->db->get();
+    return $this->db->get()->result();
   }
 
   function update_qty($data_qty)

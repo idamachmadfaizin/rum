@@ -3,6 +3,7 @@
 class product_model extends CI_Model
 {
   private $_table = "produk";
+  private $_tImage = "image";
 
   public $id_kategori;
   public $nama_produk;
@@ -52,9 +53,18 @@ class product_model extends CI_Model
     $this->nama_produk = $post['nama_produk'];
     $this->harga_produk = $post['harga_produk'];
     $this->deskripsi_produk = $post['deskripsi_produk'];
-    $this->url_produk = "assets/img/produk/".$this->_uploadImage();
-
-    $this->db->insert($this->_table, $this);
+    $this->url_produk = str_replace(" ", "-", $post['nama_produk']);
+    
+    $id_produk = $this->db->insert($this->_table, $this);
+    $this->insertToImage($id_produk);
+  }
+  
+  public function insertToImage($id_produk)
+  {
+    $data = new stdClass();
+    $data->id_produk = $id_produk;
+    $data->url_image = $this->_uploadImage();
+    $this->db->insert($this->_tImage, $data);
   }
 
   private function _uploadImage()

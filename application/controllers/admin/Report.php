@@ -12,6 +12,9 @@ class Report extends CI_Controller
 
   public function index()
   {
-    $this->load->view('admin/report');
+    $report = $this->report_model;
+
+    $data['report'] = $report->getTableContent();
+    $this->load->view('admin/report', $data);
   }
 }

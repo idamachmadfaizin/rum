@@ -20,7 +20,7 @@ class checkout_model extends CI_Model
 
   public function insDetailCart($data)
   {
-    $this->db->insert_batch('detail_order', $data);
+    return $this->db->insert_batch('detail_order', $data);
   }
   public function delete_cart()
   {

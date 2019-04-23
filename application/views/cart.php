@@ -26,31 +26,31 @@
             </tr>
           </thead>
           <tbody>
-            <?php foreach($cart as $key => $value): ?>
+            <?php foreach($cart as $carts): ?>
               <tr class="table-row">
                 <td class="column-1">
-                  <div class="cart-img-product b-rad-4 o-f-hidden" onclick="window.location = '<?php echo site_url().'/cart/delete/'.$value['id_cart']?>'">
+                  <div class="cart-img-product b-rad-4 o-f-hidden" onclick="window.location = '<?php echo site_url().'/cart/delete/'.$carts->id_cart ?>'">
                   <a href="">
-                    <img src="<?php echo base_url().$value['url_image'] ?>" alt="IMG-<?php $value['nama_produk']?>">
+                    <img src="<?php echo base_url('assets/img/produk/'.$carts->url_image) ?>" alt="IMG-<?php $carts->nama_produk ?>">
                   </a>
                   </div>
                 </td>
-                <td class="column-2"><?php echo $value['nama_produk']?></td>
-                <td class="column-3">RP <?php echo $value['harga_produk']?></td>
+                <td class="column-2"><?php echo $carts->nama_produk ?></td>
+                <td class="column-3">RP <?php echo $carts->harga_produk ?></td>
                 <td class="column-4">
                   <div class="flex-w bo5 of-hidden w-size17">
                     <button class="btn-num-product-down color1 flex-c-m size7 bg8 eff2">
                       <i class="fs-12 fa fa-minus" aria-hidden="true"></i>
                     </button>
 
-                    <input class="size8 m-text18 t-center num-product" type="number" name="<?php echo $value['id_cart']?>" min="1" value="<?php echo $value['qty_cart']?>">
+                    <input class="size8 m-text18 t-center num-product" type="number" name="<?php echo $carts->id_cart ?>" min="1" value="<?php echo $carts->qty_cart ?>">
 
                     <button class="btn-num-product-up color1 flex-c-m size7 bg8 eff2">
                       <i class="fs-12 fa fa-plus" aria-hidden="true"></i>
                     </button>
                   </div>
                 </td>
-                <td class="column-5">RP <?php echo $value['qty_cart']*$value['harga_produk'] ?></td>
+                <td class="column-5">RP <?php echo $carts->qty_cart *$carts->harga_produk  ?></td>
               </tr>
             <?php endforeach ?>
           </tbody>

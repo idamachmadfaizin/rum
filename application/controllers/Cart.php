@@ -12,7 +12,6 @@ class Cart extends CI_Controller {
 
 	function index() {
 		$cart = $this->cart_model->get_cart();
-		$cart = $cart->result_array();
 		$data['cart'] = $cart;
 
 		$grand_total = $this->cart_model->grand_total();

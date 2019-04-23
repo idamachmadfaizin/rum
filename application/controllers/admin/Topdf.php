@@ -5,6 +5,8 @@ class Topdf extends CI_Controller
   public function __construct()
   {
     parent:: __construct();
+
+    $this->load->model('admin/report_model');
     $this->load->library('pdf');
   }
 
@@ -22,17 +24,24 @@ class Topdf extends CI_Controller
     // Memberikan space kebawah agar tidak terlalu rapat
     $pdf->Cell(10,7,'',0,1);
     $pdf->SetFont('Arial','B',10);
-    $pdf->Cell(20,6,'NIM',1,0);
-    $pdf->Cell(85,6,'NAMA MAHASISWA',1,0);
-    $pdf->Cell(27,6,'NO HP',1,0);
-    $pdf->Cell(25,6,'TANGGAL LHR',1,1);
+    $pdf->Cell(20,6,'id_order',1,0);
+    $pdf->Cell(20,6,'tgl_order',1,0);
+    $pdf->Cell(30,6,'nama_customer',1,0);
+    $pdf->Cell(40,6,'nama_produk',1,0);
+    $pdf->Cell(20,6,'jumlah',1,0);
+    $pdf->Cell(20,6,'harga_satuan',1,0);
+    $pdf->Cell(25,6,'total_harga',1,0);
     $pdf->SetFont('Arial','',10);
-    $mahasiswa = $this->db->get('mahasiswa')->result();
-    foreach ($mahasiswa as $row){
-        $pdf->Cell(20,6,$row->nim,1,0);
-        $pdf->Cell(85,6,$row->nama_lengkap,1,0);
-        $pdf->Cell(27,6,$row->no_hp,1,0);
-        $pdf->Cell(25,6,$row->tanggal_lahir,1,1); 
+
+    $report = $this->report_model->getTableContent();
+    foreach ($report as $row){
+      $pdf->Cell(20,6,$row->id_order,1,0);
+      $pdf->Cell(20,6,$row->tgl_order,1,0);
+      $pdf->Cell(30,6,$row->nama_customer,1,0);
+      $pdf->Cell(40,6,$row->nama_produk,1,0);
+      $pdf->Cell(20,6,$row->jumlah,1,0);
+      $pdf->Cell(20,6,$row->harga_satuan,1,0);
+      $pdf->Cell(25,6,$row->total_harga,1,1); 
     }
     $pdf->Output();
   }

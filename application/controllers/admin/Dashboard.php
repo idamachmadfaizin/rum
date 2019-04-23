@@ -9,6 +9,13 @@ class Dashboard extends CI_Controller
     $this->load->model('admin/dashboard_model');
   }
 
+  public function tesModel()
+  {
+    $dashboard = $this->dashboard_model;
+    $dateNow = date('Y-m-d');
+
+    print_r($dashboard->getOrders($dateNow));
+  }
   public function index()
   {
     $dashboard = $this->dashboard_model;
@@ -26,8 +33,8 @@ class Dashboard extends CI_Controller
                       ];
     $data['order'] = $dashboard->getOrders($dateNow);
     $data['detail_order'] = $dashboard->getDetailOrder();
+    $data['KP'] = $dashboard->getKP($dateNow);
 
-    // print_r($data);
     $this->load->view('admin/dashboard', $data);
   }
   

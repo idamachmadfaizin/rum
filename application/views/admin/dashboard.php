@@ -216,32 +216,40 @@
 											</td>
 											<td><span><?= $order->tgl_order ?></span></td>
 											<td><span><?= $order->total_harga ?></span></td>
+
 											<td class="avatar"><!-- TF -->
-												<div class="round-img">
-													<button class="btn p-0" data-toggle="modal" data-target="#idama">
-														<img class="rounded-circle" src="<?= base_url().'upload/bukti_tf/'.$order->bukti_tf ?>" alt="">
-													</button>
-												</div>
-												<!-- Modal -->
-												<div class="modal fade" id="idama" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-													<div class="modal-dialog" role="document">
-														<div class="modal-content">
-															<div class="modal-header">
-																<h5 class="modal-title" id="exampleModalLongTitle">Customer Detail</h5>
-																<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-																	<span aria-hidden="true">&times;</span>
-																</button>
-															</div>
-															<div class="modal-body text-center">
-																<img src="<?= base_url().'upload/bukti_tf/'.$order->bukti_tf ?>" alt="<?= $order->bukti_tf ?>" class="img-thumbnail" style="min-width:100%">
-															</div>
-															<div class="modal-footer">
-																<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+												<!-- cek untuk menampilkan bbukti tf pada tabel dan modal -->
+												<?php foreach($KP as $KonPem): ?>
+													<?php if($KonPem->id_order == $order->id_order): ?>
+														<div class="round-img">
+															<button class="btn p-0" data-toggle="modal" data-target="#buktitf">
+																<img class="rounded-circle" src="<?= base_url().'upload/bukti_tf/'.$KonPem->bukti_tf ?>" alt="">
+															</button>
+														</div>
+														<!-- Modal -->
+														<div class="modal fade" id="buktitf" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+															<div class="modal-dialog" role="document">
+																<div class="modal-content">
+																	<div class="modal-header">
+																		<h5 class="modal-title" id="exampleModalLongTitle">Bukti Transfer</h5>
+																		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																			<span aria-hidden="true">&times;</span>
+																		</button>
+																	</div>
+																	<div class="modal-body text-center">
+																	<!-- cek untuk menampilkan bbukti tf pada tabel dan modal -->
+																			<img src="<?= base_url().'upload/bukti_tf/'.$KonPem->bukti_tf ?>" alt="<?= $KonPem->bukti_tf ?>" class="img-thumbnail" style="min-width:100%">
+																	<!-- end -->
+																	</div>
+																	<div class="modal-footer">
+																		<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+																	</div>
+																</div>
 															</div>
 														</div>
-													</div>
-												</div>
-												<!-- end Modal -->
+														<!-- end Modal -->
+													<?php endif ?>
+												<?php endforeach ?>
 											</td>
 											<td>
 												<div class="btn-group">
@@ -270,6 +278,8 @@
 												</div>
 											</td>
 										</tr>
+
+										<?php $num++; ?>
 									<?php endforeach ?>
 										
 									</tbody>

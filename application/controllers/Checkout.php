@@ -48,11 +48,12 @@ class Checkout extends CI_Controller
       $arr['harga_satuan'] = $cart->harga_produk;
       array_push($detail, $arr);
     }
-    $this->checkout_model->insDetailCart($detail);
+    $check = $this->checkout_model->insDetailCart($detail);
+    print_r($check);
     // end
 
     $checkout->delete_cart();
 
-    $this->load->view('order_received', $data);
+    // $this->load->view('order_received', $data);
   }
 }
