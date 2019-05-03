@@ -9,11 +9,21 @@ class K_means extends CI_Controller {
    {
       parent::__construct();
       
-      $this->load->model('Rum_model');   
-   }
+      $this->load->model('Rum_model'); 
+    }
 
-   // This func to
-    public function index()
+    public function insDetailKmeans($products)
+    {
+        // get product
+
+        // get k-means
+        // loop
+            // insert produk dan nilai
+        // end loop
+    }
+
+    // This func to clustering
+    public function cluster()
     {
         // get total k-means
         $totKmeans = $this->Rum_model->getTotalKmeans();
@@ -62,47 +72,5 @@ class K_means extends CI_Controller {
         // $produk = $this->Rum_model->getK_Produk();
 
         $this->load->view('blank');
-
-
-
-
-
-
-        // COOOKKK
-        // $query = $this->Rum_model->getAllTable('detail_kmeans');
-        // $detail_kmeans = $query->result_array();
-
-        
-        // // convert id_detail_kmeans to id_produk
-        // for ($i=0; $i < $numCluster; $i++) {
-        //     echo 'cluster ' . $i . '<br>';
-        //     foreach ($cluster[$i] as $key => $value) {
-        //         $j = 0;
-        //         while ($key-1 != $detail_kmeans[$j]['id_detail_kmeans']) {
-        //             $j++;
-        //         }
-        //         // echo 'j=' . $j.'<br>';
-        //         $idpro = $detail_kmeans[$j]['id_produk'];
-        //         // echo 'id produk = ' . $idpro .'<br>';
-        //         // print_r($key);
-        //         // echo '<br>';
-        //     }
-        //     // $arr[$newkey] = $arr[$oldkey];
-        //     $cluster[$i][$idpro] = $cluster[$i][$key];
-        //     // unset($arr[$oldkey]);
-        //     unset($cluster[$i][$key]);
-        // }
-        // echo 'cluster ini';
-        // print_r($cluster);
-
-        // distinct array
-        // for ($i=0; $i < $numCluster; $i++) { 
-        //     array_unique($cluster[$i]);
-        // }
-        // print_r($cluster);
-
-        // find $id_produk in array cluster
-        // select from produk where id_produk = $id_produk in array
-        // show all data
     }
 }

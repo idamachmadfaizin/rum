@@ -1,10 +1,8 @@
 <?php $this->load->view('partials/header2'); ?>
 
 <!-- Title Page -->
-<section class="bg-title-page p-t-40 p-b-50 flex-col-c-m slide" style="background-image: url(<?php echo base_url() ?>assets/fashe/images/heading-pages-01.jpg);">
-	<h2 class="l-text2 t-center">
-		CHECKOUT
-	</h2>
+<section class="bg-title-page p-t-40 p-b-50 flex-col-c-m slide" style="background-image: url(<?php echo base_url('assets/fashe/images/banner_carousel_product.jpg') ?>);">
+	<!-- <h2 class="l-text2 t-center">CHECKOUT</h2> -->
 </section>
 
 <div class="container mt-70 m-b-103">
@@ -57,7 +55,7 @@
                     <tr>
                       <td>
                         <div class="table-img-product mx-auto">
-                          <img src="<?= base_url().$cart->url_image?>" alt="IMG-">
+                          <img src="<?= base_url('assets/img/produk/'.$cart->url_image)?>" alt="IMG-">
                         </div>
                       </td>
                       <td><?= $cart->nama_produk; ?></td>
@@ -100,7 +98,7 @@
         <div class="row m-t-20">
           <div class="col-5">
             <img src="<?= base_url().'assets\img\logos\Logo-BCA-Big.png'?>" alt="logo-BCA" width="70px" class="py-3 m-r-32" style="float:left;">
-            <!-- <img src="<?= base_url().'assets\img\logos\Logo-BCA-Big.png'?>" alt="Logo-BCA"> -->
+            <!-- <img src="<? //base_url().'assets\img\logos\Logo-BCA-Big.png'?>" alt="Logo-BCA"> -->
             <span>Bank BCA (Manually Checked)</span>
             <p style="font-size:12px;">Accept transfer from all banks</p>
           </div>

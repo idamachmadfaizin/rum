@@ -31,6 +31,7 @@ class product_model extends CI_Model
   {
     $this->db->limit($limit, $offset);
     $this->db->from($this->_table);
+    $this->db->join('image', 'image.id_produk = '.$this->_table.'.id_produk');
     $this->db->join('kategori', 'kategori.id_kategori = '.$this->_table.'.id_kategori');
     return $this->db->get()->result();
   }

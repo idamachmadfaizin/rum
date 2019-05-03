@@ -32,7 +32,7 @@ class Dashboard extends CI_Controller
                         'customer'    => $cus
                       ];
     $data['order'] = $dashboard->getOrders($dateNow);
-    $data['detail_order'] = $dashboard->getDetailOrder();
+    $data['detail_order'] = $dashboard->getDetailOrder($dateNow);
     $data['KP'] = $dashboard->getKP($dateNow);
 
     $this->load->view('admin/dashboard', $data);

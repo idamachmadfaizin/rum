@@ -77,7 +77,7 @@
                         <td class="serial"><?= $num ?></td>
                         <td class="avatar">
                           <div class="round-img">
-                            <img class="rounded-circle" src="<?= base_url().$kategori->url_image_kategori ?>" alt="">
+                            <img class="rounded-circle" src="<?= base_url("assets/img/kategori/".$kategori->url_image_kategori) ?>" alt="">
                           </div>
                         </td>
                         <td> <span class="invoice"><?= $kategori->nama_kategori ?></span> </td>

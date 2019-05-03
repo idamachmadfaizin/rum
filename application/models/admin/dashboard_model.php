@@ -37,12 +37,17 @@ class dashboard_model extends CI_Model
     $this->db->where('tgl_order', $dateNow);
     return $this->db->get()->result();
   }
-
-  public function getDetailOrder()
+  
+  public function getDetailOrder($dateNow)
   {
+    $order = $this->getOrders($dateNow);
+    foreach ($order as $orders) {
+      $arrIdOrder[] = $orders->id_order;
+    }
+
     $this->db->from($this->_tDO);
     $this->db->join($this->_tProduk, $this->_tProduk.'.id_produk = '.$this->_tDO.'.id_produk');
-    // $this->db->where('id_order', $id_order);
+    $this->db->where_in('id_order', $arrIdOrder);
 
     return $this->db->get()->result();
   }

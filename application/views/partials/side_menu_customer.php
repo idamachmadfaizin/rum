@@ -19,7 +19,7 @@
       <a href="<?= site_url()."/order"?>" class="nav-link text-decoration-none text-secondary ml-4">Order</a>
     </li>
     <li class="nav-item side-nav">
-      <a href="<?= site_url()."/purchase"?>" class="nav-link text-decoration-none text-secondary ml-4">Puschase</a>
+      <a href="<?= site_url()."/payment_conf"?>" class="nav-link text-decoration-none text-secondary ml-4">Payment Confirm</a>
     </li>
     <li class="nav-item side-nav">
       <a href="<?= site_url()."/profile"?>" class="nav-link text-decoration-none text-secondary ml-4">Delivery of Product</a>

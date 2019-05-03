@@ -40,18 +40,21 @@ class Payment_conf extends CI_Controller
       $this->form_validation->set_rules('buktitf', 'Bukti Transfer', 'required');
     }
     if ($validation->run()) {
+      print_r($this->input->post('noinvoice'));
+      print_r($payment->cekBuktiTf());
       if ($payment->cekBuktiTf() > 0) {
         $path = $payment->getImagePath();
         $path = './upload/bukti_tf/'.$path[0]->bukti_tf;
         unlink($path);
         $payment->update();
+        $this->session->set_flashdata('sukses', 'Konfirmasi pembayaran berhasil diupdate');
       } else {
         $payment->simpan();
+        $this->session->set_flashdata('sukses', 'Konfirmasi pembayaran berhasil disimpan');
       }
-      
-      $this->session->set_flashdata('sukses', 'Konfirmasi pembayaran berhasil disimpan');
+      echo "idam";
     }
 
-    redirect('payment_conf');
+    // redirect('payment_conf');
   }
 }
