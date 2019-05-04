@@ -50,24 +50,25 @@ class Checkout extends CI_Controller {
 			$arr['jumlah']=$cart->qty_cart;
 			$arr['harga_satuan']=$cart->harga_produk;
 
-			// push to arr $detail
-			array_push($detail, $arr);
-			// push to arr $id_produks
-			$id_produks[]=["id_produk"=>$arr['id_produk']=$cart->id_produk];
+			
+			array_push($detail, $arr); // push to arr $detail
+			
+			$id_produks[]=["id_produk"=>$arr['id_produk']=$cart->id_produk]; // push to arr $id_produks
 		}
 
-		// $check = $this->checkout_model->insDetailOrder($detail);
+		
+		$check = $this->checkout_model->insDetailOrder($detail); //insert into detail order
+		$this->insDetailKmeans($id_produks); //insert into detail kmeans
+		$this->cluster(); //run function k-means clustering
 		// end
-		// $checkout->delete_cart();
+		$checkout->delete_cart(); //delete cart
 
-		$this->insDetailKmeans($id_produks);
-
-		// $this->load->view('order_received', $data);
+		$this->load->view('order_received', $data);
 	}
 
 
 	// Group Fun K-means
-	public function insDetailKmeans() {
+	public function insDetailKmeans($id_produks) {
 		// sorted checkout_model
 		$checkout=$this->checkout_model;
 		
@@ -106,34 +107,28 @@ class Checkout extends CI_Controller {
 		}
 
 		$kmeans=$checkout->getKmeans(); //get kmeans variable
-		var_dump($kmeans);
-		die();
-
-		// Tinggal Insert into detail kmeans
-
-		// var for passing to model
-		$data=array();
-
-		// loop
-		foreach ($products as $produk) {
-
-			//loop produk
-			foreach ($kmeans as $key) {
-				//loop nilai kmeans setiap produk
-				$arr["id_kemas"]=$key->id_kmeans;
-				$arr["id_produk"]=$produk->id_produk;
-				// $arr["nilai"]=;
-
-				array_push($data, $arr);
+		
+		// Insert Into array batch
+		// $cart=$this->cart_model->get_cart();
+		$arrInsert1 = array(); // var for passing to model
+		foreach ($id_produks as $keyId_produks) { // insert produk dan nilai
+			foreach ($kmeans as $keyKmeans) {
+				$arrInsert2 = array();
+				$arrInsert2["id_kmeans"] = $keyKmeans->id_kmeans;
+				$arrInsert2["id_produk"] = $keyId_produks["id_produk"];
+				if ($keyKmeans->id_kmeans == 1) {
+					$arrInsert2["nilai"] = $dk_lokasi;
+				} elseif ($keyKmeans->id_kmeans == 2) {
+					$arrInsert2["nilai"] = $dk_usia;
+				}
+				array_push($arrInsert1, $arrInsert2);
 			}
+			
 		}
-
-		// insert produk dan nilai
-		// $checkout->insDetailKmeans();
 		// end loop
+
+		$checkout->insDetailKmeans($arrInsert1); //insert into detail kmeans
 	}
-
-
 
 	// This func to clustering kmeans
 	public function cluster() {

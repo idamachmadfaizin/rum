@@ -37,7 +37,7 @@ class checkout_model extends CI_Model
   
   public function insDetailKmeans($data)
   {
-    $this->db->insert_batch("detail_kmeans", $data);
+    return $this->db->insert_batch("detail_kmeans", $data);
   }
   
   public function getBirthDayCust()
