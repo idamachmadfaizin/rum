@@ -46,9 +46,9 @@ $num_notif = $CI->cart_model->count();
 						<a href="<?php echo site_url('about') ?>">About</a>
 					</li>
 
-					<li>
-						<a href="<?php echo site_url('contact') ?>">Contact</a>
-					</li>
+					<!-- <li>
+						<a href="<?php //echo site_url('contact') ?>">Contact</a>
+					</li> -->
 				</ul>
 			</nav>
 		</div>
@@ -157,9 +157,9 @@ $num_notif = $CI->cart_model->count();
 								<a href="<?php echo site_url('about') ?>">About</a>
 							</li>
 
-							<li>
-								<a href="<?php echo site_url('contact') ?>">Contact</a>
-							</li>
+							<!-- <li>
+								<a href="<?php //echo site_url('contact') ?>">Contact</a>
+							</li> -->
 						</ul>
 					</nav>
 				</div>
