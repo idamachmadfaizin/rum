@@ -15,9 +15,15 @@ class category_model extends CI_Model
        'rules' => 'trim|required']
     ];
   }
-  public function selectAll($limit, $offset)
+  public function selectAll()
   {
-    $this->db->limit($limit, $offset);
+    // $this->db->limit($limit, $offset);
+    return $this->db->get($this->_table)->result();
+  }
+
+  public function getSingle($id)
+  {
+    $this->db->where('id_kategori', $id);
     return $this->db->get($this->_table)->result();
   }
 
@@ -31,10 +37,35 @@ class category_model extends CI_Model
     $post = $this->input->post();
 
     $this->nama_kategori = $post['nama_kategori'];
-    $this->url_image_kategori = "assets/img/kategori/".$this->_uploadImage();
+    $this->url_image_kategori = $this->_uploadImage();
 
     $this->db->insert($this->_table, $this);
   }
+
+  public function update($id, $url_image_kategori)
+  {
+    $this->nama_kategori = $this->input->post('nama_kategori');
+
+    if ($url_image_kategori) {
+      $this->url_image_kategori = $url_image_kategori;
+    }else {
+      $this->url_image_kategori = $this->_uploadImage();
+    }
+    return $this->db->update($this->_table, $this, array('id_kategori' => $id));
+  }
+
+  public function disable($id)
+  {
+    $this->db->where('id_kategori', $id);
+    return $this->db->update($this->_table, array('status_kategori'=> 1));
+  }
+
+  public function enable($id)
+  {
+    $this->db->where('id_kategori', $id);
+    return $this->db->update($this->_table, array('status_kategori'=> 0));
+  }
+
   private function _uploadImage()
   {
     $config['upload_path']    = './assets/img/kategori/';

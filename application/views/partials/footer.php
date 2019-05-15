@@ -15,7 +15,8 @@
 				<br>
 				<p><a href="#" class="text-black text-decoration-none">My Account</a></p>
 				<p><a href="#" class="text-black text-decoration-none">Order History</a></p>
-				<p><a href="#" class="text-black text-decoration-none">Wishlist</a></p>
+				<p><a href="#" class="text-black text-decoration-none">Cart</a></p>
+				<p><a href="#" class="text-black text-decoration-none">Payment Confirm</a></p>
 			</div>
 			<div class="col-sm-2 row-footer">
 				<h6><b>PAYMENT</b></h6>

@@ -31,9 +31,9 @@
 
 					<div class="slick3">
 						<?php foreach ($detailProduk as $key => $detail): ?>
-							<div class="item-slick3" data-thumb="<?php echo base_url() . $detail['url_image'];?>">
+							<div class="item-slick3" data-thumb="<?php echo base_url('assets/img/produk/'.$detail['url_image']);?>">
 								<div class="wrap-pic-w">
-									<img src="<?php echo base_url() . $detail['url_image'];?>" alt="IMG-PRODUCT">
+									<img src="<?php echo base_url('assets/img/produk/'.$detail['url_image']);?>" alt="IMG-PRODUCT">
 								</div>
 							</div>
 						<?php endforeach ?>
@@ -120,7 +120,7 @@
               <!-- Block2 -->
               <div class="block2">
                 <div class="block2-img wrap-pic-w of-hidden pos-relative">
-                  <img src="<?php echo base_url() . $value['url_image'];?>" alt="IMG-PRODUCT">
+                  <img src="<?php echo base_url('assets/img/produk/'.$value['url_image']);?>" alt="IMG-PRODUCT">
                   <div class="block2-overlay trans-0-4">
                     <div class="block2-btn-addcart w-size1 trans-0-4">
                       <!-- Button -->

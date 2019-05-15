@@ -12,7 +12,6 @@ class Cart extends CI_Controller {
 
 	function index() {
 		$cart = $this->cart_model->get_cart();
-		$cart = $cart->result_array();
 		$data['cart'] = $cart;
 
 		$grand_total = $this->cart_model->grand_total();
@@ -31,13 +30,12 @@ class Cart extends CI_Controller {
 	public function update()
 	{
 		$cart = $this->cart_model->get_cart();
-		$cart = $cart->result_array();
 
 		$push = array();
 		$data_qty = array();
 
-		foreach ($cart as $key => $value) {
-			$get_id = $value['id_cart'];
+		foreach ($cart as $carts) {
+			$get_id = $carts->id_cart;
 			$push['id_cart'] = $get_id;
 			$push['qty_cart'] = $this->input->post($get_id);
 

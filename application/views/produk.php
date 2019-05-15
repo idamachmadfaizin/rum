@@ -112,18 +112,18 @@
 					<!-- Product -->
 					<div class="row">
 
-						<?php foreach($produk as $key => $value): ?>
+						<?php foreach($produk as $produk): ?>
 						<!-- <form action="#"> -->
               <div class="col-sm-12 col-md-6 col-lg-4 p-b-50">
                 <!-- Block2 -->
                 <div class="block2">
                   <div class="block2-img wrap-pic-w of-hidden pos-relative">
-                    <img src="<?php echo base_url().$value['url_image'] ?>" alt="IMG-<?php echo $value['nama_produk'] ?>">
+                    <img src="<?php echo base_url('assets/img/produk/'.$produk->url_image) ?>" alt="IMG-<?php echo $produk->nama_produk ?>">
 
                     <div class="block2-overlay trans-0-4">
                       <div class="block2-btn-addcart w-size1 trans-0-4">
 												<!-- Button -->
-												<a href="<?= site_url().'/produk/addtocart/'.$value['id_produk']?>">
+												<a href="<?= site_url().'/produk/addtocart/'.$produk->id_produk?>">
 													<button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
 														Add to Cart
 													</button>
@@ -133,9 +133,9 @@
                   </div>
 
                   <div class="block2-txt p-t-20">
-										<p hidden class="hidden-id_produk"><?= $value['id_produk']?></p>
-                    <a href="<?php echo site_url().'/detail_produk/detail/'.$value['id_produk'] ?>" class="block2-name dis-block s-text3 p-b-5">
-											<?php echo $value['nama_produk'] ?>
+										<p hidden class="hidden-id_produk"><?= $produk->id_produk?></p>
+                    <a href="<?php echo site_url().'/detail_produk/detail/'.$produk->id_produk ?>" class="block2-name dis-block s-text3 p-b-5">
+											<?php echo $produk->nama_produk ?>
                     </a>
                     
                     <!-- <span class="block2-oldprice m-text7 p-r-5">
@@ -143,7 +143,7 @@
                     </span> -->
                     
                     <span class="block2-price m-text6 p-r-5">
-                      Rp <?php echo $value['harga_produk'] ?>
+                      Rp <?php echo $produk->harga_produk ?>
                     </span>
                   </div>
                 </div>

@@ -102,7 +102,7 @@
 </div>
 
 <div class="fixed-bottom">
-  <a href="<?= site_url()?>/register">
+  <a href="<?= site_url('login')?>">
     <button class="btn btn-light btn-block" style="height: 60px;">Login</button>
   </a> 
 </div>

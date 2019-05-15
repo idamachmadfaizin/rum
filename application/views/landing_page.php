@@ -10,13 +10,13 @@
 	</ol>
 	<div class="carousel-inner">
 		<div class="carousel-item active">
-			<img src="<?php echo base_url() ?>assets\img\banner_carousel\banner_carousel_1.png" class="d-block w-100" alt="...">
+			<img src="<?php echo base_url('assets\img\banner_carousel\banner_carousel_1.png') ?>" class="d-block w-100" alt="...">
 		</div>
 		<div class="carousel-item">
-			<img src="<?php echo base_url() ?>assets\img\banner_carousel\banner_carousel_2.png" class="d-block w-100" alt="...">
+			<img src="<?php echo base_url('assets\img\banner_carousel\banner_carousel_2.png') ?>" class="d-block w-100" alt="...">
 		</div>
 		<div class="carousel-item">
-			<img src="<?php echo base_url() ?>assets\img\banner_carousel\banner_carousel_3.png" class="d-block w-100" alt="...">
+			<img src="<?php echo base_url('assets\img\banner_carousel\banner_carousel_3.png') ?>" class="d-block w-100" alt="...">
 		</div>
 	</div>
 	<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -39,11 +39,11 @@
         <div class="col-sm-10 col-md-8 col-lg-4 m-l-r-auto">
           <!-- block1 -->
           <div class="block1 hov-img-zoom pos-relative m-b-30">
-            <img src="<?php echo base_url().$value['url_image_kategori'] ?>" alt="IMG-<?php echo $value['nama_kategori'] ?>">
+            <img src="<?php echo base_url('assets/img/kategori/'.$value['url_image_kategori']) ?>" alt="IMG-<?php echo $value['nama_kategori'] ?>">
 
             <div class="block1-wrapbtn w-size2">
               <!-- Button -->
-              <a href="<?= site_url().'/produk?kategori='.$value['id_kategori'] ?>" class="flex-c-m size2 m-text2 bg3 hov1 trans-0-4">
+              <a href="<?= site_url().'/produk?kategori='.$value['id_kategori'] ?>" class="flex-c-m size2 m-text2 bg3 hov1 trans-0-4 nounderline">
                 <?php echo $value['nama_kategori'] ?>
               </a>
             </div>
@@ -79,7 +79,7 @@
 
 			<!-- Tab panes -->
 			<div class="tab-content p-t-35">
-				<!-- - -->
+				<!-- Best Seller -->
 				<div class="tab-pane fade show active" id="best-seller" role="tabpanel">
 					<div class="row">
 
@@ -88,22 +88,20 @@
                 <!-- Block2 -->
                 <div class="block2">
                   <div class="block2-img wrap-pic-w of-hidden pos-relative">
-                    <img src="<?php echo base_url().$value['url_image'] ?>" alt="IMG-<?php echo $value['nama_produk'] ?>">
+                    <img src="<?php echo base_url('assets/img/produk/'.$value['url_image']) ?>" alt="IMG-<?php echo $value['nama_produk'] ?>">
 
                     <div class="block2-overlay trans-0-4">
                       <div class="block2-btn-addcart w-size1 trans-0-4">
                         <!-- Button -->
-                        <a href="<?= site_url().'/landing_page/addtocart/'.$value['id_produk']?>">
-                          <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
-                            Add to Cart
-                          </button>
-                        </a>
+                        <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4" onclick="window.location.href='<?= site_url().'/landing_page/addtocart/'.$value['id_produk']?>'">
+                          Add to Cart
+                        </button>
                       </div>
                     </div>
                   </div>
 
                   <div class="block2-txt p-t-20">
-                    <a href="<?php echo site_url().'/detail_produk/detail/'.$value['id_produk'] ?>" class="block2-name dis-block s-text3 p-b-5 nounderline">
+                    <a href="<?php echo site_url().'/detail_produk/detail/'.$value['id_produk'] ?>" class="block2-name dis-block s-text3 color0-hov p-b-5 nounderline">
                       <?php echo $value['nama_produk'] ?>
                     </a>
 
@@ -119,7 +117,7 @@
 				</div>
 
 
-				<!-- - -->
+				<!-- News -->
 				<div class="tab-pane fade" id="new" role="tabpanel">
 					<div class="row">
 
@@ -128,12 +126,12 @@
                 <!-- Block2 -->
                 <div class="block2">
                   <div class="block2-img wrap-pic-w of-hidden pos-relative">
-                    <img src="<?php echo base_url().$value['url_image'] ?>" alt="IMG-<?php echo $value['nama_produk'] ?>">
+                    <img src="<?php echo base_url('assets/img/produk/'.$value['url_image']) ?>" alt="IMG-<?php echo $value['nama_produk'] ?>">
 
                     <div class="block2-overlay trans-0-4">
                       <div class="block2-btn-addcart w-size1 trans-0-4">
                         <!-- Button -->
-                        <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
+                        <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4" onclick="window.location.href='<?= site_url().'/landing_page/addtocart/'.$value['id_produk']?>'">
                           Add to Cart
                         </button>
                       </div>
@@ -141,15 +139,15 @@
                   </div>
 
                   <div class="block2-txt p-t-20">
-                    <a href="<?php echo site_url().'/detail_produk/detail/'.$value['id_produk'] ?>" class="block2-name dis-block s-text3 p-b-5">
-                      Rp <?php echo $value['nama_produk'] ?>
+                    <a href="<?php echo site_url().'/detail_produk/detail/'.$value['id_produk'] ?>" class="block2-name dis-block s-text3 color0-hov p-b-5 nounderline">
+                      <?php echo $value['nama_produk'] ?>
                     </a>
 
                     <!-- <span class="block2-oldprice m-text7 p-r-5">
                       $29.50
                     </span> -->
 
-                    <span class="block2-newprice m-text8 p-r-5">
+                    <span class="block2-newprice m-text6 p-r-5">
                       <?php echo $value['harga_produk'] ?>
                     </span>
                   </div>

@@ -24,11 +24,6 @@ class payment_conf_model extends CI_Model
         'label' => 'Tanggal Transfer',
         'rules' => 'required'
       ],
-      // [
-      //   'field' => 'buktitf',
-      //   'label' => 'Bukti Transfer',
-      //   'rules' => 'required'
-      // ],
       [
         'field' => 'bankname',
         'label' => 'Bank Name',
@@ -63,7 +58,7 @@ class payment_conf_model extends CI_Model
     $id = $post['noinvoice'];
 
     $this->db->where('id_order', $id);
-    return $this->db->count_all($this->_table);
+    return $this->db->count_all_results($this->_table);
   }
 
   public function simpan()
@@ -77,6 +72,7 @@ class payment_conf_model extends CI_Model
     $this->bank_owner = $post['bankowner'];
     $this->note = $post['note'];
 
+    print_r($this);
     $this->db->insert($this->_table, $this);
   }
 

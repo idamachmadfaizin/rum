@@ -23,7 +23,7 @@ class Kmeans extends CI_Controller
     }
 
     $data['dKmeans'] = $kmeans->detailKmeans();
-    // print_r($data);
+
     $this->load->view('admin/kmeans', $data);
   }
 

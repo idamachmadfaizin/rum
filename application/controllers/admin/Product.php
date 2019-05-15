@@ -38,7 +38,7 @@ class Product extends CI_Controller
     
     
     $limit = $config['per_page'];
-    $produks = $produk->selectAll($limit, $offset);
+    $produks = $produk->selectAll(3, $offset);
     $data['produk'] = $produks;
 
     $kategori = $produk->getKategori();

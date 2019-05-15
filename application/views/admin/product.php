@@ -85,18 +85,18 @@
                   </thead>
                   <tbody>
                   <?php $num = 1; ?>
-                  <?php foreach($produk as $produk): ?>
+                  <?php foreach($produk as $produks): ?>
                     <tr>
                       <td class="serial"><?= $num; ?></td>
-                      <td><span><?= $produk->nama_produk; ?></span></td>
-                      <td>Rp <span class="count"><?= $produk->harga_produk; ?></span></td>
-                      <td><span><?= $produk->nama_kategori; ?></span></td>
+                      <td><span><?= $produks->nama_produk; ?></span></td>
+                      <td>Rp <span class="count"><?= $produks->harga_produk; ?></span></td>
+                      <td><span><?= $produks->nama_kategori; ?></span></td>
                       <!-- <td><span>cumi_kupas</span></td> -->
-                      <td><span><?= $produk->deskripsi_produk ?></span></td>
+                      <td><span><?= $produks->deskripsi_produk ?></span></td>
                       <td class="avatar">
                         <div class="round-img">
                           <a href="#">
-                            <img class="rounded-circle" src="<?= base_url().$produk->url_produk ?>" alt="">
+                            <img class="rounded-circle" src="<?= base_url('assets/img/produk/'.$produks->url_image) ?>" alt="">
                           </a>
                         </div>
                       </td>
