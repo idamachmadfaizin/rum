@@ -83,10 +83,10 @@
 					</li>
 					<li class="menu-title">Data Master</li><!-- /.menu-title -->
 					<li class="<?php if(current_url() == site_url().'/admin/category'){echo "active";} ?>">
-						<a href="<?= site_url().'/admin/category' ?>"><i class="menu-icon fas fa-tags"></i>Category</a>
+						<a href="<?= site_url().'/admin/category/index/0' ?>"><i class="menu-icon fas fa-tags"></i>Category</a>
 					</li>
 					<li class="<?php if(current_url() == site_url().'/admin/product'){echo "active";} ?>">
-						<a href="<?= site_url().'/admin/product' ?>"><i class="menu-icon fas fa-fish"></i>Product</a>
+						<a href="<?= site_url().'/admin/product/index/0' ?>"><i class="menu-icon fas fa-fish"></i>Product</a>
 					</li>
 					<li class="<?php if(current_url() == site_url().'/admin/customer'){echo "active";} ?>">
 						<a href="<?= site_url().'/admin/customer' ?>"><i class="menu-icon fas fa-user"></i>Customer</a>
