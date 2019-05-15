@@ -47,20 +47,40 @@ class Product extends CI_Controller
     $this->load->view('admin/product', $data);
   }
 
-  public function insert()
+  public function insertUpdate()
   {
     $produk = $this->product_model;
+    $post = $this->input->post();
+
+    $id = $post['id_kategori'];
 
     $validation = $this->form_validation;
     $validation->set_rules($produk->rules());
 
+    // get old url image from db
+    $url_image_kategori = $this->url_image_kategori = $kategori->getSingle($id);
+    $url_image_kategori = $url_image_kategori[0]->url_image_kategori;
+    
     if (empty($_FILES['file-input']['name'])) {
-      $this->form_validation->set_rules('file-input', 'Gambar produk', 'required');
+      if (!$url_image_kategori) {
+        // var_dump($url_image_kategori);
+        $this->form_validation->set_rules('file-input', 'Gambar produk', 'required');
+      }
+    } else {
+      $url_image_kategori = false;
     }
 
     if ($validation->run()) {
-      $produk->insert();
-      $this->session->set_flashdata('sukses', 'Produk berhasil disimpan');
+      if ($id) {
+        $update = $produk->update($id, $url_image_kategori);
+        if ($update) {
+          $this->session->set_flashdata('sukses', 'Produk berhasi diupdate');
+        }
+      } else {
+        if ($produk->insert()) {
+          $this->session->set_flashdata('sukses', 'Produk berhasil disimpan');
+        }
+      }
     }
 
     redirect("admin/product");

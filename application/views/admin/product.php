@@ -81,6 +81,7 @@
                       <!-- <th>Url Produck</th> -->
                       <th>Deskripsi</th>
                       <th class="avatar">Images</th>
+                      <th>Action</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -99,6 +100,15 @@
                             <img class="rounded-circle" src="<?= base_url('assets/img/produk/'.$produks->url_image) ?>" alt="">
                           </a>
                         </div>
+                      </td>
+                      <td>
+                        <a href="<?= site_url('admin/category/index/').$kategori->id_kategori ?>" class="btn p-0"><i class="fas fa-pen-square color-success font-16"></i></a> <!-- btn Edit -->
+                        
+                        <?php if($kategori->status_kategori == 0): ?>
+                          <a href="<?= site_url('admin/category/disable/').$kategori->id_kategori ?>" class="btn p-0" onclick="return confirm('Disable Kategori?')"><i class="fa fa-minus-square color-danger font-16"></i></a> <!-- btn Disable -->
+                        <?php elseif($kategori->status_kategori == 1): ?>
+                          <a href="<?= site_url('admin/category/enable/').$kategori->id_kategori ?>" class="btn p-0" onclick="return confirm('Enable Kategori?')"><i class="fas fa-plus-square color-danger font-16"></i></a> <!-- btn Enable -->
+                        <?php endif ?>
                       </td>
                     </tr>
                     <?php $num++ ?>

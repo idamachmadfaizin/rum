@@ -76,7 +76,7 @@ class Category extends CI_Controller
       if ($id) {
         $update = $kategori->update($id, $url_image_kategori);
         if ($update) {
-          $this->session->set_flashdata('updated', 'Data berhasi diupdate');
+          $this->session->set_flashdata('sukses', 'Kategori berhasi diupdate');
         }
       } else {
         if ($kategori->insert()) {

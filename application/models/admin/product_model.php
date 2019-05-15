@@ -59,6 +59,22 @@ class product_model extends CI_Model
     $id_produk = $this->db->insert($this->_table, $this);
     $this->insertToImage($id_produk);
   }
+
+  public function update($id, $url_image_kategori)
+  {
+    $this->id_kategori = $post['kategori_produk'];
+    $this->nama_produk = $post['nama_produk'];
+    $this->harga_produk = $post['harga_produk'];
+    $this->deskripsi_produk = $post['deskripsi_produk'];
+    $this->url_produk = str_replace(" ", "-", $post['nama_produk']);
+
+    if ($url_image_kategori) {
+      $this->url_image_kategori = $url_image_kategori;
+    }else {
+      $this->url_image_kategori = $this->_uploadImage();
+    }
+    return $this->db->update($this->_table, $this, array('id_produk' => $id));
+  }
   
   public function insertToImage($id_produk)
   {
