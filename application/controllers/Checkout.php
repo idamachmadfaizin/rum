@@ -77,7 +77,9 @@ class Checkout extends CI_Controller {
 		$birth = $checkout->getBirthDayCust(); //get birth day customer from DB
 		$age = $this->getAge($birth->tanggal_lahir); //get umur customer using function
 		$provinsiCust = $checkout->getProvinsiCust(); //get provinsi customer
-		
+		$pendidikan = $checkout->getPendidikan(); //get pendidikan customer
+		$agama = $checkout->getAgama(); //get agama customer
+
 		//convert data usia customer to angka [1-5]
 		if ($age < 18) {
 			$dk_usia = 1;
@@ -106,8 +108,39 @@ class Checkout extends CI_Controller {
 			}
 		}
 
-		$kmeans=$checkout->getKmeans(); //get kmeans variable
+		//convert data agama customer to angka [1-5]
+		$agama = $agama->id_agama;
+		if ($agama == 1) {
+			$dk_agama = 1;
+		} else if ($agama == 2) {
+			$dk_agama = 2;
+		} else if ($agama == 3) {
+			$dk_agama = 3;
+		} else if ($agama == 4) {
+			$dk_agama = 4;
+		} else if ($agama == 5) {
+			$dk_agama = 5;
+		} else if ($agama == 6) {
+			$dk_agama = 6;
+		} else if ($agama == 7) {
+			$dk_agama = 7;
+		}
+
+		//convert data pendidikan customer to angka [1-5]
+		$pendidikan = $pendidikan->id_pendidikan; //get object
+		if($pendidikan <= 2){
+			$dk_pendidikan = 1;
+		}elseif ($pendidikan <=4) {
+			$dk_pendidikan = 2;
+		}elseif ($pendidikan <= 6) {
+			$dk_pendidikan = 3;
+		}elseif ($pendidikan <= 8) {
+			$dk_pendidikan = 4;
+		}elseif ($pendidikan <= 10) {
+			$dk_pendidikan = 5;
+		}
 		
+		$kmeans = $checkout->getKmeans(); //get kmeans variable
 		// Insert Into array batch
 		// $cart=$this->cart_model->get_cart();
 		$arrInsert1 = array(); // var for passing to model
@@ -116,12 +149,16 @@ class Checkout extends CI_Controller {
 				$arrInsert2 = array();
 				$arrInsert2["id_kmeans"] = $keyKmeans->id_kmeans;
 				$arrInsert2["id_produk"] = $keyId_produks["id_produk"];
-				if ($keyKmeans->id_kmeans == 1) {
+				if ($keyKmeans->id_kmeans == 1) { //jika idkmeans == 1(lokasi)
 					$arrInsert2["nilai"] = $dk_lokasi;
-				} elseif ($keyKmeans->id_kmeans == 2) {
+				} elseif ($keyKmeans->id_kmeans == 2) { //jika idkmeans == 2(usia)
 					$arrInsert2["nilai"] = $dk_usia;
+				} elseif ($keyKmeans->id_kmeans == 3) { //jika idkmeans == 3(agama)
+					$arrInsert2["nilai"] = $dk_agama;
+				} elseif ($keyKmeans->id_kmeans == 4) { //jika idkmeans == 4(pendidikan)
+					$arrInsert2["nilai"] = $dk_pendidikan;
 				}
-				array_push($arrInsert1, $arrInsert2);
+				array_push($arrInsert1, $arrInsert2); //push arrInsert2 to ArrInsert1
 			}
 			
 		}
@@ -161,7 +198,7 @@ class Checkout extends CI_Controller {
 
 		// Script to clustering
 		// Number of cluster
-		$numCluster=2;
+		$numCluster=3;
 		$k_means=new KMeans($numCluster);
 		// cluster result in array
 		$cluster=$k_means->cluster($sample);

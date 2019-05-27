@@ -18,7 +18,7 @@ class kmeans_model extends CI_Model
   }
   public function getAllKmeans()
   {
-    $this->db->limit(3, 0);
+    // $this->db->limit(3, 0);
     return $this->db->get($this->_table)->result();
   }
 
@@ -92,7 +92,7 @@ class kmeans_model extends CI_Model
     $this->db->join($this->_table, $this->_table.'.id_kmeans = '.$this->_tDK.'.id_kmeans');
     $this->db->order_by($this->_tDK.'.id_detail_kmeans');
     
-    $this->db->limit(6, 0);
+    // $this->db->limit(6, 0);
 
     return $this->db->get()->result();
   }

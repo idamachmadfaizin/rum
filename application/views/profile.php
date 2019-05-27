@@ -50,6 +50,8 @@
               <div class="d-flex align-items-center justify-content-end text-secondary d-block-h-45">Nama Lengkap</div>
               <div class="d-flex align-items-center justify-content-end text-secondary d-block-h-45">Jenis Kelamin</div>
               <div class="d-flex align-items-center justify-content-end text-secondary d-block-h-45">Tanggal Lahir</div>
+              <div class="d-flex align-items-center justify-content-end text-secondary d-block-h-45">Agama</div>
+              <div class="d-flex align-items-center justify-content-end text-secondary d-block-h-45">Pendidikan</div>
               <div class="d-flex align-items-center justify-content-end text-secondary d-block-h-45">Address</div>
             </div>
 
@@ -77,10 +79,45 @@
                 <input type="date" name="tanggal_lahir" value="<?= $profile->tanggal_lahir; ?>" id="tanggal_lahir" class="form-control form-control-sm">
               </div>
               <div class="d-flex align-items-center d-block-h-45">
+                <select name="agama" id="agama" class="form-control form-control-sm">
+                    <option value="">Agama</option>
+                  <?php foreach($agamas as $agama): ?>
+                    <option value="<?= $agama->id_agama ?>" <?php if ($profile->id_agama == $agama->id_agama) echo "selected"; ?> ><?= $agama->nama_agama ?></option>
+                  <?php endforeach ?>
+                </select>
+              </div>
+              <div class="d-flex align-items-center d-block-h-45">
+                <select name="pendidikan" id="pendidikan" class="form-control form-control-sm">
+                    <option value="">Pendidikan</option>
+                  <?php foreach($pendidikans as $pendidikan): ?>
+                    <option value="<?= $pendidikan->id_pendidikan ?>" <?php if ($profile->id_pendidikan == $pendidikan->id_pendidikan) echo "selected"; ?> ><?= $pendidikan->nama_pendidikan ?></option>
+                  <?php endforeach ?>
+                </select>
+              </div>
+              <div class="d-flex align-items-center d-block-h-45">
+                <select name="provinsi" id="provinsi" class="form-control form-control-sm">
+                    <option value="">Provinsi</option>
+                  <?php foreach($provinsis as $provinsi): ?>
+                    <option value="<?= $provinsi->id_provinsi ?>" <?php if ($profile->provinsi == $provinsi->id_provinsi) echo "selected"; ?> ><?= $provinsi->nama_provinsi ?></option>
+                  <?php endforeach ?>
+                </select>
+                <select name="kabupaten" id="kabupaten" class="form-control form-control-sm">
+                    <option value="">Kabupaten</option>
+                  <?php foreach($kabupatens as $kabupaten): ?>
+                    <option value="<?= $kabupaten->id_kabupaten ?>" <?php if ($profile->kabupaten == $kabupaten->id_kabupaten) echo "selected"; ?> ><?= $kabupaten->nama_kabupaten ?></option>
+                  <?php endforeach ?>
+                </select>
+                <select name="kota" id="kota" class="form-control form-control-sm">
+                    <option value="">Kota</option>
+                  <?php foreach($kotas as $kota): ?>
+                    <option value="<?= $kota->id_kota ?>" <?php if ($profile->kota == $kota->id_kota) echo "selected"; ?> ><?= $kota->nama_kota ?></option>
+                  <?php endforeach ?>
+                </select>
+              </div>
+              <div class="d-flex align-items-center d-block-h-45">
                 <input type="text" name="address" id="address" value="<?= $profile->address; ?>" placeholder="1234 Main St" class="form-control form-control-sm">
               </div>
               <div class="d-flex align-items-center d-block-h-45">
-                <!-- <button type="submit" class="btn btn-primary border-0 d-block-w-100" style="background-color: #3D2577">SAVE</button> -->
                 <input type="submit" value="SAVE" class="btn btn-primary border-0 d-block-w-100" style="background-color: #3D2577">
               </div>
             </div>

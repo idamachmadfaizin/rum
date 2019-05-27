@@ -10,15 +10,21 @@ class Profile extends CI_Controller {
 	}
 
 	public function index() {
-    // $id = $this->session->id_customer;
-    
-    $data['profile']=$this->profile_model->getById();
+		//get master select options    
+		$data['agamas'] = $this->profile_model->masterAgama();
+		$data['pendidikans'] = $this->profile_model->masterPendidikan();
+		$data['provinsis'] = $this->profile_model->masterProvinsi();
+		$data['kabupatens'] = $this->profile_model->masterKabupaten();
+		$data['kotas'] = $this->profile_model->masterKota();
+		//end
+
+		//get profile customer
+		$data['profile']=$this->profile_model->getById();
     
 		$this->load->view('profile', $data);
 	}
 
 	public function update() {
-		$id = $this->session->id_customer;
 		$profile = $this->profile_model;
 
 		$validation=$this->form_validation;

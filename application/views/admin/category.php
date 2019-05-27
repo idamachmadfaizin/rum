@@ -28,6 +28,7 @@
 						</button>
 					</div>
 					<?php endif; ?>
+					
 					<?= form_open_multipart('admin/category/insertUpdate') ?>
 					<!-- <form action="#" method="post" enctype="multipart/form-data" class="form-horizontal"> -->
 					<div class="card-body card-block">
@@ -86,7 +87,7 @@
 												</td>
 												<td> <span class="invoice"><?= $kategori->nama_kategori ?></span> </td>
 												<td>
-													<a href="<?= site_url('admin/category/index/').$kategori->id_kategori ?>" class="btn p-0"><i class="fas fa-pen-square color-success font-16"></i></a> <!-- btn Edit -->
+													<a href="<?= site_url('admin/category/index/'.$offset.'/').$kategori->id_kategori ?>" class="btn p-0"><i class="fas fa-pen-square color-success font-16"></i></a> <!-- btn Edit -->
 													
 													<?php if($kategori->status_kategori == 0): ?>
 														<a href="<?= site_url('admin/category/disable/').$kategori->id_kategori ?>" class="btn p-0" onclick="return confirm('Disable Kategori?')"><i class="fa fa-minus-square color-danger font-16"></i></a> <!-- btn Disable -->
@@ -100,7 +101,7 @@
 										</tbody>
 									</table>
 									<hr>
-									<?php //echo $this->pagination->create_links(); ?>
+									<?php echo $this->pagination->create_links(); ?>
 								</div> <!-- /.table-stats -->
 							</div>
 						</div> <!-- /.card -->

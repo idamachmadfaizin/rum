@@ -15,9 +15,9 @@ class category_model extends CI_Model
        'rules' => 'trim|required']
     ];
   }
-  public function selectAll()
+  public function selectAll($limit, $offset)
   {
-    // $this->db->limit($limit, $offset);
+    $this->db->limit($limit, $offset);
     return $this->db->get($this->_table)->result();
   }
 
@@ -80,8 +80,8 @@ class category_model extends CI_Model
 
     if ($this->upload->do_upload('file-input')) {
       return $this->upload->data("file_name");
-    }
-    
-    // return "default.jpg";
+    }else {
+      return "default.jpg";
+    }    
   }
 }

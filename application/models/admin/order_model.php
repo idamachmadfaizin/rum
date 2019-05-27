@@ -19,8 +19,9 @@ class order_model extends CI_Model
   {
     $this->db->from($this->_tOrders);
     $this->db->join($this->_tCustomer, $this->_tCustomer.'.id_customer = '.$this->_tOrders.'.id_customer');
-    $this->db->join($this->_tKP, $this->_tKP.'.id_order = '.$this->_tOrders.'.id_order');
+    $this->db->join($this->_tKP, $this->_tKP.'.id_order = '.$this->_tOrders.'.id_order', 'left');
     $this->db->limit($limit, $offset);
+    // echo $this->db->get_compiled_select();
     
     return $this->db->get()->result();
   }

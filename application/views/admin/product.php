@@ -9,25 +9,47 @@
           <div class="card-header">
             <strong>Product</strong>
           </div>
-          <?= form_open_multipart(site_url('admin/product/insert')) ?>
+
+          <?php if(validation_errors()): ?>
+					<div class="sufee-alert alert with-close alert-warning alert-dismissible fade show">
+						<span class="badge badge-pill badge-warning">Warning</span>
+						<?= validation_errors(); ?>
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">×</span>
+						</button>
+					</div>
+					<?php endif; ?>
+
+					<?php if($this->session->flashdata('sukses')): ?>
+					<div class="sufee-alert alert with-close alert-success alert-dismissible fade show">
+						<?= $this->session->flashdata('sukses'); ?>
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<?php endif; ?>
+
+          <?= form_open_multipart(site_url('admin/product/insertUpdate')) ?>
           <!-- <form action="#" method="post" enctype="multipart/form-data" class="form-horizontal"> -->
             <div class="card-body card-block">
               <div class="row">
                 <div class="col col-md-6">
+                  <input type="hidden" name="id_produk" id="id_produk" value="<?php if(!empty($singleProduk)){ echo $singleProduk[0]->id_produk;} ?>" class="form-control">
+
                   <div class="form-group">
                     <label for="nama_produk" class="form-control-label">Nama Produk</label>
-                    <input type="text" name="nama_produk" id="nama_produk" value="<?= set_value('nama_produk') ?>" class="form-control">
+                    <input type="text" name="nama_produk" id="nama_produk" value="<?php if(!empty($singleProduk)){echo $singleProduk[0]->nama_produk;} ?>" class="form-control">
                   </div>
                   <div class="form-group">
                     <label for="harga_produk" class="form-control-label">Harga Produk</label>
-                    <input type="number" name="harga_produk" id="harga_produk" value="<?= set_value('harga_produk') ?>" class="form-control">
+                    <input type="number" name="harga_produk" id="harga_produk" value="<?php if(!empty($singleProduk)){echo $singleProduk[0]->harga_produk;} ?>" class="form-control">
                   </div>
                   <div class="form-group">
                     <label for="kategori_produk" class="form-control-label">Kategori Produk</label>
                     <select name="kategori_produk" id="kategori_produk" class="form-control">
                       <option>Please select</option>
                       <?php foreach($kategori as $kategori): ?>
-                        <option value="<?= $kategori->id_kategori; ?>"><?= $kategori->nama_kategori; ?></option>
+                        <option value="<?= $kategori->id_kategori; ?>" <?php if($singleProduk[0]->id_kategori == $kategori->id_kategori){echo "selected";} ?>><?= $kategori->nama_kategori; ?></option>
                       <?php endforeach ?>
                     </select>
                   </div>
@@ -39,7 +61,7 @@
                   </div> -->
                   <div class="form-group">
                     <label for="deskripsi_produk" class="form-control-label">Deskripsi Produk</label>
-                    <textarea name="deskripsi_produk" id="deskripsi_produk" class="form-control" value="<?= set_value('deskripsi_produk')?>"></textarea>
+                    <textarea name="deskripsi_produk" id="deskripsi_produk" class="form-control" value="<?= set_value('deskripsi_produk')?>"><?php if(!empty($singleProduk)){echo $singleProduk[0]->deskripsi_produk;} ?></textarea>
                   </div>
                   <div class="form-group">
                     <label for="file-multiple-input" class="form-control-label">Gambar Produk</label>
@@ -81,6 +103,7 @@
                       <!-- <th>Url Produck</th> -->
                       <th>Deskripsi</th>
                       <th class="avatar">Images</th>
+                      <th>Action</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -99,6 +122,15 @@
                             <img class="rounded-circle" src="<?= base_url('assets/img/produk/'.$produks->url_image) ?>" alt="">
                           </a>
                         </div>
+                      </td>
+                      <td>
+                        <a href="<?= site_url('admin/product/index/'.$offset.'/').$produks->id_produk ?>" class="btn p-0"><i class="fas fa-pen-square color-success font-16"></i></a> <!-- btn Edit -->
+                        
+                        <?php if($produks->status_produk == 0): ?>
+                          <a href="<?= site_url('admin/product/disable/').$produks->id_produk ?>" class="btn p-0" onclick="return confirm('Disable Product?')"><i class="fa fa-minus-square color-danger font-16"></i></a> <!-- btn Disable -->
+                        <?php elseif($produks->status_produk == 1): ?>
+                          <a href="<?= site_url('admin/product/enable/').$produks->id_produk ?>" class="btn p-0" onclick="return confirm('Enable Product?')"><i class="fas fa-plus-square color-danger font-16"></i></a> <!-- btn Enable -->
+                        <?php endif ?>
                       </td>
                     </tr>
                     <?php $num++ ?>

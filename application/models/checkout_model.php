@@ -55,6 +55,22 @@ class checkout_model extends CI_Model
     $this->db->where('id_customer', $id);
     return $this->db->get("customer")->row_object();
   }
+  
+  public function getPendidikan() //get pendidikan customer
+  {
+    $id = $this->session->id_customer;
+    $this->db->select("id_pendidikan");
+    $this->db->where('id_customer', $id);
+    return $this->db->get("customer")->row_object();
+  }
+  
+  public function getAgama() //get agama customer
+  {
+    $id = $this->session->id_customer;
+    $this->db->select("id_agama");
+    $this->db->where('id_customer', $id);
+    return $this->db->get("customer")->row_object();
+  }
 
   public function getAllProvinsi()
   {

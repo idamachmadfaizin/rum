@@ -82,7 +82,7 @@
 						<a href="<?= site_url().'/admin/dashboard' ?>"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
 					</li>
 					<li class="menu-title">Data Master</li><!-- /.menu-title -->
-					<li class="<?php if(current_url() == site_url().'/admin/category'){echo "active";} ?>">
+					<li class="<?php if(current_url() == site_url().'/admin/category/'){echo "active";} ?>">
 						<a href="<?= site_url().'/admin/category/index/0' ?>"><i class="menu-icon fas fa-tags"></i>Category</a>
 					</li>
 					<li class="<?php if(current_url() == site_url().'/admin/product'){echo "active";} ?>">

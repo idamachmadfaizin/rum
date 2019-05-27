@@ -10,43 +10,43 @@ class Category extends CI_Controller
     $this->load->library('pagination');
   }
   
-  public function index($id = 0)
+  public function index($offset = 0, $id = 0)
   {
     $kategori = $this->category_model;
 
-    // $config['base_url'] = site_url('admin/category/index');
-    // $config['total_rows'] = $kategori->getTotalRow();
-    // $config['per_page'] = 10;
+    $config['base_url'] = site_url('admin/category/index/');
+    $config['total_rows'] = $kategori->getTotalRow();
+    $config['per_page'] = 10;
     
-    // // tag pagination
-    // $config['full_tag_open'] = '<nav aria-label="Page navigation kategori" class="d-flex justify-content-end pr-5"><ul class="pagination pagination-sm">';
-    // $config['full_tag_close'] = '</ul></nav>';
+    // tag pagination
+    $config['full_tag_open'] = '<nav aria-label="Page navigation kategori" class="d-flex justify-content-end pr-5"><ul class="pagination pagination-sm">';
+    $config['full_tag_close'] = '</ul></nav>';
     
-    // $config['num_tag_open'] = '<li class="page-item">';
-    // $config['num_tag_close'] = '</li>';
+    $config['num_tag_open'] = '<li class="page-item">';
+    $config['num_tag_close'] = '</li>';
     
-    // $config['cur_tag_open'] = '<li class="page-item active"><a class="page-link">';
-    // $config['cur_tag_close'] = '</a></li>';
+    $config['cur_tag_open'] = '<li class="page-item active"><a class="page-link">';
+    $config['cur_tag_close'] = '</a></li>';
     
-    // $config['next_link'] = '<li class="page-item">Next</li>';
-    // $config['prev_link'] = '<li class="page-item">Previous</li>';
+    $config['next_link'] = '<li class="page-item">Next</li>';
+    $config['prev_link'] = '<li class="page-item">Previous</li>';
     
-    // $config['attributes'] = array('class' => 'page-link');
+    $config['attributes'] = array('class' => 'page-link');
     
-    // $this->pagination->initialize($config);
-    // // end tag pagination
+    $this->pagination->initialize($config);
+    // end tag pagination
     
-    
-    // $limit = $config['per_page'];
-    $kategoris = $kategori->selectAll();
+    $limit = $config['per_page'];
+    $kategoris = $kategori->selectAll($limit, $offset);
     $data['kategori'] = $kategoris;
+    $data['offset'] = $offset;
     
     if ($id != 0) {
       $data['singleCategory'] = $kategori->getSingle($id);
-    }else {
+    } else {
       $data['singleCategory'] = "";
     }
-
+    
     $this->load->view('admin/category', $data);
   }
   public function insertUpdate()
@@ -60,7 +60,7 @@ class Category extends CI_Controller
     $validation->set_rules($kategori->rules());
 
     // get old url image from db
-    $url_image_kategori = $this->url_image_kategori = $kategori->getSingle($id);
+    $url_image_kategori = $kategori->getSingle($id);
     $url_image_kategori = $url_image_kategori[0]->url_image_kategori;
 
     if (empty($_FILES['file-input']['name'])) { //cek form input image

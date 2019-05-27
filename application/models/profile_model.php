@@ -6,20 +6,41 @@ class profile_model extends CI_Model
   
   public $nama_customer;
   public $nomor_telp;
+  public $provinsi;
+  public $kabupaten;
+  public $kota;
   public $address;
   public $jenis_kelamin;
   public $tanggal_lahir;
+  public $id_pendidikan;
+  public $id_agama;
   public $url_img_customer;
 
   public function rules()
   {
     return [
+      ['field' => 'nama',
+      'label' => 'Nama',
+      'rules' => 'trim|required'],
+
       ['field' => 'telp',
       'label' => 'Telephone',
       'rules' => 'trim|required|max_length[13]'],
-      
-      ['field' => 'nama',
-      'label' => 'Nama',
+
+      ['field' => 'provinsi',
+      'label' => 'Provinsi',
+      'rules' => 'trim|required'],
+
+      ['field' => 'kabupaten',
+      'label' => 'Kabupaten',
+      'rules' => 'trim|required'],
+
+      ['field' => 'kota',
+      'label' => 'Kota',
+      'rules' => 'trim|required'],
+
+      ['field' => 'address',
+      'label' => 'Address',
       'rules' => 'trim|required'],
       
       ['field' => 'jenis_kelamin',
@@ -29,9 +50,13 @@ class profile_model extends CI_Model
       ['field' => 'tanggal_lahir',
       'label' => 'Tanggal Lahir',
       'rules' => 'required'],
-      
-      ['field' => 'address',
-      'label' => 'Address',
+
+      ['field' => 'pendidikan',
+      'label' => 'Pendidikan',
+      'rules' => 'trim|required'],
+
+      ['field' => 'agama',
+      'label' => 'Agama',
       'rules' => 'trim|required']
     ];
   }
@@ -42,16 +67,48 @@ class profile_model extends CI_Model
     return $this->db->get_where($this->_table, ["id_customer" => $id])->row();
   }
 
+  public function masterAgama()
+  {
+    return $this->db->get('agama')->result();
+  }
+
+  public function masterPendidikan()
+  {
+    return $this->db->get('pendidikan')->result();
+  }
+
+  public function masterProvinsi()
+  {
+    return $this->db->get('provinsi')->result();
+  }
+  
+  public function masterKabupaten()
+  {
+    return $this->db->get('kabupaten')->result();
+  }
+  
+  public function masterKota()
+  {
+    return $this->db->get('kota')->result();
+  }
+
   public function update()
   {
     $post = $this->input->post();
 
-    $this->nomor_telp = $post['telp'];
     $this->nama_customer = $post['nama'];
+    $this->nomor_telp = $post['telp'];
+    $this->provinsi = $post['provinsi'];
+    $this->kabupaten = $post['kabupaten'];
+    $this->kota = $post['kota'];
+    $this->address = $post['address'];
     $this->jenis_kelamin = $post['jenis_kelamin'];
     $this->tanggal_lahir = $post['tanggal_lahir'];
-    $this->address = $post['address'];
-    $this->url_img_customer = $this->_uploadImage();
+    $this->id_pendidikan = $post['pendidikan'];
+    $this->id_agama = $post['agama'];
+    if ($this->upload->do_upload('userfile')) {
+      $this->url_img_customer = $this->_uploadImage();
+    }
 
     $this->db->update($this->_table, $this, array('id_customer' => $this->session->id_customer));
   }

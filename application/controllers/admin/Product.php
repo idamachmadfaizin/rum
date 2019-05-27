@@ -10,13 +10,13 @@ class Product extends CI_Controller
     $this->load->library('pagination');
   }
 
-  public function index($offset= 0)
+  public function index($offset = 0, $id = 0)
   {
     $produk = $this->product_model;
 
-    $config['base_url'] = site_url('admin/product/index');
+    $config['base_url'] = site_url('admin/product/index/');
     $config['total_rows'] = $produk->getTotalRow();
-    $config['per_page'] = 10;
+    $config['per_page'] = 5;
     
     // tag pagination
     $config['full_tag_open'] = '<nav aria-label="Page navigation produk" class="d-flex justify-content-end pr-5"><ul class="pagination pagination-sm">';
@@ -38,31 +38,81 @@ class Product extends CI_Controller
     
     
     $limit = $config['per_page'];
-    $produks = $produk->selectAll(3, $offset);
+    $produks = $produk->selectAll($limit, $offset);
     $data['produk'] = $produks;
 
     $kategori = $produk->getKategori();
     $data['kategori'] = $kategori;
+    $data['offset'] = $offset;
+
+    if ($id != 0) {
+      $data['singleProduk'] = $produk->getSingleProduk($id);
+    } else {
+      $data['singleProduk'] = "";
+    }
+    // var_dump($data['singleProduk']);
+    // die();
 
     $this->load->view('admin/product', $data);
   }
 
-  public function insert()
+  public function insertUpdate()
   {
     $produk = $this->product_model;
+    $post = $this->input->post();
+
+    $id = $post['id_produk'];
 
     $validation = $this->form_validation;
     $validation->set_rules($produk->rules());
 
+    // get old url image from db
+    $url_image = $produk->getImageProduk($id);
+    $url_image = $url_image[0]->url_image;
+
     if (empty($_FILES['file-input']['name'])) {
-      $this->form_validation->set_rules('file-input', 'Gambar produk', 'required');
+      if (!$url_image) {
+        $this->form_validation->set_rules('file-input', 'Gambar produk', 'required');
+      }
+    } else {
+      $url_image= false;
     }
 
     if ($validation->run()) {
-      $produk->insert();
-      $this->session->set_flashdata('sukses', 'Produk berhasil disimpan');
+      if ($id) {
+        $update = $produk->update($id, $url_image);
+        if($update){
+          $this->session->set_flashdata('sukses', 'Produk berhasil diupdate');
+        }
+      }else {
+        if ($produk->insert()) {
+          $this->session->set_flashdata('sukses', 'Produk berhasil disimpan');
+        }
+      }
     }
 
     redirect("admin/product");
+  }
+
+  public function disable($id)
+  {
+    $produk = $this->product_model;
+    
+    $disable = $produk->disable($id);
+    if ($disable) {
+      $this->session->set_flashdata('sukses', 'Produk berhasil dinonaktifkan');
+    }
+    redirect("admin/product/index/0");
+  }
+  
+  public function enable($id)
+  {
+    $produk = $this->product_model;
+    
+    $enable = $produk->enable($id);
+    if ($enable) {
+      $this->session->set_flashdata('sukses', 'Produk berhasil diaktifkan');
+    }
+    redirect("admin/product/index/0");
   }
 }
