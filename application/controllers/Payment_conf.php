@@ -1,20 +1,21 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 class Payment_conf extends CI_Controller
 {
-  
-  public function __construct() {
-    parent:: __construct();
-    
+
+  public function __construct()
+  {
+    parent::__construct();
+
     $this->load->model('payment_conf_model');
     $this->load->helper('file');
   }
-  
+
   public function index()
   {
-    $payment= $this->payment_conf_model;
-    
+    $payment = $this->payment_conf_model;
+
     $data['no_invoice'] = $payment->getOrders();
 
     if ($this->input->get('invoice')) {
@@ -40,11 +41,9 @@ class Payment_conf extends CI_Controller
       $this->form_validation->set_rules('buktitf', 'Bukti Transfer', 'required');
     }
     if ($validation->run()) {
-      print_r($this->input->post('noinvoice'));
-      print_r($payment->cekBuktiTf());
       if ($payment->cekBuktiTf() > 0) {
         $path = $payment->getImagePath();
-        $path = './upload/bukti_tf/'.$path[0]->bukti_tf;
+        $path = './upload/bukti_tf/' . $path[0]->bukti_tf;
         unlink($path);
         $payment->update();
         $this->session->set_flashdata('sukses', 'Konfirmasi pembayaran berhasil diupdate');
@@ -52,9 +51,8 @@ class Payment_conf extends CI_Controller
         $payment->simpan();
         $this->session->set_flashdata('sukses', 'Konfirmasi pembayaran berhasil disimpan');
       }
-      echo "idam";
     }
 
-    // redirect('payment_conf');
+    redirect('payment_conf');
   }
 }
