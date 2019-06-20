@@ -3,7 +3,7 @@
 class profile_model extends CI_Model
 {
   private $_table = "customer";
-  
+
   public $nama_customer;
   public $nomor_telp;
   public $provinsi;
@@ -19,45 +19,65 @@ class profile_model extends CI_Model
   public function rules()
   {
     return [
-      ['field' => 'nama',
-      'label' => 'Nama',
-      'rules' => 'trim|required'],
+      [
+        'field' => 'nama',
+        'label' => 'Nama',
+        'rules' => 'trim|required'
+      ],
 
-      ['field' => 'telp',
-      'label' => 'Telephone',
-      'rules' => 'trim|required|max_length[13]'],
+      [
+        'field' => 'telp',
+        'label' => 'Telephone',
+        'rules' => 'trim|required|max_length[13]'
+      ],
 
-      ['field' => 'provinsi',
-      'label' => 'Provinsi',
-      'rules' => 'trim|required'],
+      [
+        'field' => 'provinsi',
+        'label' => 'Provinsi',
+        'rules' => 'trim|required'
+      ],
 
-      ['field' => 'kabupaten',
-      'label' => 'Kabupaten',
-      'rules' => 'trim|required'],
+      [
+        'field' => 'kabupaten',
+        'label' => 'Kabupaten',
+        'rules' => 'trim|required'
+      ],
 
-      ['field' => 'kota',
-      'label' => 'Kota',
-      'rules' => 'trim|required'],
+      [
+        'field' => 'kota',
+        'label' => 'Kota',
+        'rules' => 'trim|required'
+      ],
 
-      ['field' => 'address',
-      'label' => 'Address',
-      'rules' => 'trim|required'],
-      
-      ['field' => 'jenis_kelamin',
-      'label' => 'Jenis Kelamin',
-      'rules' => 'required'],
-      
-      ['field' => 'tanggal_lahir',
-      'label' => 'Tanggal Lahir',
-      'rules' => 'required'],
+      [
+        'field' => 'address',
+        'label' => 'Address',
+        'rules' => 'trim|required'
+      ],
 
-      ['field' => 'pendidikan',
-      'label' => 'Pendidikan',
-      'rules' => 'trim|required'],
+      [
+        'field' => 'jenis_kelamin',
+        'label' => 'Jenis Kelamin',
+        'rules' => 'required'
+      ],
 
-      ['field' => 'agama',
-      'label' => 'Agama',
-      'rules' => 'trim|required']
+      [
+        'field' => 'tanggal_lahir',
+        'label' => 'Tanggal Lahir',
+        'rules' => 'required'
+      ],
+
+      [
+        'field' => 'pendidikan',
+        'label' => 'Pendidikan',
+        'rules' => 'trim|required'
+      ],
+
+      [
+        'field' => 'agama',
+        'label' => 'Agama',
+        'rules' => 'trim|required'
+      ]
     ];
   }
 
@@ -81,12 +101,12 @@ class profile_model extends CI_Model
   {
     return $this->db->get('provinsi')->result();
   }
-  
+
   public function masterKabupaten()
   {
     return $this->db->get('kabupaten')->result();
   }
-  
+
   public function masterKota()
   {
     return $this->db->get('kota')->result();
@@ -106,9 +126,7 @@ class profile_model extends CI_Model
     $this->tanggal_lahir = $post['tanggal_lahir'];
     $this->id_pendidikan = $post['pendidikan'];
     $this->id_agama = $post['agama'];
-    if ($this->upload->do_upload('userfile')) {
-      $this->url_img_customer = $this->_uploadImage();
-    }
+    $this->url_img_customer = $this->_uploadImage();
 
     $this->db->update($this->_table, $this, array('id_customer' => $this->session->id_customer));
   }
@@ -117,7 +135,7 @@ class profile_model extends CI_Model
   {
     $config['upload_path']    = './upload/profile/';
     $config['allowed_types']  = 'jpg|png';
-    $config['file_name']      = $this->session->id_customer;
+    $config['file_name']      = $this->session->id_customer . ".jpg";
     $config['overwrite']      = true;
     $config['max_size']       = 1024; // 1MB
     // $config['max_width']            = 1024;
@@ -126,9 +144,11 @@ class profile_model extends CI_Model
     $this->load->library('upload', $config);
 
     if ($this->upload->do_upload('userfile')) {
-      return $this->upload->data("file_name");
+      return $this->upload->data();
     }
-    
-    return "default.jpg";
+
+    $oldProfile = $this->getById();
+
+    return $oldProfile->url_img_customer;
   }
 }

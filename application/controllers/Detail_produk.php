@@ -1,25 +1,27 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Detail_produk extends CI_Controller {
+class Detail_produk extends CI_Controller
+{
 
-	public function __construct()
+    public function __construct()
     {
         parent::__construct();
 
-        $this->load->model('rum_model');   
+        $this->load->model('rum_model');
     }
 
-	public function detail($url_produk)
-	{
+    public function detail($url_produk)
+    {
         // Get Detail Produk
         $query = $this->rum_model->getDetailProduk($url_produk);
         $data['detailProduk'] = $query->result_array();
 
         $relatedP = $this->rum_model->getRelatedProduk($url_produk);
+
         if (empty($relatedP)) {
             $data['relatedP'] = '';
-        }else {
+        } else {
             $data['relatedP'] = $relatedP->result_array();
         }
 

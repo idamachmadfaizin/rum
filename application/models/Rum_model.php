@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class rum_model extends CI_Model
 {
@@ -43,7 +43,7 @@ class rum_model extends CI_Model
     // insert to cluster
     public function insMultiRows($table_name, $data)
     {
-        $this->db->truncate($table_name);//to delete and reset autoincrement
+        $this->db->truncate($table_name); //to delete and reset autoincrement
         $this->db->insert_batch($table_name, $data);
         return $this->db->affected_rows();
     }
@@ -59,62 +59,64 @@ class rum_model extends CI_Model
         $this->db->where('p.id_produk', $id_produk);
         $gcluster = $this->db->get();
         $gcluster = $gcluster->row_array();
-        
-        $this->db->reset_query();
 
-        // get semua id_produk dalam cluster
-        $this->db->select('p.id_produk');
-        $this->db->from('cluster c');
-        $this->db->join('detail_kmeans dk', 'c.id_detail_kmeans = dk.id_detail_kmeans');
-        $this->db->join('produk p', 'p.id_produk = dk.id_produk');
-        $this->db->where($gcluster);
-        $this->db->where('dk.id_produk <>', $id_produk);
-        // echo $this->db->get_compiled_select();
-        $this->db->distinct();
-        $id = $this->db->get();
-        
-        $this->db->reset_query();
-        
-        // Cek if group cluster hanya satu produk
-        if (empty($id->result_array())) {
-            $kosong = array();
-            return $kosong;
-        }else {
-            $this->db->select('produk.id_produk, nama_produk, harga_produk, deskripsi_produk, url_image');
-            $this->db->from('produk');
-            $this->db->join('image', 'image.id_produk = produk.id_produk');
-            $wherein = array();
-            foreach ($id->result_array() as $key => $value) {
-                array_push($wherein, $value['id_produk']);
-            }
-            $this->db->where_in('produk.id_produk', $wherein);
-            $this->db->group_by('produk.id_produk');
+        if ($gcluster) {
+            $this->db->reset_query();
+
+            // get semua id_produk dalam cluster
+            $this->db->select('p.id_produk');
+            $this->db->from('cluster c');
+            $this->db->join('detail_kmeans dk', 'c.id_detail_kmeans = dk.id_detail_kmeans');
+            $this->db->join('produk p', 'p.id_produk = dk.id_produk');
+            $this->db->where($gcluster);
+            $this->db->where('dk.id_produk <>', $id_produk);
             // echo $this->db->get_compiled_select();
-            return $this->db->get();
+            $this->db->distinct();
+            $id = $this->db->get();
+
+            $this->db->reset_query();
+
+            // Cek if group cluster hanya satu produk
+            if (empty($id->result_array())) {
+                $kosong = array();
+                return $kosong;
+            } else {
+                $this->db->select('produk.id_produk, nama_produk, harga_produk, deskripsi_produk, url_image');
+                $this->db->from('produk');
+                $this->db->join('image', 'image.id_produk = produk.id_produk');
+                $wherein = array();
+                foreach ($id->result_array() as $key => $value) {
+                    array_push($wherein, $value['id_produk']);
+                }
+                $this->db->where_in('produk.id_produk', $wherein);
+                $this->db->group_by('produk.id_produk');
+                // echo $this->db->get_compiled_select();
+                return $this->db->get();
+            }
         }
     }
 
     public function addToCart($data)
     {
-      $this->db->insert('cart', $data);
+        $this->db->insert('cart', $data);
     }
 
     public function product_exist($where)
     {
-      return $this->db->get_where('cart', $where)->result_array()[0]['id_cart'];
+        return $this->db->get_where('cart', $where)->result_array()[0]['id_cart'];
     }
 
     public function getQty($where)
     {
-      $this->db->select('qty_cart');
-      $this->db->where($where);
-      return $this->db->get('cart')->result_array()[0]['qty_cart'];
+        $this->db->select('qty_cart');
+        $this->db->where($where);
+        return $this->db->get('cart')->result_array()[0]['qty_cart'];
     }
 
     public function tambah_qty($id_cart, $updateQty)
     {
-      $this->db->where('id_cart', $id_cart);
-      $this->db->update('cart', $updateQty);
-      return $this->db->affected_rows();
+        $this->db->where('id_cart', $id_cart);
+        $this->db->update('cart', $updateQty);
+        return $this->db->affected_rows();
     }
 }

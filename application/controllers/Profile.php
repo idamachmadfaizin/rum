@@ -1,15 +1,19 @@
-<?php 
-defined('BASEPATH') OR exit('No direct script access allowed');
+<?php
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Profile extends CI_Controller {
+class Profile extends CI_Controller
+{
 
-	public function __construct() {
-    parent:: __construct();
-    
+	public function __construct()
+	{
+		parent::__construct();
+
 		$this->load->model('profile_model');
+		$this->load->library('upload');
 	}
 
-	public function index() {
+	public function index()
+	{
 		//get master select options    
 		$data['agamas'] = $this->profile_model->masterAgama();
 		$data['pendidikans'] = $this->profile_model->masterPendidikan();
@@ -19,24 +23,23 @@ class Profile extends CI_Controller {
 		//end
 
 		//get profile customer
-		$data['profile']=$this->profile_model->getById();
-    
+		$data['profile'] = $this->profile_model->getById();
+
 		$this->load->view('profile', $data);
 	}
 
-	public function update() {
+	public function update()
+	{
 		$profile = $this->profile_model;
 
-		$validation=$this->form_validation;
+		$validation = $this->form_validation;
 		$validation->set_rules($profile->rules());
 
-		if($validation->run()) {
+		if ($validation->run()) {
 			$profile->update();
 			$this->session->set_flashdata('updated', 'Update Profile Success');
 		}
 
-		// redirect('/profile');
-		$this->index();
+		redirect('/profile');
 	}
-
 }
