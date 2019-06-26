@@ -1,10 +1,11 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 class Dashboard extends CI_Controller
 {
-  public function __construct() {
-    parent:: __construct();
+  public function __construct()
+  {
+    parent::__construct();
 
     $this->load->model('admin/dashboard_model');
   }
@@ -26,11 +27,12 @@ class Dashboard extends CI_Controller
     $proses = $dashboard->getWidget($dateNow, 'Proses');
     $cus = $dashboard->totCustomer();
 
-    $data['widget'] = [ 'order_today' => $order_today,
-                        'dibayar'     => $dibayar,
-                        'proses'      => $proses,
-                        'customer'    => $cus
-                      ];
+    $data['widget'] = [
+      'order_today' => $order_today,
+      'dibayar'     => $dibayar,
+      'proses'      => $proses,
+      'customer'    => $cus
+    ];
     $data['order'] = $dashboard->getOrders($dateNow);
     if ($data['order']) {
       $data['detail_order'] = $dashboard->getDetailOrder($dateNow);
@@ -39,7 +41,7 @@ class Dashboard extends CI_Controller
 
     $this->load->view('admin/dashboard', $data);
   }
-  
+
   public function updateStatus()
   {
     $dashboard = $this->dashboard_model;

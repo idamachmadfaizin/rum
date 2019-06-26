@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 | -------------------------------------------------------------------------
@@ -52,3 +52,4 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'landing_page';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+$route['verify/(:any)'] = "/home/verify/$1";

@@ -1,14 +1,16 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Login extends CI_Controller {
+class Login extends CI_Controller
+{
 
-  public function __construct() {
-		parent:: __construct();
+  public function __construct()
+  {
+    parent::__construct();
 
-		$this->load->model('login_model');
+    $this->load->model('login_model');
   }
-  
+
   public function index()
   {
     $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
@@ -22,17 +24,21 @@ class Login extends CI_Controller {
         'password_customer' => md5($password)
       );
 
-      $id = $this->login_model->login($where)->row_array()['id_customer'];
+      $customer = $this->login_model->login($where)->row_array();
 
-      if ($id) {
-        $_SESSION['id_customer'] = $id;
-        redirect();
-      }else {
+      if ($customer) {
+        //cek status active email == NO
+        if ($customer['active_status'] == 'N') {
+          $_SESSION['id_customer'] = $customer['id_customer'];
+          redirect('register/verify/' . $customer['id_customer']);
+        } else {
+          redirect();
+        }
+      } else {
         $this->session->set_flashdata('error_session', 'Email atau password salah!');
         redirect('/login');
       }
     }
     $this->load->view('login');
   }
-
 }
