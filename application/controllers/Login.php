@@ -32,6 +32,7 @@ class Login extends CI_Controller
           $_SESSION['id_customer'] = $customer['id_customer'];
           redirect('register/verify/' . $customer['id_customer']);
         } else {
+          $_SESSION['id_customer'] = $customer['id_customer'];
           redirect();
         }
       } else {
