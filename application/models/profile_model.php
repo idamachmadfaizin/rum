@@ -151,4 +151,10 @@ class profile_model extends CI_Model
 
     return $oldProfile->url_img_customer;
   }
+
+  public function getKabupaten($id)
+  {
+    //
+    return $this->db->get_where('kabupaten', ['id_provinsi' => $id])->result();
+  }
 }

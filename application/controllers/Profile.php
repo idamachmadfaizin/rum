@@ -42,4 +42,26 @@ class Profile extends CI_Controller
 
 		redirect('/profile');
 	}
+
+	public function getKabupaten()
+	{
+		$id = $this->input->post('provinsi');
+		$regencies = $this->profile_model->getKabupaten($id);
+		$profile = $this->profile_model->getById();
+
+		// var_dump($regencies);
+		// var_dump($profile);
+		// die();
+
+		$output = "";
+		foreach ($regencies as $regency) {
+			// $selected = "";
+			// if ($profile->kabupaten == $regency->id_kabupaten) {
+			// 	$selected = "selected";
+			// }
+			$output .= "<option value='" . $regency->id_kabupaten . "'>" . $regency->nama_kabupaten . "</option>";
+		}
+		// 
+		echo $output;
+	}
 }

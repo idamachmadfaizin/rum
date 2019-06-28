@@ -112,9 +112,6 @@
               </select>
               <select name="kabupaten" id="kabupaten" class="form-control form-control-sm">
                 <option value="">Kabupaten</option>
-                <?php foreach ($kabupatens as $kabupaten) : ?>
-                  <option value="<?= $kabupaten->id_kabupaten ?>" <?php if ($profile->kabupaten == $kabupaten->id_kabupaten) echo "selected"; ?>><?= $kabupaten->nama_kabupaten ?></option>
-                <?php endforeach ?>
               </select>
               <select name="kota" id="kota" class="form-control form-control-sm">
                 <option value="">Kota</option>
@@ -136,5 +133,33 @@
   </div>
   <?= form_close() ?>
 </div>
+
+<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.js"></script> -->
+<!-- <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script> -->
+
+<script src="<?= base_url() ?>assets/js/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $("#provinsi").on('change', function() {
+      getKabupaten($(this).val())
+    });
+
+    function getKabupaten(provinsi) {
+      alert(provinsi);
+      $.ajax({
+        url: "<?= site_url('profile/getKabupaten') ?>",
+        // url: 'profile/getKabupaten') ?>,
+        type: "POST",
+        data: {
+          "provinsi": provinsi
+        },
+        success: function(data) {
+          $("#kabupaten").html(data);
+        }
+      });
+
+    }
+  });
+</script>
 
 <?php $this->load->view('partials/footer'); ?>
