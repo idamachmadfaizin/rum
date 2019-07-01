@@ -9,7 +9,6 @@ class Profile extends CI_Controller
 		parent::__construct();
 
 		$this->load->model('profile_model');
-		$this->load->library('upload');
 	}
 
 	public function index()
@@ -18,8 +17,6 @@ class Profile extends CI_Controller
 		$data['agamas'] = $this->profile_model->masterAgama();
 		$data['pendidikans'] = $this->profile_model->masterPendidikan();
 		$data['provinsis'] = $this->profile_model->masterProvinsi();
-		$data['kabupatens'] = $this->profile_model->masterKabupaten();
-		$data['kotas'] = $this->profile_model->masterKota();
 		//end
 
 		//get profile customer
@@ -40,7 +37,7 @@ class Profile extends CI_Controller
 			$this->session->set_flashdata('updated', 'Update Profile Success');
 		}
 
-		redirect('/profile');
+		$this->index();
 	}
 
 	public function getKabupaten()
@@ -49,17 +46,31 @@ class Profile extends CI_Controller
 		$regencies = $this->profile_model->getKabupaten($id);
 		$profile = $this->profile_model->getById();
 
-		// var_dump($regencies);
-		// var_dump($profile);
-		// die();
-
 		$output = "";
 		foreach ($regencies as $regency) {
-			// $selected = "";
-			// if ($profile->kabupaten == $regency->id_kabupaten) {
-			// 	$selected = "selected";
-			// }
-			$output .= "<option value='" . $regency->id_kabupaten . "'>" . $regency->nama_kabupaten . "</option>";
+			$selected = "";
+			if ($profile->kabupaten == $regency->id_kabupaten) {
+				$selected = "selected";
+			}
+			$output .= "<option value='" . $regency->id_kabupaten . "'" . $selected . ">" . $regency->nama_kabupaten . "</option>";
+		}
+		// 
+		echo $output;
+	}
+
+	public function getKota()
+	{
+		$id = $this->input->post('kabupaten');
+		$cities = $this->profile_model->getKota($id);
+		$profile = $this->profile_model->getById();
+
+		$output = "";
+		foreach ($cities as $city) {
+			$selected = "";
+			if ($profile->kabupaten == $city->id_kota) {
+				$selected = "selected";
+			}
+			$output .= "<option value='" . $city->id_kota . "'" . $selected . ">" . $city->nama_kota . "</option>";
 		}
 		// 
 		echo $output;

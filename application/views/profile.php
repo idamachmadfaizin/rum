@@ -46,7 +46,7 @@
 
             <div class="form-group float-left ml-4 input-image-profile">
               <!-- <input type="file" name="image-profile" id="image-profile"><br> -->
-              <?= form_upload('userfile', set_value('userfile')); ?><br>
+              <?= form_upload('userfile'); ?><br>
               <label for="userfile" class="text-secondary text-12">Max size: 1 MB. Format: *JPG, *PNG</label>
             </div>
           </div>
@@ -111,17 +111,22 @@
                 <?php endforeach ?>
               </select>
               <select name="kabupaten" id="kabupaten" class="form-control form-control-sm">
-                <option value="">Kabupaten</option>
+                <?php if ($profile->kabupaten) : ?>
+                  <option value="<?= $profile->kabupaten ?>"><?= $profile->nama_kabupaten ?></option>
+                <?php else : ?>
+                  <option value="">Kabupaten</option>
+                <?php endif ?>
               </select>
               <select name="kota" id="kota" class="form-control form-control-sm">
-                <option value="">Kota</option>
-                <?php foreach ($kotas as $kota) : ?>
-                  <option value="<?= $kota->id_kota ?>" <?php if ($profile->kota == $kota->id_kota) echo "selected"; ?>><?= $kota->nama_kota ?></option>
-                <?php endforeach ?>
+                <?php if ($profile->kota) : ?>
+                  <option value="<?= $profile->kota ?>"><?= $profile->nama_kota ?></option>
+                <?php else : ?>
+                  <option value="">Kota</option>
+                <?php endif ?>
               </select>
             </div>
             <div class="d-flex align-items-center d-block-h-45">
-              <input type="text" name="address" id="address" value="<?= $profile->address; ?>" placeholder="1234 Main St" class="form-control form-control-sm">
+              <input type="text" name="address" id="address" value="<?= $profile->address; ?>" placeholder="Your Address" class="form-control form-control-sm">
             </div>
             <div class="d-flex align-items-center d-block-h-45">
               <input type="submit" value="SAVE" class="btn btn-primary border-0 d-block-w-100" style="background-color: #3D2577">
@@ -138,26 +143,43 @@
 <!-- <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script> -->
 
 <script src="<?= base_url() ?>assets/js/jquery-3.4.1.min.js"></script>
+
 <script type="text/javascript">
   $(document).ready(function() {
     $("#provinsi").on('change', function() {
       getKabupaten($(this).val())
     });
 
+    $("#kabupaten").on('change', function() {
+      getKota($(this).val())
+    });
+
     function getKabupaten(provinsi) {
-      alert(provinsi);
       $.ajax({
         url: "<?= site_url('profile/getKabupaten') ?>",
-        // url: 'profile/getKabupaten') ?>,
         type: "POST",
         data: {
           "provinsi": provinsi
         },
         success: function(data) {
           $("#kabupaten").html(data);
+          $("#kabupaten").prop('disabled', false);
         }
       });
+    }
 
+    function getKota(kabupaten) {
+      $.ajax({
+        url: "<?= site_url('profile/getKota') ?>",
+        type: "POST",
+        data: {
+          "kabupaten": kabupaten
+        },
+        success: function(data) {
+          $("#kota").html(data);
+          $("#kota").prop('disabled', false);
+        }
+      });
     }
   });
 </script>

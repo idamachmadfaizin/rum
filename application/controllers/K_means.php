@@ -1,25 +1,17 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 require APPPATH . '/libraries/php-ml/vendor/autoload.php';
+
 use Phpml\Clustering\KMeans;
 
-class K_means extends CI_Controller {
-   public function __construct()
-   {
-      parent::__construct();
-      
-      $this->load->model('Rum_model'); 
-    }
-
-    public function insDetailKmeans($products)
+class K_means extends CI_Controller
+{
+    public function __construct()
     {
-        // get product
+        parent::__construct();
 
-        // get k-means
-        // loop
-            // insert produk dan nilai
-        // end loop
+        $this->load->model('Rum_model');
     }
 
     // This func to clustering
@@ -28,7 +20,7 @@ class K_means extends CI_Controller {
         // get total k-means
         $totKmeans = $this->Rum_model->getTotalKmeans();
         // get all data from table detail_kmeans
-        $query = $this->Rum_model->getAllTable('detail_kmeans');
+        $query = $this->Rum_model->getDetailKmeans();
         $k_means = $query->result_array();
 
         // Insert array from db format k-means
@@ -38,8 +30,9 @@ class K_means extends CI_Controller {
         foreach ($k_means as $key => $value) {
             if ($value['id_kmeans'] < $totKmeans) {
                 $j++;
+                // array_push($arr1, $value['id_produk']);
                 array_push($arr1, $value['nilai']);
-            }else {
+            } else {
                 $j++;
                 array_push($arr1, $value['nilai']);
                 // Push to arr $sample
@@ -48,18 +41,21 @@ class K_means extends CI_Controller {
                 $arr1 = array();
             }
         }
-        
+        // var_dump($k_means);
+        var_dump($sample);
         // Script to clustering
         // Number of cluster
-        $numCluster = 2;
+        $numCluster = 4;
         $k_means = new KMeans($numCluster);
         // cluster result in array
         $cluster = $k_means->cluster($sample);
-        
+        // var_dump($cluster);
+
+        // die();
         // script for passing data $insT_Cluster to Model
         $insT_Cluster = array();
         $arr1 = array('group_cluster' => '', 'id_detail_kmeans' => '');
-        for ($numC=0; $numC < $numCluster; $numC++) {
+        for ($numC = 0; $numC < $numCluster; $numC++) {
             foreach ($cluster[$numC] as $key => $iddetail) {
                 $arr1['group_cluster'] = $numC;
                 $arr1['id_detail_kmeans'] = $key;

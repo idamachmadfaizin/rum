@@ -98,6 +98,9 @@ class Register extends CI_Controller
 
         redirect('register/verify/' . $id);
       }
+    } else {
+      // redirect('register');
+      $this->index();
     }
   }
 
@@ -142,19 +145,29 @@ class Register extends CI_Controller
   {
     $this->load->library('email');
     //email config
-    $config['charset'] = 'utf-8';
-    $config['useragent'] = 'Codeigniter';
-    $config['protocol'] = 'smtp';
-    $config['mailtype'] = 'html';
-    $config['smtp_host'] = 'smtp.gmail.com';
-    $config['smtp_port'] = '465';
-    $config['smtp_timeout'] = '7';
-    $config['smtp_user'] = 'doublebunny76@gmail.com';
-    $config['smtp_pass'] = 'DoubleBunny123';
-    $config['crlf'] = '\r\n';
-    $config['newline'] = '\r\n';
-    $config['wordwrap'] = TRUE;
-    $config['smtp_crypto'] = "ssl";
+    // $config['charset'] = 'utf-8';
+    // $config['useragent'] = 'Codeigniter';
+    // $config['protocol'] = 'smtp';
+    // $config['mailtype'] = 'html';
+    // $config['smtp_host'] = 'smtp.gmail.com';
+    // $config['smtp_port'] = '465';
+    // $config['smtp_timeout'] = '7';
+    // $config['smtp_user'] = 'doublebunny76@gmail.com';
+    // $config['smtp_pass'] = 'DoubleBunny123';
+    // $config['crlf'] = '\r\n';
+    // $config['newline'] = '\r\n';
+    // $config['wordwrap'] = TRUE;
+    // $config['smtp_crypto'] = "ssl";
+
+    $config = array(
+      'protocol' => 'smtp',
+      'smtp_host' => 'smtp.mailtrap.io',
+      'smtp_port' => 2525,
+      'smtp_user' => '16ef3c199dc945',
+      'smtp_pass' => '5569c6b859347a',
+      'crlf' => "\r\n",
+      'newline' => "\r\n"
+    );
 
     // initialize email
     $this->email->initialize($config);

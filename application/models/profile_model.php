@@ -84,32 +84,41 @@ class profile_model extends CI_Model
   public function getById()
   {
     $id = $this->session->id_customer;
-    return $this->db->get_where($this->_table, ["id_customer" => $id])->row();
+
+    $this->db->where("id_customer", $id);
+    $this->db->join("kabupaten", "kabupaten.id_kabupaten = customer.kabupaten", "left");
+    $this->db->join("kota", "kota.id_kota = customer.kota", "left");
+    return $this->db->get($this->_table)->row();
   }
 
   public function masterAgama()
   {
+    $this->db->order_by('nama_agama', 'asc');
     return $this->db->get('agama')->result();
   }
 
   public function masterPendidikan()
   {
+    // $this->db->order_by('nama_pendidikan', 'asc');
     return $this->db->get('pendidikan')->result();
   }
 
   public function masterProvinsi()
   {
+    $this->db->order_by('nama_provinsi', 'asc');
     return $this->db->get('provinsi')->result();
   }
 
-  public function masterKabupaten()
+  public function getKabupaten($id)
   {
-    return $this->db->get('kabupaten')->result();
+    $this->db->order_by('nama_kabupaten', 'asc');
+    return $this->db->get_where('kabupaten', ['id_provinsi' => $id])->result();
   }
 
-  public function masterKota()
+  public function getKota($id)
   {
-    return $this->db->get('kota')->result();
+    $this->db->order_by('nama_kota', 'asc');
+    return $this->db->get_where('kota', ['id_kabupaten' => $id])->result();
   }
 
   public function update()
@@ -144,17 +153,11 @@ class profile_model extends CI_Model
     $this->load->library('upload', $config);
 
     if ($this->upload->do_upload('userfile')) {
-      return $this->upload->data();
+      return $this->upload->data()['file_name'];
     }
 
     $oldProfile = $this->getById();
 
     return $oldProfile->url_img_customer;
-  }
-
-  public function getKabupaten($id)
-  {
-    //
-    return $this->db->get_where('kabupaten', ['id_provinsi' => $id])->result();
   }
 }

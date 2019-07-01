@@ -1,6 +1,7 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 
 require APPPATH . '/libraries/php-ml/vendor/autoload.php';
+
 use Phpml\Clustering\KMeans;
 
 class Checkout extends CI_Controller
@@ -217,20 +218,19 @@ class Checkout extends CI_Controller
 
 		// Script to clustering
 		// Number of cluster
-		$numCluster = 3;
+		$numCluster = 5;
 		$k_means = new KMeans($numCluster);
 		// cluster result in array
 		$cluster = $k_means->cluster($sample);
 
+		// var_dump($cluster);
 		// script for passing data $insT_Cluster to Model
 		$insT_Cluster = array();
 		$arr1 = array('group_cluster' => '', 'id_detail_kmeans' => '');
-		for (
-			$numC = 0;
-			$numC < $numCluster;
-
-			$numC++
-		) {
+		for ($numC = 0; $numC < $numCluster; $numC++) {
+			if (count($cluster[$numC]) == 0) {
+				break;
+			}
 			foreach ($cluster[$numC] as $key => $iddetail) {
 				$arr1['group_cluster'] = $numC;
 				$arr1['id_detail_kmeans'] = $key;

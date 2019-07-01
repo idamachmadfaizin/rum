@@ -7,6 +7,12 @@ class rum_model extends CI_Model
         return $this->db->get($table_name);
     }
 
+    public function getDetailKmeans()
+    {
+        $this->db->select('id_kmeans, id_produk, nilai');
+        return $this->db->get('detail_kmeans');
+    }
+
     public function getTotalKmeans()
     {
         return $this->db->count_all('k_means');
@@ -57,10 +63,10 @@ class rum_model extends CI_Model
         $this->db->join('detail_kmeans dk', 'c.id_detail_kmeans = dk.id_detail_kmeans');
         $this->db->join('produk p', 'p.id_produk = dk.id_produk');
         $this->db->where('p.id_produk', $id_produk);
-        $gcluster = $this->db->get();
-        $gcluster = $gcluster->row_array();
+        $gclusters = $this->db->get()->result_array();
+        // $gclusters = $gclusters->row_array();
 
-        if ($gcluster) {
+        if ($gclusters) {
             $this->db->reset_query();
 
             // get semua id_produk dalam cluster
@@ -68,16 +74,17 @@ class rum_model extends CI_Model
             $this->db->from('cluster c');
             $this->db->join('detail_kmeans dk', 'c.id_detail_kmeans = dk.id_detail_kmeans');
             $this->db->join('produk p', 'p.id_produk = dk.id_produk');
-            $this->db->where($gcluster);
+            foreach ($gclusters as $gcluster) {
+                $whereIn[] = $gcluster['group_cluster'];
+            }
+            $this->db->where_in('group_cluster', $whereIn);
             $this->db->where('dk.id_produk <>', $id_produk);
-            // echo $this->db->get_compiled_select();
             $this->db->distinct();
-            $id = $this->db->get();
-
+            $id = $this->db->get()->result_array();
             $this->db->reset_query();
 
             // Cek if group cluster hanya satu produk
-            if (empty($id->result_array())) {
+            if (empty($id)) {
                 $kosong = array();
                 return $kosong;
             } else {
@@ -85,7 +92,7 @@ class rum_model extends CI_Model
                 $this->db->from('produk');
                 $this->db->join('image', 'image.id_produk = produk.id_produk');
                 $wherein = array();
-                foreach ($id->result_array() as $key => $value) {
+                foreach ($id as $key => $value) {
                     array_push($wherein, $value['id_produk']);
                 }
                 $this->db->where_in('produk.id_produk', $wherein);

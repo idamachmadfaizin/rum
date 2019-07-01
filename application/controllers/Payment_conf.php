@@ -53,6 +53,6 @@ class Payment_conf extends CI_Controller
       }
     }
 
-    redirect('payment_conf');
+    $this->index();
   }
 }

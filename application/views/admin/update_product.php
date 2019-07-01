@@ -7,7 +7,7 @@
             <div class="col-md-12 col-lg-12">
                 <div class="card">
                     <div class="card-header">
-                        <strong>Product</strong>
+                        <strong>Update Product</strong>
                     </div>
 
                     <?php if (validation_errors()) : ?>
@@ -55,7 +55,9 @@
                                     <select name="kategori_produk" id="kategori_produk" class="form-control">
                                         <option>Please select</option>
                                         <?php foreach ($kategoris as $kategori) : ?>
-                                            <option value="<?= $kategori->id_kategori; ?>">
+                                            <option value="<?= $kategori->id_kategori; ?>" <?php if ($singleProduk[0]->id_kategori == $kategori->id_kategori) {
+                                                                                                echo "selected";
+                                                                                            } ?>>
                                                 <?= $kategori->nama_kategori; ?>
                                             </option>
                                         <?php endforeach ?>
@@ -94,70 +96,6 @@
                 </div>
             </div>
         </div>
-        <!-- Orders -->
-        <div class="orders">
-            <div class="row">
-                <div class="col-xl-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="box-title">List Product</h4>
-                        </div>
-                        <div class="card-body--">
-                            <div class="table-stats order-table ov-h">
-                                <table class="table ">
-                                    <thead>
-                                        <tr>
-                                            <th class="serial">#</th>
-                                            <th>Nama Produk</th>
-                                            <th>Harga</th>
-                                            <th>Kategori</th>
-                                            <!-- <th>Url Produck</th> -->
-                                            <th>Deskripsi</th>
-                                            <th class="avatar">Images</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php $offset++; ?>
-                                        <?php foreach ($produk as $produks) : ?>
-                                            <tr>
-                                                <td class="serial"><?= $offset; ?></td>
-                                                <td><span><?= $produks->nama_produk; ?></span></td>
-                                                <td>Rp <span class="count"><?= $produks->harga_produk; ?></span></td>
-                                                <td><span><?= $produks->nama_kategori; ?></span></td>
-                                                <!-- <td><span>cumi_kupas</span></td> -->
-                                                <td><span><?= $produks->deskripsi_produk ?></span></td>
-                                                <td class="avatar">
-                                                    <div class="round-img">
-                                                        <a href="#">
-                                                            <img class="rounded-circle" src="<?= base_url('assets/img/produk/' . $produks->url_image) ?>" alt="">
-                                                        </a>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <a href="<?= site_url('admin/product/edit/' . $produks->id_produk) ?>" class="btn p-0"><i class="fas fa-pen-square color-success font-16"></i></a> <!-- btn Edit -->
-
-                                                    <?php if ($produks->status_produk == 0) : ?>
-                                                        <a href="<?= site_url('admin/product/disable/') . $produks->id_produk ?>" class="btn p-0" onclick="return confirm('Disable Product?')"><i class="fa fa-minus-square color-danger font-16"></i></a> <!-- btn Disable -->
-                                                    <?php elseif ($produks->status_produk == 1) : ?>
-                                                        <a href="<?= site_url('admin/product/enable/') . $produks->id_produk ?>" class="btn p-0" onclick="return confirm('Enable Product?')"><i class="fas fa-plus-square color-danger font-16"></i></a> <!-- btn Enable -->
-                                                    <?php endif ?>
-                                                </td>
-                                            </tr>
-                                            <?php $offset++ ?>
-                                        <?php endforeach ?>
-                                    </tbody>
-                                </table>
-                                <hr>
-                                <?php echo $this->pagination->create_links(); ?>
-                            </div> <!-- /.table-stats -->
-                        </div>
-                    </div> <!-- /.card -->
-                </div> <!-- /.col-lg-8 -->
-            </div>
-        </div>
-        <!-- /.orders -->
-
     </div>
     <!-- .animated -->
 </div>
