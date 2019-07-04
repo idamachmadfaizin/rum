@@ -1,33 +1,34 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Landing_page extends CI_Controller {
+class Landing_page extends CI_Controller
+{
 
-	public function __construct()
-    {
-        parent::__construct();
+  public function __construct()
+  {
+    parent::__construct();
 
-        $this->load->model('rum_model');   
-	}
-	
-	public function index()
-	{
-		$kategori = $this->rum_model->getAllTable('kategori');
-		$kategori = $kategori->result_array();
-		$data['kategori'] = $kategori;
+    $this->load->model('rum_model');
+  }
 
-		$bestseller = $this->rum_model->selectProdukImage('bestseller');
-		$bestseller = $bestseller->result_array();
-		$data['bestseller'] = $bestseller;
+  public function index()
+  {
+    $kategori = $this->rum_model->getKategori();
+    $kategori = $kategori->result_array();
+    $data['kategori'] = $kategori;
 
-		$new = $this->rum_model->selectProdukImage('new');
-		$new = $new->result_array();
-		$data['new'] = $new;
+    $bestseller = $this->rum_model->selectProdukImage('bestseller');
+    $bestseller = $bestseller->result_array();
+    $data['bestseller'] = $bestseller;
 
-		$this->load->view('landing_page', $data);
-	}
+    $new = $this->rum_model->selectProdukImage('new');
+    $new = $new->result_array();
+    $data['new'] = $new;
 
-	public function addtocart($id_produk)
+    $this->load->view('landing_page', $data);
+  }
+
+  public function addtocart($id_produk)
   {
     if ($this->session->id_customer) {
       $id_customer = $this->session->id_customer;
@@ -35,7 +36,7 @@ class Landing_page extends CI_Controller {
       $data['id_customer'] = $id_customer;
       $data['id_produk'] = $id_produk;
       $data['qty_cart'] = 1;
-  
+
       // cek barang wes onok nang cart?
       $where = array(
         'id_customer' => $id_customer,
@@ -50,17 +51,14 @@ class Landing_page extends CI_Controller {
 
         $updateQty['qty_cart'] = $new_qty;
 
-        $this->rum_model->tambah_qty($id_cart, $updateQty);        
+        $this->rum_model->tambah_qty($id_cart, $updateQty);
         redirect();
-      }else{
+      } else {
         $this->rum_model->addToCart($data);
         redirect();
       }
-
-
     } else {
       redirect('/login'); //kalau belum login
     }
-	}
-	
+  }
 }

@@ -17,27 +17,29 @@
 									<thead>
 										<tr>
 											<th class="serial">#</th>
-											<th>No Order</th>
+											<!-- <th>No Order</th> -->
 											<th>Nama Customer</th>
 											<th>Tanggal Order</th>
 											<th>Total Harga</th>
+											<th>BA</th>
 											<th class="avatar">TF</th>
 											<th>Status</th>
 										</tr>
 									</thead>
 									<tbody>
-										<?php $num = 1 ?>
-										<?php foreach ($order as $order) : ?>
+										<?php $num = $offset + 1
+										?>
+										<?php foreach ($orders as $order) : ?>
 											<tr>
-												<td class="serial"><?= $num ?></td>
+												<!-- <td class="serial"><?= $order->id_order ?></td> -->
 												<td>
 													<!-- Button trigger modal -->
-													<button type="button" class="btn btn-sm p-0" data-toggle="modal" data-target="#kadam" style="font-weight:600">
-														<?= $order->id_order ?>
+													<button type="button" class="btn btn-sm p-0" data-toggle="modal" data-target="#detailorder<?= $order->id_customer ?>" style="font-weight:600">
+														<?= $num ?>
 													</button>
 
-													<!-- Modal -->
-													<div class="modal fade" id="kadam" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+													<!-- Modal detail order -->
+													<div class="modal fade" id="detailorder<?= $order->id_customer ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
 														<div class="modal-dialog" role="document">
 															<div class="modal-content">
 																<div class="modal-header">
@@ -60,7 +62,7 @@
 																			<tbody>
 
 																				<?php $numDO = 1 ?>
-																				<?php foreach ($detail_order as $detail_order) : ?>
+																				<?php foreach ($detail_orders as $detail_order) : ?>
 																					<?php if ($detail_order->id_order == $order->id_order) : ?>
 																						<tr>
 																							<td class="serial"><?= $numDO ?></td>
@@ -86,12 +88,12 @@
 												</td>
 												<td>
 													<!-- Button trigger modal -->
-													<button type="button" class="btn btn-sm p-0" data-toggle="modal" data-target="#idam" style="font-weight:600">
+													<button type="button" class="btn btn-sm p-0" data-toggle="modal" data-target="#detailcustomer<?= $order->id_customer ?>" style="font-weight:600">
 														<?= $order->nama_customer ?>
 													</button>
 
-													<!-- Modal -->
-													<div class="modal fade" id="idam" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+													<!-- Modal detail customer-->
+													<div class="modal fade" id="detailcustomer<?= $order->id_customer ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
 														<div class="modal-dialog" role="document">
 															<div class="modal-content">
 																<div class="modal-header">
@@ -140,25 +142,28 @@
 												</td>
 												<td><span><?= $order->tgl_order ?></span></td>
 												<td><span><?= $order->total_harga ?></span></td>
+												<td><span><?= $order->id_order ?></span></td>
 												<td class="avatar">
 													<!-- TF -->
 													<div class="round-img">
-														<button class="btn p-0" data-toggle="modal" data-target="#idama">
-															<img class="rounded-circle" src="<?= base_url() . 'upload/bukti_tf/' . $order->bukti_tf ?>" alt="">
+														<button class="btn p-0" data-toggle="modal" data-target="#buktitf<?= $order->id_order ?>">
+															<img class="rounded-circle" style="object-fit:cover; height:45px; width:45px" src="<?= base_url() . 'upload/bukti_tf/' . $order->bukti_tf ?>" alt="">
 														</button>
 													</div>
-													<!-- Modal -->
-													<div class="modal fade" id="idama" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+													<!-- Modal TF-->
+													<div class="modal fade" id="buktitf<?= $order->id_order ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
 														<div class="modal-dialog" role="document">
 															<div class="modal-content">
 																<div class="modal-header">
-																	<h5 class="modal-title" id="exampleModalLongTitle">Customer Detail</h5>
+																	<h5 class="modal-title" id="exampleModalLongTitle">Bukti Transfer</h5>
 																	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 																		<span aria-hidden="true">&times;</span>
 																	</button>
 																</div>
 																<div class="modal-body text-center">
+																	<!-- cek untuk menampilkan bbukti tf pada tabel dan modal -->
 																	<img src="<?= base_url() . 'upload/bukti_tf/' . $order->bukti_tf ?>" alt="<?= $order->bukti_tf ?>" class="img-thumbnail" style="min-width:100%">
+																	<!-- end -->
 																</div>
 																<div class="modal-footer">
 																	<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -169,31 +174,35 @@
 													<!-- end Modal -->
 												</td>
 												<td>
-													<div class="btn-group">
-														<button type="button" class="btn btn-sm dropdown-toggle <?php
-																												if ($order->status == 'Menunggu') {
-																													echo 'btn-warning';
-																												} elseif ($order->status == 'Dibayar') {
-																													echo 'btn-primary';
-																												} elseif ($order->status == 'Proses') {
-																													echo 'btn-success';
-																												} elseif ($order->status == 'Pengiriman') {
-																													echo 'btn-secondary';
-																												} else {
-																													echo '';
-																												}
-																												?>" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-															<?= $order->status ?>
-														</button>
-														<div class="dropdown-menu" style="margin-top:30px;font-size:14px;">
-															<a class="dropdown-item" href="<?= site_url() . '/admin/order/updateStatus?id=' . $order->id_order . '&status=Menunggu'; ?>">MENUNGGU</a>
-															<a class="dropdown-item" href="<?= site_url() . '/admin/order/updateStatus?id=' . $order->id_order . '&status=Dibayar' ?>">DIBAYAR</a>
-															<a class="dropdown-item" href="<?= site_url() . '/admin/order/updateStatus?id=' . $order->id_order . '&status=Proses' ?>">PROSES</a>
-															<a class="dropdown-item" href="<?= site_url() . '/admin/order/updateStatus?id=' . $order->id_order . '&status=Pengiriman' ?>">PENGIRIMAN</a>
-														</div>
+													<div class="btn-group btn-group-sm" role="group">
+														<button type="button" class="btn <?php if ($order->status == 'Menunggu') {
+																								echo 'btn-warning';
+																							} else {
+																								echo 'btn-light';
+																							}
+																							?>" title="Menunggu" onclick="window.location.href = '<?= site_url() . '/admin/order/updateStatus?id=' . $order->id_order . '&status=Menunggu'; ?>'"><i class="fas fa-clock"></i></button>
+														<button type="button" class="btn <?php if ($order->status == 'Dibayar') {
+																								echo 'btn-primary';
+																							} else {
+																								echo 'btn-light';
+																							}
+																							?>" title="Dibayar" onclick="window.location.href = '<?= site_url() . '/admin/order/updateStatus?id=' . $order->id_order . '&status=Dibayar' ?>'"><i class="fas fa-money-bill"></i></button>
+														<button type="button" class="btn <?php if ($order->status == 'Proses') {
+																								echo 'btn-success';
+																							} else {
+																								echo 'btn-light';
+																							}
+																							?>" title="Proses" onclick="window.location.href = '<?= site_url() . '/admin/order/updateStatus?id=' . $order->id_order . '&status=Proses' ?>'"><i class="fas fa-sync"></i></button>
+														<button type="button" class="btn <?php if ($order->status == 'Pengiriman') {
+																								echo 'btn-secondary';
+																							} else {
+																								echo 'btn-light';
+																							}
+																							?>" title="Pengiriman" onclick="window.location.href = '<?= site_url() . '/admin/order/updateStatus?id=' . $order->id_order . '&status=Pengiriman' ?>'"><i class="fas fa-truck"></i></button>
 													</div>
 												</td>
 											</tr>
+											<?php $num++ ?>
 										<?php endforeach ?>
 
 									</tbody>

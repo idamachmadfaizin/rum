@@ -21,9 +21,9 @@ class dashboard_model extends CI_Model
     $this->db->where('tgl_order', $dateNow);
     $this->db->where('status', $value);
     $this->db->from($this->_tOrders);
-    return $this->db->count_all();
+    return $this->db->count_all_results();
   }
-  
+
   public function totCustomer()
   {
     return $this->db->count_all('customer');
@@ -31,13 +31,14 @@ class dashboard_model extends CI_Model
 
   public function getOrders($dateNow)
   {
+    $this->db->select('orders.id_order, orders.id_customer, orders.tgl_order, orders.total_harga, orders.status, customer.email_customer, customer.nama_customer, customer.nomor_telp, customer.address, customer.jenis_kelamin, customer.tanggal_lahir, konfirmasi_pembayaran.id_konfirmasi, konfirmasi_pembayaran.tanggal_tf, konfirmasi_pembayaran.bukti_tf, konfirmasi_pembayaran.nama_bank, konfirmasi_pembayaran.bank_owner, konfirmasi_pembayaran.note');
     $this->db->from($this->_tOrders);
-    $this->db->join($this->_tCustomer, $this->_tCustomer.'.id_customer = '.$this->_tOrders.'.id_customer');
-    // $this->db->join($this->_tKP, $this->_tKP.'.id_order = '.$this->_tOrders.'.id_order', 'left');
+    $this->db->join($this->_tCustomer, $this->_tCustomer . '.id_customer = ' . $this->_tOrders . '.id_customer');
+    $this->db->join($this->_tKP, $this->_tKP . '.id_order = ' . $this->_tOrders . '.id_order', 'left');
     $this->db->where('tgl_order', $dateNow);
     return $this->db->get()->result();
   }
-  
+
   public function getDetailOrder($dateNow)
   {
     $order = $this->getOrders($dateNow);
@@ -46,7 +47,7 @@ class dashboard_model extends CI_Model
     }
 
     $this->db->from($this->_tDO);
-    $this->db->join($this->_tProduk, $this->_tProduk.'.id_produk = '.$this->_tDO.'.id_produk');
+    $this->db->join($this->_tProduk, $this->_tProduk . '.id_produk = ' . $this->_tDO . '.id_produk');
     $this->db->where_in('id_order', $arrIdOrder);
 
     return $this->db->get()->result();
@@ -61,7 +62,7 @@ class dashboard_model extends CI_Model
   public function updateStatus()
   {
     $get = $this->input->get();
-    
+
     $id = $get['id'];
     $this->status = $get['status'];
 

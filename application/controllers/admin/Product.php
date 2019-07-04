@@ -51,7 +51,7 @@ class Product extends CI_Controller
         } else {
             $data['singleProduk'] = "";
         }
-        // var_dump($this->db->get('produk')->result());
+        // var_dump($data);
         // die();
 
         $this->load->view('admin/product', $data);
@@ -63,8 +63,6 @@ class Product extends CI_Controller
         $kategori = $produk->getKategori();
         $data['kategoris'] = $kategori;
         $data['singleProduk'] = $produk->getSingleProduk($id_product);
-        // var_dump($data);
-        // die();
 
         $this->load->view('admin/update_product', $data);
     }
@@ -82,6 +80,8 @@ class Product extends CI_Controller
         // get old url image from db
         $url_images = $produk->getImageProduk($id);
 
+        // var_dump($url_images);
+        // die();
         if (empty($_FILES['files']['name'])) {
             //jika produk belum memiliki image
             if (!$url_images) {
@@ -94,15 +94,17 @@ class Product extends CI_Controller
                 $update = $produk->update($id, $url_images);
                 if ($update) {
                     $this->session->set_flashdata('sukses', 'Produk berhasil diupdate');
+                    $this->index();
                 }
             } else {
                 if ($produk->insert()) {
                     $this->session->set_flashdata('sukses', 'Produk berhasil disimpan');
+                    $this->index();
                 }
             }
         }
 
-        redirect("admin/product");
+        // redirect("admin/product");
     }
 
     public function disable($id)

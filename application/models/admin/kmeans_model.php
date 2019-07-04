@@ -11,15 +11,25 @@ class kmeans_model extends CI_Model
   public function rules()
   {
     return [
-      ['field' => 'nama_variable',
-       'label' => 'Nama variable',
-       'rules' => 'trim|required']
+      [
+        'field' => 'nama_variable',
+        'label' => 'Nama variable',
+        'rules' => 'trim|required'
+      ]
     ];
   }
   public function getAllKmeans()
   {
-    // $this->db->limit(3, 0);
     return $this->db->get($this->_table)->result();
+  }
+
+  public function getCluster()
+  {
+    $this->db->select('group_cluster, nama_produk');
+    $this->db->from('cluster');
+    $this->db->join('detail_kmeans', 'detail_kmeans.id_detail_kmeans = cluster.id_detail_kmeans');
+    $this->db->join('produk', 'produk.id_produk = detail_kmeans.id_produk');
+    return $this->db->get()->result();
   }
 
   public function getSingle($id)
@@ -48,7 +58,7 @@ class kmeans_model extends CI_Model
   public function deleteDetailKmeans($id_kmeans)
   {
     $this->db->truncate("cluster");
-    
+
     $this->db->where("id_kmeans", $id_kmeans);
     return $this->db->delete($this->_tDK);
   }
@@ -65,7 +75,7 @@ class kmeans_model extends CI_Model
     $this->db->select('id_kmeans, id_produk, nilai');
     return $this->db->get($this->_tDK);
   }
-  
+
   public function countKmeans()
   {
     return $this->db->count_all($this->_table);
@@ -77,26 +87,35 @@ class kmeans_model extends CI_Model
 
     $object = new stdClass();
     $object->nilai = $post['text'];
-    
+
     $id = $post['id'];
 
     return $this->db->update($this->_tDK, $object, array("id_detail_kmeans" => $id));
   }
 
   // update detail kmeans after added kmeans
-  public function detailKmeans()
+  public function detailKmeans($limit, $offset)
   {
     // $this->db->select($this->_table.'.nama_variable, '.$this->_tProduk.'.nama_produk, '.$this->_tDK.'.nilai');
+    $this->db->limit($limit, $offset);
     $this->db->from($this->_tDK);
-    $this->db->join($this->_tProduk, $this->_tProduk.'.id_produk = '.$this->_tDK.'.id_produk');
-    $this->db->join($this->_table, $this->_table.'.id_kmeans = '.$this->_tDK.'.id_kmeans');
-    $this->db->order_by($this->_tDK.'.id_detail_kmeans');
-    
-    // $this->db->limit(6, 0);
+    $this->db->join($this->_tProduk, $this->_tProduk . '.id_produk = ' . $this->_tDK . '.id_produk');
+    $this->db->join($this->_table, $this->_table . '.id_kmeans = ' . $this->_tDK . '.id_kmeans');
+    $this->db->order_by($this->_tDK . '.id_detail_kmeans');
 
     return $this->db->get()->result();
   }
-  
+
+  public function countDetailKmeans()
+  {
+    $this->db->from($this->_tDK);
+    $this->db->join($this->_tProduk, $this->_tProduk . '.id_produk = ' . $this->_tDK . '.id_produk');
+    $this->db->join($this->_table, $this->_table . '.id_kmeans = ' . $this->_tDK . '.id_kmeans');
+    $this->db->order_by($this->_tDK . '.id_detail_kmeans');
+
+    return $this->db->count_all_results();
+  }
+
   public function reAllocate($data)
   {
     $this->db->query('alter table cluster drop foreign key cluster_ibfk_1');

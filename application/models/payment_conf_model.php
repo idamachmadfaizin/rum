@@ -72,7 +72,6 @@ class payment_conf_model extends CI_Model
     $this->bank_owner = $post['bankowner'];
     $this->note = $post['note'];
 
-    print_r($this);
     $this->db->insert($this->_table, $this);
   }
 
@@ -88,7 +87,7 @@ class payment_conf_model extends CI_Model
     $this->note = $post['note'];
 
     $id_order = $post['noinvoice'];
-    
+
     $this->db->where('id_order', $id_order);
     $this->db->update($this->_table, $this);
   }
@@ -96,7 +95,7 @@ class payment_conf_model extends CI_Model
   public function getImagePath()
   {
     $post = $this->input->post();
-    
+
     $id_order = $post['noinvoice'];
 
     $this->db->where('id_order', $id_order);
@@ -109,7 +108,7 @@ class payment_conf_model extends CI_Model
 
     $config['upload_path']    = './upload/bukti_tf/';
     $config['allowed_types']  = 'jpg|png';
-    $config['file_name']      = $post['noinvoice'].'-'.$this->tanggal_tf;
+    $config['file_name']      = $post['noinvoice'] . '-' . $this->tanggal_tf;
     $config['overwrite']      = true;
     $config['max_size']       = 1024; // 1MB
     // $config['max_width']            = 1024;
@@ -123,5 +122,4 @@ class payment_conf_model extends CI_Model
       echo $this->upload->display_errors();
     }
   }
-
 }

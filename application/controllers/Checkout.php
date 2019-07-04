@@ -80,7 +80,7 @@ class Checkout extends CI_Controller
 	}
 
 
-	// Group Fun K-means
+	// Group Fun K-means 
 	public function insDetailKmeans($id_produks)
 	{
 		// sorted checkout_model
@@ -123,7 +123,7 @@ class Checkout extends CI_Controller
 		}
 
 		//mencari lokasi customer berada dicluster berapa?
-		for ($i = 1; $i < count($clusterProvinsi); $i++) {
+		for ($i = 0; $i < count($clusterProvinsi); $i++) {
 			$keySearch = array_search($provinsiCust->provinsi, $clusterProvinsi[$i]);
 			if ($keySearch) {
 				$dk_lokasi = $i + 1; //mendapatkan hasil cluster lokasi provinsi

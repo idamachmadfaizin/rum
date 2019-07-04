@@ -3,15 +3,19 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Login extends CI_Controller
 {
-    public function __constructor()
+    public function __construct()
     {
         parent::__construct();
 
-        $this->load->model('admin/adminLogin_model');
+        $this->load->model('admin/loginAdmin_model');
+        // $this->load->model('login_model');
     }
 
     public function index()
     {
+        if ($this->session->id_admin) {
+            redirect('admin/dashboard');
+        }
         $this->load->view('admin/login');
     }
 
@@ -28,14 +32,16 @@ class Login extends CI_Controller
                 'password_admin' => md5($password)
             );
 
-            $admin = $this->adminLogin_model->login($where)->row_array();
-            die(var_dump($admin));
+            $admin = $this->loginAdmin_model->login($where)->row_array();
+
             if ($admin) {
+                $_SESSION['id_admin'] = $admin['id_admin'];
                 redirect('admin/dashboard');
             } else {
                 $this->session->set_flashdata('error_session', 'Email atau password salah!');
-                redirect('admin/login');
+                $this->index();
             }
         }
+        $this->index();
     }
 }

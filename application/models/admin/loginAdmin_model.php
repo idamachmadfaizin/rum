@@ -1,6 +1,6 @@
 <?php
 
-class adminLogin_model extends CI_Model
+class loginAdmin_model extends CI_Model
 {
     public function login($where)
     {

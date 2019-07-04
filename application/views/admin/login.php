@@ -35,16 +35,32 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 </head>
 
-<body class="bg-dark">
+<body class="">
     <div class="sufee-login d-flex align-content-center flex-wrap">
         <div class="container">
             <div class="login-content">
                 <div class="login-logo">
                     <a href="index.html">
-                        <img class="align-content" src="images/logo.png" alt="">
+                        <img class="align-content" src="<?= base_url('assets\img\logos\logo_Rumseafood.png') ?>" alt="">
                     </a>
                 </div>
                 <div class="login-form">
+                    <?php if (validation_errors()) : ?>
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <?= validation_errors(); ?>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    <?php endif; ?>
+                    <?php if ($this->session->flashdata('error_session')) : ?>
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <?= $this->session->flashdata('error_session'); ?>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    <?php endif; ?>
                     <?= form_open('admin/login/submit') ?>
                     <div class="form-group">
                         <label>Email address</label>

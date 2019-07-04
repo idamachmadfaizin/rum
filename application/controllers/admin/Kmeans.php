@@ -1,28 +1,51 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Kmeans extends CI_Controller 
+class Kmeans extends CI_Controller
 {
-  public function __construct() {
-    parent:: __construct();
+  public function __construct()
+  {
+    parent::__construct();
 
     $this->load->model('admin/kmeans_model');
+    $this->load->library('pagination');
     $this->load->dbforge();
   }
 
-  public function index($id = 0)
+  public function index($offset = 0)
   {
     $kmeans = $this->kmeans_model;
 
-    $data['kmeans'] = $kmeans->getAllKmeans();
+    $config['base_url'] = site_url('admin/kmeans/index/');
+    $config['total_rows'] = $kmeans->countDetailKmeans();
+    $config['per_page'] = 20;
 
-    if ($id != 0) {
-      $data['singleNama'] = $kmeans->getSingle($id);
-    }else {
-      $data['singleNama'] = "";
-    }
+    // tag pagination
+    $config['full_tag_open'] = '<nav aria-label="Page navigation kategori" class="d-flex justify-content-end pr-5"><ul class="pagination pagination-sm">';
+    $config['full_tag_close'] = '</ul></nav>';
 
-    $data['dKmeans'] = $kmeans->detailKmeans();
+    $config['num_tag_open'] = '<li class="page-item">';
+    $config['num_tag_close'] = '</li>';
+
+    $config['cur_tag_open'] = '<li class="page-item active"><a class="page-link">';
+    $config['cur_tag_close'] = '</a></li>';
+
+    $config['next_link'] = '<li class="page-item">Next</li>';
+    $config['prev_link'] = '<li class="page-item">Previous</li>';
+
+    $config['attributes'] = array('class' => 'page-link');
+
+    $this->pagination->initialize($config);
+    // end tag pagination
+
+    $limit = $config['per_page'];
+
+    $data['clusters'] = $kmeans->getCluster();
+    $data['dKmeans'] = $kmeans->detailKmeans($limit, $offset);
+    $countKmeans = $kmeans->countKmeans();
+    $data['modulus'] = $countKmeans;
+    $data['rowspan'] = $countKmeans;
+    $data['offset'] = $offset;
 
     $this->load->view('admin/kmeans', $data);
   }
@@ -50,7 +73,7 @@ class Kmeans extends CI_Controller
     }
 
     // $detailKmeans = $kmeans->getAllDetailKmeans();
-    
+
 
     redirect('admin/kmeans');
   }
@@ -71,9 +94,9 @@ class Kmeans extends CI_Controller
     $x = 0;
 
     // #memecah data lama sebanyak jumlah kmeans
-    for ($i=0; $i < $numDK; $i= $i+2) {
+    for ($i = 0; $i < $numDK; $i = $i + 2) {
       // $slice = array_slice($oldDK, $i, $numKmean-1);
-      $slice = array_chunk($oldDK, $numKmean-1);
+      $slice = array_chunk($oldDK, $numKmean - 1);
       // print_r($slice);
       array_push($raws, $slice);
     }
@@ -81,7 +104,7 @@ class Kmeans extends CI_Controller
     // #push $slice[] to $data[] ++ null row
     foreach ($slice as $slice) {
       $id_produk;
-      for ($i=0; $i < count($slice); $i++) { 
+      for ($i = 0; $i < count($slice); $i++) {
         $id_produk = $slice[$i]['id_produk'];
         array_push($data, $slice[$i]);
       }
@@ -91,7 +114,6 @@ class Kmeans extends CI_Controller
         $arr1['nilai']     = null;
         array_push($data, $arr1);
       }
-
     }
 
     // print_r($data);
@@ -126,7 +148,7 @@ class Kmeans extends CI_Controller
   public function detailKmeans()
   {
     $kmeans = $this->kmeans_model;
-    $output = ''; 
+    $output = '';
     $output .= '  
       <div class="table-stats order-table ov-h">
         <table class="table ">
@@ -149,14 +171,14 @@ class Kmeans extends CI_Controller
     $rowspan = $kmeans->countKmeans();
     foreach ($dKmeans as $dKmeans) {
       $output .= '<tr>';
-      if($modulus%$rowspan == 0){
+      if ($modulus % $rowspan == 0) {
         $num++;
-        $output .= '<td rowspan="'.$rowspan.'" class="serial">'.$num.'</td>';
+        $output .= '<td rowspan="' . $rowspan . '" class="serial">' . $num . '</td>';
       };
       $output .= '
-          <td class="nama_variable">'.$dKmeans->nama_variable.'</td>
-          <td class="nama_produk">'.$dKmeans->nama_produk.'</td>
-          <td class="nilai" data-id1="'.$dKmeans->id_detail_kmeans.'" contenteditable>'.$dKmeans->nilai.'</td>
+          <td class="nama_variable">' . $dKmeans->nama_variable . '</td>
+          <td class="nama_produk">' . $dKmeans->nama_produk . '</td>
+          <td class="nilai" data-id1="' . $dKmeans->id_detail_kmeans . '" contenteditable>' . $dKmeans->nilai . '</td>
         </tr>
       ';
       $modulus++;

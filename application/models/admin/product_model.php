@@ -36,13 +36,12 @@ class product_model extends CI_Model
     public function selectAll($limit, $offset)
     {
         // $this->db->select('distinct produk.id_produk, produk.id_kategori, produk.nama_produk, produk.harga_produk, produk.deskripsi_produk, produk.url_produk, produk.produk_created_at, produk.produk_updated_at, image.id_image, image.id_produk, image.url_image, kategori.id_kategori, kategori.nama_kategori, kategori.url_image_kategori, kategori.status_kategori');
+        $this->db->select('produk.id_produk, produk.id_kategori, produk.nama_produk, produk.harga_produk, produk.deskripsi_produk, produk.url_produk, produk.status_produk, image.id_image, image.url_image, kategori.nama_kategori, kategori.url_image_kategori');
         $this->db->limit($limit, $offset);
         $this->db->from($this->_table);
-        $this->db->join('image', 'image.id_produk = ' . $this->_table . '.id_produk');
+        $this->db->join('image', 'image.id_produk = ' . $this->_table . '.id_produk', 'left');
         $this->db->join('kategori', 'kategori.id_kategori = ' . $this->_table . '.id_kategori');
         $this->db->group_by('produk.id_produk');
-        // echo $this->db->get_compiled_select();
-        // die();
         return $this->db->get()->result();
     }
 
@@ -83,6 +82,7 @@ class product_model extends CI_Model
 
         //insert image to table image
         $this->insertToImage($id_produk, $this->nama_produk);
+        return true;
     }
 
     public function update($id_produk, $url_images)
@@ -96,19 +96,23 @@ class product_model extends CI_Model
         $this->url_produk = str_replace(" ", "-", $post['nama_produk']);
 
         if (isset($url_images)) {
-            foreach ($url_images as $url_image) {
-                unlink(base_url('assets/img/produk/' . $url_image->url_image));
+            if ($_FILES['files']['name']) {
+                foreach ($url_images as $url_image) {
+                    unlink(base_url('assets/img/produk/' . $url_image->url_image));
+                }
             }
         }
 
         $productNames = $this->_uploadImage($this->nama_produk);
         $this->db->delete('image', array('id_produk' => $id_produk));
-        foreach ($productNames as $productName) {
-            $data = new stdClass();
-            $data->id_produk = $id_produk;
-            $data->url_image = $productName;
-            $this->db->insert('image', $data);
-            // $this->db->update('image', $data, array('id_produk' => $id_produk));
+        if ($productNames) {
+            foreach ($productNames as $productName) {
+                $data = new stdClass();
+                $data->id_produk = $id_produk;
+                $data->url_image = $productName;
+                $this->db->insert('image', $data);
+                // $this->db->update('image', $data, array('id_produk' => $id_produk));
+            }
         }
 
         // $this->url_image = $this->nama_produk;
@@ -179,6 +183,8 @@ class product_model extends CI_Model
                 }
             }
         } //end for
-        return $filenames;
+        if (isset($filenames)) {
+            return $filenames;
+        }
     }
 }

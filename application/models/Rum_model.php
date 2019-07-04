@@ -7,6 +7,10 @@ class rum_model extends CI_Model
         return $this->db->get($table_name);
     }
 
+    public function getKategori()
+    {
+        return $this->db->get_where('kategori', ['status_kategori' => 0]);
+    }
     public function getDetailKmeans()
     {
         $this->db->select('id_kmeans, id_produk, nilai');
