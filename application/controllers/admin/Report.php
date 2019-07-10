@@ -19,7 +19,7 @@ class Report extends CI_Controller
     $config['per_page'] = 10;
 
     $datas = $report->getTableContent($config['per_page'], $offset);
-    $config['total_rows'] = count($datas);
+    $config['total_rows'] = $report->getTotalRow();
 
     // tag pagination
     $config['full_tag_open'] = '<nav aria-label="Page navigation customer" class="d-flex justify-content-end pr-5"><ul class="pagination pagination-sm">';
@@ -39,12 +39,21 @@ class Report extends CI_Controller
     $this->pagination->initialize($config);
     // end tag pagination
 
-    $data['report'] = $datas;
+    $data['reports'] = $datas;
     $this->load->view('admin/report', $data);
   }
 
-  public function pdf($data)
+  public function pdf($start = "", $end = "")
   {
-    var_dump($data);
+    $report = $this->report_model;
+    $json = $report->getTableContentPdf();
+
+    // $json = $this->input->post('data');
+    $data['datas'] = $json;
+
+    $mpdf = new \Mpdf\Mpdf();
+    $view = $this->load->view('admin/mpdfReport', $data, TRUE);
+    $mpdf->WriteHTML($view);
+    $mpdf->Output();
   }
 }

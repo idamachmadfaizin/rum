@@ -120,14 +120,15 @@ class Register extends CI_Controller
 
     // konfigurasi pengiriman
     $this->email->set_newline("\r\n");
+    $this->email->set_mailtype('html');
     $this->email->from("doublebunny76@gmail.com", "RUM Seafood");
     $this->email->to($email); //email customer
     $this->email->subject("Verification account");
-    $this->email->message(
-      "Dear User,<br>
-      Please click on below URL or paste into your browser to verify your Email Address<br><br><a href='" . site_url("register/verifyEmail/$verificationText") . "'>Verify Email Address</a>"
-        . "<br><br>Thanks<br>RUM Seafood"
-    );
+    $mailMessage = "<html><head><meta name='viewport' content='width=device-width, initial-scale=1.0'><meta http-equiv='Content-Type' content='text/html; charset=UTF-8'></head><body>";
+    $mailMessage .= "Dear User,<br>
+    Please click on below URL or paste into your browser to verify your Email Address<br><br><a href='" . site_url("register/verifyEmail/$verificationText") . "'style='box-sizing: border-box; border-radius: 3px; box-shadow: 0 2px 3px rgba(0, 0, 0, 0.16); color: #FFF; display: inline-block; text-decoration: none; -webkit-text-size-adjust: none; background-color: #3490DC; border-top: 10px solid #3490DC; border-right: 18px solid #3490DC; border-bottom: 10px solid #3490DC; border-left: 18px solid #3490DC;'>Verify Email Address</a>" . "<br><br>Thanks<br>RUM Seafoody";
+    $mailMessage .= "</body></html>";
+    $this->email->message($mailMessage);
 
     if ($this->email->send()) {
       $messageEmail = "Request Verification Successfully, please check your email for a verification link. If you did not receive the email, <a href='" . site_url("register/resend/" . $id) . "'>click here to request another</a>";

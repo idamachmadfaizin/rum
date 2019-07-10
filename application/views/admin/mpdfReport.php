@@ -5,6 +5,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td,
+        th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        /* tr:nth-child(even) {
+            background-color: #dddddd;
+        } */
+    </style>
+
     <title>Report</title>
 </head>
 
@@ -21,22 +41,20 @@
             <th>Total</th>
         </thead>
         <tbody>
-        <tbody>
             <?php $number = 1; ?>
-            <?php foreach ($report as $report) : ?>
+            <?php foreach ($datas as $data) : ?>
                 <tr>
                     <td class="serial"><?= $number ?></td>
-                    <td><span><?= $report->id_order ?></span></td>
-                    <td><span><?= $report->tgl_order ?></span></td>
-                    <td><span><?= $report->nama_customer ?></span></td>
-                    <td><span><?= $report->nama_produk ?></span></td>
-                    <td><span><?= $report->jumlah ?></span></td>
-                    <td class="count"><span><?= $report->harga_satuan ?></span></td>
-                    <td class="count"><span><?= $report->total_harga ?></span></td>
+                    <td><span><?= $data->id_order ?></span></td>
+                    <td><span><?= $data->tgl_order ?></span></td>
+                    <td><span><?= $data->nama_customer ?></span></td>
+                    <td><span><?= $data->nama_produk ?></span></td>
+                    <td><span><?= $data->jumlah ?></span></td>
+                    <td class="count"><span><?= $data->harga_satuan ?></span></td>
+                    <td class="count"><span><?= $data->total_harga ?></span></td>
                 </tr>
                 <?php $number++; ?>
             <?php endforeach; ?>
-        </tbody>
         </tbody>
     </table>
 </body>

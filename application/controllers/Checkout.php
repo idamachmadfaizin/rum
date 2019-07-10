@@ -172,15 +172,15 @@ class Checkout extends CI_Controller
 
 		//convert data pendidikan customer to angka [1-5]
 		$pendidikan = $pendidikan->id_pendidikan; //get object
-		if ($pendidikan == 9 && $pendidikan == 10) {
+		if ($pendidikan == 9 || $pendidikan == 10) {
 			$dk_pendidikan = 1;
-		} elseif ($pendidikan == 7 && $pendidikan == 8) {
+		} elseif ($pendidikan == 7 || $pendidikan == 8) {
 			$dk_pendidikan = 2;
-		} elseif ($pendidikan == 5 && $pendidikan == 6) {
+		} elseif ($pendidikan == 5 || $pendidikan == 6) {
 			$dk_pendidikan = 3;
-		} elseif ($pendidikan == 3 && $pendidikan == 4) {
+		} elseif ($pendidikan == 3 || $pendidikan == 4) {
 			$dk_pendidikan = 4;
-		} elseif ($pendidikan == 1 && $pendidikan == 2) {
+		} elseif ($pendidikan == 1 || $pendidikan == 2) {
 			$dk_pendidikan = 5;
 		}
 
