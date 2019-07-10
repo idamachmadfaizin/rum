@@ -96,11 +96,11 @@ class Checkout extends CI_Controller
 
 		//convert data usia customer to angka [1-5]
 		if ($age < 18) {
-			$dk_usia = 1;
-		} elseif ($age < 34) {
-			$dk_usia = 2;
-		} elseif ($age < 50) {
 			$dk_usia = 3;
+		} elseif ($age < 34) {
+			$dk_usia = 1;
+		} elseif ($age < 50) {
+			$dk_usia = 2;
 		} elseif ($age < 66) {
 			$dk_usia = 4;
 		} else {
@@ -108,19 +108,45 @@ class Checkout extends CI_Controller
 		}
 
 		// convert data provinsi customer to angka [1-5]
-		$rawProvinsi = $checkout->getAllProvinsi(); //get all provinsi obj_result()
-		$allProvinsi = array(); //declare all provinsi
-		foreach ($rawProvinsi as $rawPro) { //convert multy object to single array
-			$allProvinsi[] = $rawPro->id_provinsi;
-		}
-		$allProvinsi = array_chunk($allProvinsi, 7); //split array berisi 7 data
-		//reloop array chunk start key 1
-		foreach ($allProvinsi as $key => $rows) {
-			$count = 1;
-			foreach ($rows as $row) {
-				$clusterProvinsi[$key][$count++] = $row;
-			}
-		}
+		$count = 1;
+		$clusterProvinsi[0][$count++] = 31;
+		$clusterProvinsi[0][$count++] = 32;
+		$clusterProvinsi[0][$count++] = 33;
+		$clusterProvinsi[0][$count++] = 34;
+		$clusterProvinsi[0][$count++] = 35;
+		$clusterProvinsi[0][$count++] = 36;
+		$clusterProvinsi[0][$count++] = 51;
+		$clusterProvinsi[0][$count++] = 52;
+		$clusterProvinsi[0][$count++] = 53;
+		$count = 1;
+		$clusterProvinsi[1][$count++] = 61;
+		$clusterProvinsi[1][$count++] = 62;
+		$clusterProvinsi[1][$count++] = 63;
+		$clusterProvinsi[1][$count++] = 64;
+		$clusterProvinsi[1][$count++] = 65;
+		$count = 1;
+		$clusterProvinsi[2][$count++] = 11;
+		$clusterProvinsi[2][$count++] = 12;
+		$clusterProvinsi[2][$count++] = 13;
+		$clusterProvinsi[2][$count++] = 14;
+		$clusterProvinsi[2][$count++] = 15;
+		$clusterProvinsi[2][$count++] = 16;
+		$clusterProvinsi[2][$count++] = 17;
+		$clusterProvinsi[2][$count++] = 18;
+		$clusterProvinsi[2][$count++] = 19;
+		$clusterProvinsi[2][$count++] = 21;
+		$count = 1;
+		$clusterProvinsi[3][$count++] = 71;
+		$clusterProvinsi[3][$count++] = 72;
+		$clusterProvinsi[3][$count++] = 73;
+		$clusterProvinsi[3][$count++] = 74;
+		$clusterProvinsi[3][$count++] = 75;
+		$clusterProvinsi[3][$count++] = 76;
+		$count = 1;
+		$clusterProvinsi[4][$count++] = 81;
+		$clusterProvinsi[4][$count++] = 82;
+		$clusterProvinsi[4][$count++] = 91;
+		$clusterProvinsi[4][$count++] = 94;
 
 		//mencari lokasi customer berada dicluster berapa?
 		for ($i = 0; $i < count($clusterProvinsi); $i++) {
@@ -132,33 +158,29 @@ class Checkout extends CI_Controller
 
 		//convert data agama customer to angka [1-5]
 		$agama = $agama->id_agama;
-		if ($agama == 1) {
+		if ($agama == 2) {
 			$dk_agama = 1;
-		} else if ($agama == 2) {
+		} else if ($agama == 1) {
 			$dk_agama = 2;
 		} else if ($agama == 3) {
 			$dk_agama = 3;
-		} else if ($agama == 4) {
-			$dk_agama = 4;
-		} else if ($agama == 5) {
-			$dk_agama = 5;
 		} else if ($agama == 6) {
-			$dk_agama = 6;
-		} else if ($agama == 7) {
-			$dk_agama = 7;
+			$dk_agama = 4;
+		} else {
+			$dk_agama = 5;
 		}
 
 		//convert data pendidikan customer to angka [1-5]
 		$pendidikan = $pendidikan->id_pendidikan; //get object
-		if ($pendidikan <= 2) {
+		if ($pendidikan == 9 && $pendidikan == 10) {
 			$dk_pendidikan = 1;
-		} elseif ($pendidikan <= 4) {
+		} elseif ($pendidikan == 7 && $pendidikan == 8) {
 			$dk_pendidikan = 2;
-		} elseif ($pendidikan <= 6) {
+		} elseif ($pendidikan == 5 && $pendidikan == 6) {
 			$dk_pendidikan = 3;
-		} elseif ($pendidikan <= 8) {
+		} elseif ($pendidikan == 3 && $pendidikan == 4) {
 			$dk_pendidikan = 4;
-		} elseif ($pendidikan <= 10) {
+		} elseif ($pendidikan == 1 && $pendidikan == 2) {
 			$dk_pendidikan = 5;
 		}
 
