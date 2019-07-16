@@ -13,7 +13,7 @@ class profile_model extends CI_Model
   public $jenis_kelamin;
   public $tanggal_lahir;
   public $id_pendidikan;
-  public $id_agama;
+  public $pendapatan;
   public $url_img_customer;
 
   public function rules()
@@ -74,8 +74,8 @@ class profile_model extends CI_Model
       ],
 
       [
-        'field' => 'agama',
-        'label' => 'Agama',
+        'field' => 'pendapatan',
+        'label' => 'Pendapatan',
         'rules' => 'trim|required'
       ]
     ];
@@ -91,11 +91,11 @@ class profile_model extends CI_Model
     return $this->db->get($this->_table)->row();
   }
 
-  public function masterAgama()
-  {
-    $this->db->order_by('nama_agama', 'asc');
-    return $this->db->get('agama')->result();
-  }
+  // public function masterAgama()
+  // {
+  //   $this->db->order_by('nama_agama', 'asc');
+  //   return $this->db->get('agama')->result();
+  // }
 
   public function masterPendidikan()
   {
@@ -134,7 +134,7 @@ class profile_model extends CI_Model
     $this->jenis_kelamin = $post['jenis_kelamin'];
     $this->tanggal_lahir = $post['tanggal_lahir'];
     $this->id_pendidikan = $post['pendidikan'];
-    $this->id_agama = $post['agama'];
+    $this->pendapatan = $post['pendapatan'];
     $this->url_img_customer = $this->_uploadImage();
 
     $this->db->update($this->_table, $this, array('id_customer' => $this->session->id_customer));

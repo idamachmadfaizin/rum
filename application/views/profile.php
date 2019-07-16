@@ -59,8 +59,8 @@
             <div class="d-flex align-items-center justify-content-end text-secondary d-block-h-45">Nama Lengkap</div>
             <div class="d-flex align-items-center justify-content-end text-secondary d-block-h-45">Jenis Kelamin</div>
             <div class="d-flex align-items-center justify-content-end text-secondary d-block-h-45">Tanggal Lahir</div>
-            <div class="d-flex align-items-center justify-content-end text-secondary d-block-h-45">Agama</div>
             <div class="d-flex align-items-center justify-content-end text-secondary d-block-h-45">Pendidikan</div>
+            <div class="d-flex align-items-center justify-content-end text-secondary d-block-h-45">Pendapatan</div>
             <div class="d-flex align-items-center justify-content-end text-secondary d-block-h-45">Address</div>
           </div>
 
@@ -88,19 +88,22 @@
               <input type="date" name="tanggal_lahir" value="<?= $profile->tanggal_lahir; ?>" id="tanggal_lahir" class="form-control form-control-sm">
             </div>
             <div class="d-flex align-items-center d-block-h-45">
-              <select name="agama" id="agama" class="form-control form-control-sm">
-                <option value="">Agama</option>
-                <?php foreach ($agamas as $agama) : ?>
-                  <option value="<?= $agama->id_agama ?>" <?php if ($profile->id_agama == $agama->id_agama) echo "selected"; ?>><?= $agama->nama_agama ?></option>
-                <?php endforeach ?>
-              </select>
-            </div>
-            <div class="d-flex align-items-center d-block-h-45">
               <select name="pendidikan" id="pendidikan" class="form-control form-control-sm">
                 <option value="">Pendidikan</option>
                 <?php foreach ($pendidikans as $pendidikan) : ?>
                   <option value="<?= $pendidikan->id_pendidikan ?>" <?php if ($profile->id_pendidikan == $pendidikan->id_pendidikan) echo "selected"; ?>><?= $pendidikan->nama_pendidikan ?></option>
                 <?php endforeach ?>
+              </select>
+            </div>
+            <div class="d-flex align-items-center d-block-h-45">
+              <select name="pendapatan" id="pendapatan" class="form-control form-control-sm">
+                <option value="">Pendapatan</option>
+                <option value="1" <?php if ($profile->pendapatan == 1) echo "selected"; ?>>
+                  < Rp 2.000.000</option> <option value="2" <?php if ($profile->pendapatan == 2) echo "selected"; ?>>Rp 2.000.000 - Rp 4.999.999
+                </option>
+                <option value="3" <?php if ($profile->pendapatan == 3) echo "selected"; ?>>Rp 5.000.000 - Rp 9.999.999</option>
+                <option value="4" <?php if ($profile->pendapatan == 4) echo "selected"; ?>>Rp 10.000.000 - Rp 19.999.999</option>
+                <option value="5" <?php if ($profile->pendapatan == 5) echo "selected"; ?>>> Rp 20.000.000</option>
               </select>
             </div>
             <div class="d-flex align-items-center d-block-h-45">

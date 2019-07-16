@@ -77,6 +77,7 @@ class Register extends CI_Controller
 
         // konfigurasi pengiriman
         $this->email->set_newline("\r\n");
+        $this->email->set_mailtype('html');
         $this->email->from("doublebunny76@gmail.com", "RUM Seafood");
         $this->email->to($customer['email_customer']); //email customer
         $this->email->subject("Verification account");

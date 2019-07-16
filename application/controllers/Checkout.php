@@ -90,9 +90,9 @@ class Checkout extends CI_Controller
 		// Data customer for clustering
 		$birth = $checkout->getBirthDayCust(); //get birth day customer from DB
 		$age = $this->getAge($birth->tanggal_lahir); //get umur customer using function
-		$provinsiCust = $checkout->getProvinsiCust(); //get provinsi customer
+		$jenisKelamin = $checkout->getJenisKelamin(); //get provinsi customer
 		$pendidikan = $checkout->getPendidikan(); //get pendidikan customer
-		$agama = $checkout->getAgama(); //get agama customer
+		$pendapatan = $checkout->getPendapatan(); //get agama customer
 
 		//convert data usia customer to angka [1-5]
 		if ($age < 18) {
@@ -108,45 +108,22 @@ class Checkout extends CI_Controller
 		}
 
 		// convert data provinsi customer to angka [1-5]
-		$count = 1;
-		$clusterProvinsi[0][$count++] = 31;
-		$clusterProvinsi[0][$count++] = 32;
-		$clusterProvinsi[0][$count++] = 33;
-		$clusterProvinsi[0][$count++] = 34;
-		$clusterProvinsi[0][$count++] = 35;
-		$clusterProvinsi[0][$count++] = 36;
-		$clusterProvinsi[0][$count++] = 51;
-		$clusterProvinsi[0][$count++] = 52;
-		$clusterProvinsi[0][$count++] = 53;
-		$count = 1;
-		$clusterProvinsi[1][$count++] = 61;
-		$clusterProvinsi[1][$count++] = 62;
-		$clusterProvinsi[1][$count++] = 63;
-		$clusterProvinsi[1][$count++] = 64;
-		$clusterProvinsi[1][$count++] = 65;
-		$count = 1;
-		$clusterProvinsi[2][$count++] = 11;
-		$clusterProvinsi[2][$count++] = 12;
-		$clusterProvinsi[2][$count++] = 13;
-		$clusterProvinsi[2][$count++] = 14;
-		$clusterProvinsi[2][$count++] = 15;
-		$clusterProvinsi[2][$count++] = 16;
-		$clusterProvinsi[2][$count++] = 17;
-		$clusterProvinsi[2][$count++] = 18;
-		$clusterProvinsi[2][$count++] = 19;
-		$clusterProvinsi[2][$count++] = 21;
-		$count = 1;
-		$clusterProvinsi[3][$count++] = 71;
-		$clusterProvinsi[3][$count++] = 72;
-		$clusterProvinsi[3][$count++] = 73;
-		$clusterProvinsi[3][$count++] = 74;
-		$clusterProvinsi[3][$count++] = 75;
-		$clusterProvinsi[3][$count++] = 76;
-		$count = 1;
-		$clusterProvinsi[4][$count++] = 81;
-		$clusterProvinsi[4][$count++] = 82;
-		$clusterProvinsi[4][$count++] = 91;
-		$clusterProvinsi[4][$count++] = 94;
+		$provinces = $checkout->getAllProvinsi();
+		foreach ($provinces as $province) {
+			if ($province->id_pulau == 1 || $province->id_pulau == 3) {
+				$clusterProvinsi[0][] = $province->id_provinsi;
+			} elseif ($province->id_pulau == 2) {
+				$clusterProvinsi[1][] = $province->id_provinsi;
+			} elseif ($province->id_pulau == 6) {
+				$clusterProvinsi[2][] = $province->id_provinsi;
+			} elseif ($province->id_pulau == 5) {
+				$clusterProvinsi[3][] = $province->id_provinsi;
+			} elseif ($province->id_pulau == 4 || $province->id_pulau == 7) {
+				$clusterProvinsi[4][] = $province->id_provinsi;
+			}
+		}
+		//sort key in array
+		ksort($clusterProvinsi);
 
 		//mencari lokasi customer berada dicluster berapa?
 		for ($i = 0; $i < count($clusterProvinsi); $i++) {

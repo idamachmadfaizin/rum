@@ -3,7 +3,7 @@
 class checkout_model extends CI_Model
 {
   private $_table = "orders";
-  
+
   public $id_customer;
   public $tgl_order;
   public $total_harga;
@@ -28,18 +28,18 @@ class checkout_model extends CI_Model
     $this->db->where('id_customer', $id);
     $this->db->delete('cart');
   }
-  
+
   // group fun Kmeans
   public function getKmeans()
   {
     return $this->db->get("k_means")->result();
   }
-  
+
   public function insDetailKmeans($data)
   {
     return $this->db->insert_batch("detail_kmeans", $data);
   }
-  
+
   public function getBirthDayCust()
   {
     $id = $this->session->id_customer;
@@ -48,14 +48,14 @@ class checkout_model extends CI_Model
     return $this->db->get("customer")->row_object();
   }
 
-  public function getProvinsiCust() //get provinsi customer
+  public function getJenisKelamin() //get provinsi customer
   {
     $id = $this->session->id_customer;
-    $this->db->select("provinsi");
+    $this->db->select("jenis_kelamin");
     $this->db->where('id_customer', $id);
     return $this->db->get("customer")->row_object();
   }
-  
+
   public function getPendidikan() //get pendidikan customer
   {
     $id = $this->session->id_customer;
@@ -63,17 +63,18 @@ class checkout_model extends CI_Model
     $this->db->where('id_customer', $id);
     return $this->db->get("customer")->row_object();
   }
-  
-  public function getAgama() //get agama customer
+
+  public function getPendapatan() //get agama customer
   {
     $id = $this->session->id_customer;
-    $this->db->select("id_agama");
+    $this->db->select("pendapatan");
     $this->db->where('id_customer', $id);
     return $this->db->get("customer")->row_object();
   }
 
   public function getAllProvinsi()
   {
+    $this->db->order_by('id_pulau', 'ASC');
     return $this->db->get("provinsi")->result();
   }
 }
