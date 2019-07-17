@@ -59,7 +59,7 @@
           <label for="total" class="col-sm-5 col-form-label">Total Pembayaran</label>
           <div class="col-sm-7">
             <input type="text" name="total" id="total" value="<?php if ($this->input->get('invoice')) {
-                                                                echo $total[0]->total_harga;
+                                                                echo number_format($total[0]->total_harga, 0, ",", ".");
                                                               } ?>" placeholder="<?php ?>" class="form-control form-control-sm" disabled>
           </div>
         </div>

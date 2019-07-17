@@ -2,7 +2,7 @@
 
 <!-- Title Page -->
 <section class="bg-title-page p-t-40 p-b-50 flex-col-c-m slide" style="background-image: url(<?php echo base_url('assets/fashe/images/banner_carousel_product.jpg') ?>);">
-	<!-- <h2 class="l-text2 t-center">CHECKOUT</h2> -->
+  <!-- <h2 class="l-text2 t-center">CHECKOUT</h2> -->
 </section>
 
 <div class="container mt-70 m-b-103">
@@ -27,59 +27,61 @@
             <span><?= $profile->address; ?></span>
           </div>
           <div class="col-3 text-right">
-            <a href="<?= site_url()."/profile"?>" class="font-weight-bold text-rum">CHANGE</a>
+            <a href="<?= site_url() . "/profile" ?>" class="font-weight-bold text-rum">CHANGE</a>
           </div>
         </div>
       </div>
     </div>
   </div>
-  
+
   <div class="row">
     <div class="col">
       <div class="mt-40">
-        <? // form_open(site_url().'/cart/update') ?>
-          <div class="container-table-cart pos-relative">
-            <div class="wrap-table-shopping-cart bgwhite">
-              <table id="detail_cart" class="table table-shopping-cart mb-0">
-                <thead  class="thead-light">
-                  <tr class="table-head">
-                    <th scope="col-2"></th>
-                    <th scope="col-3">Product</th>
-                    <th scope="col-2">Price</th>
-                    <th scope="col-2">Quantity</th>
-                    <th scope="col-3">Total</th>
+        <? // form_open(site_url().'/cart/update') 
+        ?>
+        <div class="container-table-cart pos-relative">
+          <div class="wrap-table-shopping-cart bgwhite">
+            <table id="detail_cart" class="table table-shopping-cart mb-0">
+              <thead class="thead-light">
+                <tr class="table-head">
+                  <th scope="col-2"></th>
+                  <th scope="col-3">Product</th>
+                  <th scope="col-2">Price</th>
+                  <th scope="col-2">Quantity</th>
+                  <th scope="col-3">Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php foreach ($carts as $cart) : ?>
+                  <tr>
+                    <td>
+                      <div class="table-img-product mx-auto">
+                        <img src="<?= base_url('assets/img/produk/' . $cart->url_image) ?>" alt="IMG-">
+                      </div>
+                    </td>
+                    <td><?= $cart->nama_produk; ?></td>
+                    <td>RP <?= number_format($cart->harga_produk, 0, ",", ".") ?></td>
+                    <td>
+                      <span><?= $cart->qty_cart; ?></span>
+                    </td>
+                    <td>RP <?= number_format($cart->total_harga_produk, 0, ",", ".") ?></td>
                   </tr>
-                </thead>
-                <tbody>
-                  <?php foreach($carts as $cart): ?>
-                    <tr>
-                      <td>
-                        <div class="table-img-product mx-auto">
-                          <img src="<?= base_url('assets/img/produk/'.$cart->url_image)?>" alt="IMG-">
-                        </div>
-                      </td>
-                      <td><?= $cart->nama_produk; ?></td>
-                      <td>RP <?= $cart->harga_produk ?></td>
-                      <td>
-                        <span><?= $cart->qty_cart; ?></span>
-                      </td>
-                      <td>RP <?= $cart->total_harga_produk; ?></td>
-                    </tr>
-                  <?php endforeach; ?>
-                  <tr class="table-head thead-light">
-                    <th scope="col-2"></th>
-                    <th scope="col-3"></th>
-                    <th scope="col-2"></th>
-                    <th scope="col-2">GRAND TOTAL</th>
-                    <th scope="col-3">Rp <?= $grand_total->grand_total; ?></th>
-                  </tr>
-                </tbody>
-                <!-- <thead  class="thead-light"> -->
-                <!-- </thead> -->
-              </table>
-            </div>
+                <?php endforeach; ?>
+                <tr class="table-head thead-light">
+                  <th scope="col-2"></th>
+                  <th scope="col-3"></th>
+                  <th scope="col-2"></th>
+                  <th scope="col-2">GRAND TOTAL</th>
+                  <th scope="col-3">Rp <?= number_format($grand_total->grand_total, 0, ",", ".") ?></th>
+                </tr>
+              </tbody>
+              <!-- <thead  class="thead-light"> -->
+              <!-- </thead> -->
+            </table>
           </div>
-        <? // form_close(); ?>
+        </div>
+        <? // form_close(); 
+        ?>
       </div>
     </div>
   </div>
@@ -97,8 +99,9 @@
         </div>
         <div class="row m-t-20">
           <div class="col-5">
-            <img src="<?= base_url().'assets\img\logos\Logo-BCA-Big.png'?>" alt="logo-BCA" width="70px" class="py-3 m-r-32" style="float:left;">
-            <!-- <img src="<? //base_url().'assets\img\logos\Logo-BCA-Big.png'?>" alt="Logo-BCA"> -->
+            <img src="<?= base_url() . 'assets\img\logos\Logo-BCA-Big.png' ?>" alt="logo-BCA" width="70px" class="py-3 m-r-32" style="float:left;">
+            <!-- <img src="<? //base_url().'assets\img\logos\Logo-BCA-Big.png'
+                            ?>" alt="Logo-BCA"> -->
             <span>Bank BCA (Manually Checked)</span>
             <p style="font-size:12px;">Accept transfer from all banks</p>
           </div>
@@ -116,9 +119,9 @@
     <div class="col-12 d-flex justify-content-end">
       <div class="size10 trans-0-4 m-t-10 m-b-10">
         <!-- <a href="" class="nounderline"> -->
-          <button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4" onclick="location.href='<?= site_url().'/checkout/makeorder/' ;?>'">
-            MAKE ORDER
-          </button>
+        <button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4" onclick="location.href='<?= site_url() . '/checkout/makeorder/'; ?>'">
+          MAKE ORDER
+        </button>
         <!-- </a> -->
       </div>
     </div>

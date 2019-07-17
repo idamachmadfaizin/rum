@@ -155,11 +155,11 @@
 									</a>
 
 									<!-- <span class="block2-oldprice m-text7 p-r-5">
-                      												$29.50
-                    												</span> -->
+                      													$29.50
+                    													</span> -->
 
 									<span class="block2-price m-text6 p-r-5">
-										Rp <?php echo $produk->harga_produk ?>
+										Rp <?php echo number_format($produk->harga_produk, 0, ",", ".") ?>
 									</span>
 								</div>
 							</div>

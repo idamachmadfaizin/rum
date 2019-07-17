@@ -123,7 +123,7 @@
                                             <tr>
                                                 <td class="serial"><?= $offset; ?></td>
                                                 <td><span><?= $produks->nama_produk; ?></span></td>
-                                                <td>Rp <span class="count"><?= $produks->harga_produk; ?></span></td>
+                                                <td>Rp <span class="count"><?= number_format($produks->harga_produk, 0, ",", ".") ?></span></td>
                                                 <td><span><?= $produks->nama_kategori; ?></span></td>
                                                 <!-- <td><span>cumi_kupas</span></td> -->
                                                 <td><span><?= $produks->deskripsi_produk ?></span></td>

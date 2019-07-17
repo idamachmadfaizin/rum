@@ -47,7 +47,7 @@
 			</h4>
 
 			<span class="m-text17">
-				Rp <?php echo $detailProduk[0]['harga_produk'] ?>
+				Rp <?php echo number_format($detailProduk[0]['harga_produk'], 0, ",", ".") ?>
 			</span>
 
 			<!--  -->

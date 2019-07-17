@@ -107,45 +107,16 @@ class Checkout extends CI_Controller
 			$dk_usia = 5;
 		}
 
-		// convert data provinsi customer to angka [1-5]
-		$provinces = $checkout->getAllProvinsi();
-		foreach ($provinces as $province) {
-			if ($province->id_pulau == 1 || $province->id_pulau == 3) {
-				$clusterProvinsi[0][] = $province->id_provinsi;
-			} elseif ($province->id_pulau == 2) {
-				$clusterProvinsi[1][] = $province->id_provinsi;
-			} elseif ($province->id_pulau == 6) {
-				$clusterProvinsi[2][] = $province->id_provinsi;
-			} elseif ($province->id_pulau == 5) {
-				$clusterProvinsi[3][] = $province->id_provinsi;
-			} elseif ($province->id_pulau == 4 || $province->id_pulau == 7) {
-				$clusterProvinsi[4][] = $province->id_provinsi;
-			}
-		}
-		//sort key in array
-		ksort($clusterProvinsi);
-
-		//mencari lokasi customer berada dicluster berapa?
-		for ($i = 0; $i < count($clusterProvinsi); $i++) {
-			$keySearch = array_search($provinsiCust->provinsi, $clusterProvinsi[$i]);
-			if ($keySearch) {
-				$dk_lokasi = $i + 1; //mendapatkan hasil cluster lokasi provinsi
-			}
+		// convert data jenis kelamin customer to angka [1, 2]
+		$jenisKelamin = $jenisKelamin->jenis_kelamin;
+		if ($jenisKelamin == 'Pria') {
+			$dk_jenisKelamin = 1;
+		} elseif ($age == 'Wanita') {
+			$dk_jenisKelamin = 2;
 		}
 
-		//convert data agama customer to angka [1-5]
-		$agama = $agama->id_agama;
-		if ($agama == 2) {
-			$dk_agama = 1;
-		} else if ($agama == 1) {
-			$dk_agama = 2;
-		} else if ($agama == 3) {
-			$dk_agama = 3;
-		} else if ($agama == 6) {
-			$dk_agama = 4;
-		} else {
-			$dk_agama = 5;
-		}
+		//convert data pendapatan customer to angka [1-5]
+		$dk_pendapatan = (int) $pendapatan->pendapatan;
 
 		//convert data pendidikan customer to angka [1-5]
 		$pendidikan = $pendidikan->id_pendidikan; //get object
@@ -170,12 +141,12 @@ class Checkout extends CI_Controller
 				$arrInsert2 = array();
 				$arrInsert2["id_kmeans"] = $keyKmeans->id_kmeans;
 				$arrInsert2["id_produk"] = $keyId_produks["id_produk"];
-				if ($keyKmeans->id_kmeans == 1) { //jika idkmeans == 1(lokasi)
-					$arrInsert2["nilai"] = $dk_lokasi;
-				} elseif ($keyKmeans->id_kmeans == 2) { //jika idkmeans == 2(usia)
+				if ($keyKmeans->id_kmeans == 1) { //jika idkmeans == 1(usia)
 					$arrInsert2["nilai"] = $dk_usia;
-				} elseif ($keyKmeans->id_kmeans == 3) { //jika idkmeans == 3(agama)
-					$arrInsert2["nilai"] = $dk_agama;
+				} elseif ($keyKmeans->id_kmeans == 2) { //jika idkmeans == 2(jenis kelamin)
+					$arrInsert2["nilai"] = $dk_jenisKelamin;
+				} elseif ($keyKmeans->id_kmeans == 3) { //jika idkmeans == 3(pendapatan)
+					$arrInsert2["nilai"] = $dk_pendapatan;
 				} elseif ($keyKmeans->id_kmeans == 4) { //jika idkmeans == 4(pendidikan)
 					$arrInsert2["nilai"] = $dk_pendidikan;
 				}

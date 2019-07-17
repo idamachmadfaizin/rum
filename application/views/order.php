@@ -28,7 +28,7 @@
 								<th scope="row"><a href="<?= site_url('order/show/' . $order->id_order) ?>"><?= $offset ?></a></th>
 								<td><?= $order->tgl_order ?></td>
 								<td><?= $order->id_order ?></td>
-								<td>Rp <?= $order->total_harga ?></td>
+								<td>Rp <?= number_format($order->total_harga, 0, ",", ".") ?></td>
 								<td><?= $order->status ?></td>
 							</tr>
 						<?php endforeach; ?>

@@ -214,7 +214,7 @@
 													<!-- end Modal -->
 												</td>
 												<td><span><?= $order->tgl_order ?></span></td>
-												<td><span><?= $order->total_harga ?></span></td>
+												<td><span><?= number_format($order->total_harga, 0, ",", ".") ?></span></td>
 												<td class="avatar">
 													<!-- TF -->
 													<div class="round-img">

@@ -50,8 +50,8 @@
                     <td><span><?= $data->nama_customer ?></span></td>
                     <td><span><?= $data->nama_produk ?></span></td>
                     <td><span><?= $data->jumlah ?></span></td>
-                    <td class="count"><span><?= $data->harga_satuan ?></span></td>
-                    <td class="count"><span><?= $data->total_harga ?></span></td>
+                    <td class="count"><span><?= number_format($data->harga_satuan, 0, ",", ".") ?></span></td>
+                    <td class="count"><span><?= number_format($data->total_harga, 0, ",", ".") ?></span></td>
                 </tr>
                 <?php $number++; ?>
             <?php endforeach; ?>
