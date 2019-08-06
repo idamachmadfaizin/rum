@@ -50,6 +50,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 $route['default_controller'] = 'landing_page';
+// $route['default_controller'] = 'maintenance_mode';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 $route['verify/(:any)'] = "/home/verify/$1";
+// $route['(:any)'] = "maintenance_mode";

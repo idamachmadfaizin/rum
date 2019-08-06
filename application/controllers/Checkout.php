@@ -12,13 +12,15 @@ class Checkout extends CI_Controller
 		parent::__construct();
 
 		$this->load->model('checkout_model');
-		$this->load->model('cart_model');
+		// $this->load->model('cart_model');
 		$this->load->model('profile_model');
 		$this->load->model('Rum_model');
 	}
 
 	public function index()
 	{
+		require_once('cart_header.php');
+
 		//get data profile
 		$data['profile'] = $this->profile_model->getById();
 
@@ -42,6 +44,8 @@ class Checkout extends CI_Controller
 
 	public function makeorder()
 	{
+		require_once('cart_header.php');
+
 		$checkout = $this->checkout_model;
 
 		// get grand total

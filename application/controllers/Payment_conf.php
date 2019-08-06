@@ -14,6 +14,8 @@ class Payment_conf extends CI_Controller
 
   public function index()
   {
+    require_once('cart_header.php');
+
     $payment = $this->payment_conf_model;
 
     $data['no_invoice'] = $payment->getOrders();

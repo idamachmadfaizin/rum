@@ -13,6 +13,8 @@ class Landing_page extends CI_Controller
 
   public function index()
   {
+    require_once('cart_header.php');
+
     $kategori = $this->rum_model->getKategori();
     $kategori = $kategori->result_array();
     $data['kategori'] = $kategori;

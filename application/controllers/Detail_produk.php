@@ -13,6 +13,8 @@ class Detail_produk extends CI_Controller
 
     public function detail($url_produk)
     {
+        require_once('cart_header.php');
+
         // Get Detail Produk
         $query = $this->rum_model->getDetailProduk($url_produk);
         $data['detailProduk'] = $query->result_array();

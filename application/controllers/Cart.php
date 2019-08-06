@@ -1,16 +1,18 @@
-<?php 
-defined('BASEPATH') OR exit('No direct script access allowed');
+<?php
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Cart extends CI_Controller {
+class Cart extends CI_Controller
+{
 
-	public function __construct() {
-		parent:: __construct();
-
-    // $this->load->library('cart');
-		$this->load->model('cart_model');
+	public function __construct()
+	{
+		parent::__construct();
 	}
 
-	function index() {
+	function index()
+	{
+		require_once('cart_header.php');
+
 		$cart = $this->cart_model->get_cart();
 		$data['cart'] = $cart;
 
@@ -22,6 +24,8 @@ class Cart extends CI_Controller {
 
 	public function delete($id_cart)
 	{
+		$this->load->model('cart_model');
+
 		$this->cart_model->delete_produk($id_cart);
 		// $this->update_total_cart();
 		redirect('cart');
@@ -29,6 +33,7 @@ class Cart extends CI_Controller {
 
 	public function update()
 	{
+		$this->load->model('cart_model');
 		$cart = $this->cart_model->get_cart();
 
 		$push = array();
