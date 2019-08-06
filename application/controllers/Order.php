@@ -7,13 +7,13 @@ class Order extends CI_Controller
   {
     parent::__construct();
 
-    $this->load->model('order_model');
+    $this->load->model('Order_model');
     $this->load->library('pagination');
   }
 
   public function index($offset = 0)
   {
-    $order = $this->order_model;
+    $order = $this->Order_model;
 
     $config['base_url'] = site_url('order/index');
     $config['total_rows'] = $order->getTotalRow();
@@ -48,7 +48,7 @@ class Order extends CI_Controller
 
   public function show($id)
   {
-    $order = $this->order_model->find($id);
+    $order = $this->Order_model->find($id);
     $data['detail_order'] = '';
   }
 }

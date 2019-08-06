@@ -7,13 +7,13 @@ class Order extends CI_Controller
   {
     parent::__construct();
 
-    $this->load->model('admin/order_model');
+    $this->load->model('admin/Order_model');
     $this->load->library('pagination');
   }
 
   public function index($offset = 0)
   {
-    $orderModel = $this->order_model;
+    $orderModel = $this->Order_model;
 
     // Pagination
     $config['base_url'] = site_url('admin/order/index');
@@ -55,7 +55,7 @@ class Order extends CI_Controller
 
   public function updateStatus()
   {
-    $orderModel = $this->order_model;
+    $orderModel = $this->Order_model;
 
     $id = $orderModel->updateStatus();
 

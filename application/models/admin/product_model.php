@@ -1,6 +1,6 @@
 <?php
 
-class product_model extends CI_Model
+class Product_model extends CI_Model
 {
     private $_table = "produk";
     private $_tImage = "image";

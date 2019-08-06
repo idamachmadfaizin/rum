@@ -1,6 +1,6 @@
 <?php
 
-class dashboard_model extends CI_Model
+class Dashboard_model extends CI_Model
 {
   private $_tOrders = 'orders';
   private $_tKP = 'konfirmasi_pembayaran';

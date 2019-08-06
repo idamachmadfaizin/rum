@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 | -------------------------------------------------------------------
@@ -76,9 +76,12 @@ $query_builder = TRUE;
 $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'localhost',
-	'username' => 'root',
-	'password' => '',
-	'database' => 'rum',
+	// 'username' => 'root',
+	// 'password' => '',
+	// 'database' => 'rum',
+	'username' => 'rumseafo_rumseafo',
+	'password' => 'adminrum123',
+	'database' => 'rumseafo_rum',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,

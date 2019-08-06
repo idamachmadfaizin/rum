@@ -8,13 +8,13 @@ class Payment_conf extends CI_Controller
   {
     parent::__construct();
 
-    $this->load->model('payment_conf_model');
+    $this->load->model('Payment_conf_model');
     $this->load->helper('file');
   }
 
   public function index()
   {
-    $payment = $this->payment_conf_model;
+    $payment = $this->Payment_conf_model;
 
     $data['no_invoice'] = $payment->getOrders();
 
@@ -25,14 +25,14 @@ class Payment_conf extends CI_Controller
   }
   public function getSingle($id)
   {
-    $payment = $this->payment_conf_model;
+    $payment = $this->Payment_conf_model;
 
     return $payment->getSingleData('id_order', $id);
   }
 
   public function simpan()
   {
-    $payment = $this->payment_conf_model;
+    $payment = $this->Payment_conf_model;
 
     $validation = $this->form_validation;
     $validation->set_rules($payment->rules());

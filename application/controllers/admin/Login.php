@@ -7,8 +7,8 @@ class Login extends CI_Controller
     {
         parent::__construct();
 
-        $this->load->model('admin/loginAdmin_model');
-        // $this->load->model('login_model');
+        $this->load->model('admin/LoginAdmin_model');
+        // $this->load->model('Login_model');
     }
 
     public function index()
@@ -32,7 +32,7 @@ class Login extends CI_Controller
                 'password_admin' => md5($password)
             );
 
-            $admin = $this->loginAdmin_model->login($where)->row_array();
+            $admin = $this->LoginAdmin_model->login($where)->row_array();
 
             if ($admin) {
                 $_SESSION['id_admin'] = $admin['id_admin'];

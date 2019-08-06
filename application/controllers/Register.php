@@ -8,7 +8,7 @@ class Register extends CI_Controller
   {
     parent::__construct();
 
-    $this->load->model('register_model');
+    $this->load->model('Register_model');
     $this->load->helper('string');
   }
 
@@ -50,7 +50,7 @@ class Register extends CI_Controller
         'email_customer' => $customer['email_customer']
       );
 
-      $cek = $this->register_model->cek_exist($where)->num_rows();
+      $cek = $this->Register_model->cek_exist($where)->num_rows();
 
       //cek email exist?
       if ($cek > 0) {
@@ -62,7 +62,7 @@ class Register extends CI_Controller
         $customer['email_verification_code'] = $verificationText;
 
         //insert data register and get id
-        $id = $this->register_model->register($customer);
+        $id = $this->Register_model->register($customer);
 
         //make session id_customer
         if ($id) {
@@ -113,11 +113,11 @@ class Register extends CI_Controller
     $verificationText = random_string('alnum', 45);
 
     //get email customer
-    $email = $this->register_model->getEmail($id);
+    $email = $this->Register_model->getEmail($id);
 
     //update verification code
     $update['email_verification_code'] = $verificationText;
-    $this->register_model->updateVerficationCode($id, $update);
+    $this->Register_model->updateVerficationCode($id, $update);
 
     // konfigurasi pengiriman
     $this->email->set_newline("\r\n");
@@ -177,7 +177,7 @@ class Register extends CI_Controller
 
   function verifyEmail($code)
   {
-    $result = $this->register_model->activatingAccount($code);
+    $result = $this->Register_model->activatingAccount($code);
     if ($result != false) {
       redirect();
     } else {

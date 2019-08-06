@@ -1,15 +1,15 @@
 <?php
 $CI = &get_instance();
 
-$CI->load->model('cart_model');
+$CI->load->model('Cart_model');
 
-$cart = $CI->cart_model->get_cart();
+$cart = $CI->Cart_model->get_cart();
 $data['cart'] = $cart;
 
-$grand_total = $CI->cart_model->grand_total();
+$grand_total = $CI->Cart_model->grand_total();
 $data['grand_total'] = $grand_total->row_array();
 
-$num_notif = $CI->cart_model->count();
+$num_notif = $CI->Cart_model->count();
 
 ?>
 

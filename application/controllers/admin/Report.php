@@ -7,13 +7,13 @@ class Report extends CI_Controller
   {
     parent::__construct();
 
-    $this->load->model('admin/report_model');
+    $this->load->model('admin/Report_model');
     $this->load->library('pagination');
   }
 
   public function index($offset = 0)
   {
-    $report = $this->report_model;
+    $report = $this->Report_model;
 
     $config['base_url'] = site_url('admin/report/index');
     $config['per_page'] = 10;
@@ -45,7 +45,7 @@ class Report extends CI_Controller
 
   public function pdf($start = "", $end = "")
   {
-    $report = $this->report_model;
+    $report = $this->Report_model;
     $json = $report->getTableContentPdf();
 
     // $json = $this->input->post('data');

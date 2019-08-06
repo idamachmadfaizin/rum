@@ -1,6 +1,6 @@
 <?php
 
-class kmeans_model extends CI_Model
+class Kmeans_model extends CI_Model
 {
   private $_table = "k_means";
   private $_tDK = "detail_kmeans";

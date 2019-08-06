@@ -1,6 +1,6 @@
 <?php
 
-class category_model extends CI_Model
+class Category_model extends CI_Model
 {
   private $_table = "kategori";
 
@@ -10,9 +10,11 @@ class category_model extends CI_Model
   public function rules()
   {
     return [
-      ['field' => 'nama_kategori',
-       'label' => 'Nama Kategori',
-       'rules' => 'trim|required']
+      [
+        'field' => 'nama_kategori',
+        'label' => 'Nama Kategori',
+        'rules' => 'trim|required'
+      ]
     ];
   }
   public function selectAll($limit, $offset)
@@ -48,7 +50,7 @@ class category_model extends CI_Model
 
     if ($url_image_kategori) {
       $this->url_image_kategori = $url_image_kategori;
-    }else {
+    } else {
       $this->url_image_kategori = $this->_uploadImage();
     }
     return $this->db->update($this->_table, $this, array('id_kategori' => $id));
@@ -57,13 +59,13 @@ class category_model extends CI_Model
   public function disable($id)
   {
     $this->db->where('id_kategori', $id);
-    return $this->db->update($this->_table, array('status_kategori'=> 1));
+    return $this->db->update($this->_table, array('status_kategori' => 1));
   }
 
   public function enable($id)
   {
     $this->db->where('id_kategori', $id);
-    return $this->db->update($this->_table, array('status_kategori'=> 0));
+    return $this->db->update($this->_table, array('status_kategori' => 0));
   }
 
   private function _uploadImage()
@@ -80,8 +82,8 @@ class category_model extends CI_Model
 
     if ($this->upload->do_upload('file-input')) {
       return $this->upload->data("file_name");
-    }else {
+    } else {
       return "default.jpg";
-    }    
+    }
   }
 }

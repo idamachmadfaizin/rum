@@ -6,7 +6,7 @@ class Dashboard extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('admin/dashboard_model');
+        $this->load->model('admin/Dashboard_model');
 
         if (!$this->session->userdata('id_admin')) {
             redirect('admin/login');
@@ -15,7 +15,7 @@ class Dashboard extends CI_Controller
 
     public function index()
     {
-        $dashboard = $this->dashboard_model;
+        $dashboard = $this->Dashboard_model;
         $dateNow = date('Y-m-d');
 
         $order_today = $dashboard->orderToday($dateNow);
@@ -40,7 +40,7 @@ class Dashboard extends CI_Controller
 
     public function updateStatus()
     {
-        $dashboard = $this->dashboard_model;
+        $dashboard = $this->Dashboard_model;
 
         $id = $dashboard->updateStatus();
 

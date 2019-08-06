@@ -13,14 +13,14 @@ class Checkout extends CI_Controller
 
 		$this->load->model('checkout_model');
 		$this->load->model('cart_model');
-		$this->load->model('profile_model');
+		$this->load->model('Profile_model');
 		$this->load->model('Rum_model');
 	}
 
 	public function index()
 	{
 		//get data profile
-		$data['profile'] = $this->profile_model->getById();
+		$data['profile'] = $this->Profile_model->getById();
 
 		// cek data is completed
 		foreach ($data['profile'] as $coloumnProfile) {

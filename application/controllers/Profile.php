@@ -8,26 +8,26 @@ class Profile extends CI_Controller
 	{
 		parent::__construct();
 
-		$this->load->model('profile_model');
+		$this->load->model('Profile_model');
 	}
 
 	public function index()
 	{
 		//get master select options    
-		// $data['agamas'] = $this->profile_model->masterAgama();
-		$data['pendidikans'] = $this->profile_model->masterPendidikan();
-		$data['provinsis'] = $this->profile_model->masterProvinsi();
+		// $data['agamas'] = $this->Profile_model->masterAgama();
+		$data['pendidikans'] = $this->Profile_model->masterPendidikan();
+		$data['provinsis'] = $this->Profile_model->masterProvinsi();
 		//end
 
 		//get profile customer
-		$data['profile'] = $this->profile_model->getById();
+		$data['profile'] = $this->Profile_model->getById();
 
 		$this->load->view('profile', $data);
 	}
 
 	public function update()
 	{
-		$profile = $this->profile_model;
+		$profile = $this->Profile_model;
 
 		$validation = $this->form_validation;
 		$validation->set_rules($profile->rules());
@@ -43,8 +43,8 @@ class Profile extends CI_Controller
 	public function getKabupaten()
 	{
 		$id = $this->input->post('provinsi');
-		$regencies = $this->profile_model->getKabupaten($id);
-		$profile = $this->profile_model->getById();
+		$regencies = $this->Profile_model->getKabupaten($id);
+		$profile = $this->Profile_model->getById();
 
 		$output = "";
 		foreach ($regencies as $regency) {
@@ -61,8 +61,8 @@ class Profile extends CI_Controller
 	public function getKota()
 	{
 		$id = $this->input->post('kabupaten');
-		$cities = $this->profile_model->getKota($id);
-		$profile = $this->profile_model->getById();
+		$cities = $this->Profile_model->getKota($id);
+		$profile = $this->Profile_model->getById();
 
 		$output = "";
 		foreach ($cities as $city) {

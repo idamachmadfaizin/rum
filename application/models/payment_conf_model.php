@@ -1,6 +1,6 @@
 <?php
 
-class payment_conf_model extends CI_Model
+class Payment_conf_model extends CI_Model
 {
   private $_table = 'konfirmasi_pembayaran';
 

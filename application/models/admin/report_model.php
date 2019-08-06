@@ -1,5 +1,5 @@
 <?php
-class report_model extends CI_Model
+class Report_model extends CI_Model
 {
   private $_tOrder = "orders";
   private $_tDO = "detail_order";

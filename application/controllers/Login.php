@@ -8,7 +8,7 @@ class Login extends CI_Controller
   {
     parent::__construct();
 
-    $this->load->model('login_model');
+    $this->load->model('Login_model');
   }
 
   public function index()
@@ -24,7 +24,7 @@ class Login extends CI_Controller
         'password_customer' => md5($password)
       );
 
-      $customer = $this->login_model->login($where)->row_array();
+      $customer = $this->Login_model->login($where)->row_array();
 
       if ($customer) {
         //cek status active email == NO

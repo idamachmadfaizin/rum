@@ -7,14 +7,14 @@ class Kmeans extends CI_Controller
   {
     parent::__construct();
 
-    $this->load->model('admin/kmeans_model');
+    $this->load->model('admin/Kmeans_model');
     $this->load->library('pagination');
     $this->load->dbforge();
   }
 
   public function index($offset = 0)
   {
-    $kmeans = $this->kmeans_model;
+    $kmeans = $this->Kmeans_model;
 
     $config['base_url'] = site_url('admin/kmeans/index/');
     $config['total_rows'] = $kmeans->countDetailKmeans();
@@ -52,7 +52,7 @@ class Kmeans extends CI_Controller
 
   public function insertUpdate()
   {
-    $kmeans = $this->kmeans_model;
+    $kmeans = $this->Kmeans_model;
     $post   = $this->input->post();
 
     $validation = $this->form_validation;
@@ -81,7 +81,7 @@ class Kmeans extends CI_Controller
   //reallocate after added new variable or deleted variable
   public function reAllocate($insertedId = 0)
   {
-    $kmeans = $this->kmeans_model;
+    $kmeans = $this->Kmeans_model;
 
     $result    = $kmeans->getAllDetailKmeans();
     $numDK     = $result->num_rows();
@@ -126,7 +126,7 @@ class Kmeans extends CI_Controller
   // Fungsi Delete K-means
   public function delete($id_kmeans)
   {
-    $kmeans = $this->kmeans_model;
+    $kmeans = $this->Kmeans_model;
 
     if ($this->deleteDetailKmeans($id_kmeans)) {
       if ($kmeans->deleteKmeans($id_kmeans)) {
@@ -139,7 +139,7 @@ class Kmeans extends CI_Controller
   }
   public function deleteDetailKmeans($id_kmeans)
   {
-    $kmeans = $this->kmeans_model;
+    $kmeans = $this->Kmeans_model;
 
     return $kmeans->deleteDetailKmeans($id_kmeans);
   }
@@ -147,7 +147,7 @@ class Kmeans extends CI_Controller
 
   public function detailKmeans()
   {
-    $kmeans = $this->kmeans_model;
+    $kmeans = $this->Kmeans_model;
     $output = '';
     $output .= '  
       <div class="table-stats order-table ov-h">
@@ -194,7 +194,7 @@ class Kmeans extends CI_Controller
 
   public function editDetailKmeans()
   {
-    $kmeans = $this->kmeans_model;
+    $kmeans = $this->Kmeans_model;
 
     if ($kmeans->updateDetailKmeans()) {
       echo "Data updated!";

@@ -7,13 +7,13 @@ class Product extends CI_Controller
     {
         parent::__construct();
 
-        $this->load->model('admin/product_model');
+        $this->load->model('admin/Product_model');
         $this->load->library('pagination');
     }
 
     public function index($offset = 0, $id = 0)
     {
-        $produk = $this->product_model;
+        $produk = $this->Product_model;
 
         $config['base_url'] = site_url('admin/product/index/');
         $config['total_rows'] = $produk->getTotalRow();
@@ -59,7 +59,7 @@ class Product extends CI_Controller
 
     public function edit($id_product)
     {
-        $produk = $this->product_model;
+        $produk = $this->Product_model;
         $kategori = $produk->getKategori();
         $data['kategoris'] = $kategori;
         $data['singleProduk'] = $produk->getSingleProduk($id_product);
@@ -69,7 +69,7 @@ class Product extends CI_Controller
 
     public function insertUpdate()
     {
-        $produk = $this->product_model;
+        $produk = $this->Product_model;
         $post = $this->input->post();
 
         $id = $post['id_produk'];
@@ -109,7 +109,7 @@ class Product extends CI_Controller
 
     public function disable($id)
     {
-        $produk = $this->product_model;
+        $produk = $this->Product_model;
 
         $disable = $produk->disable($id);
         if ($disable) {
@@ -120,7 +120,7 @@ class Product extends CI_Controller
 
     public function enable($id)
     {
-        $produk = $this->product_model;
+        $produk = $this->Product_model;
 
         $enable = $produk->enable($id);
         if ($enable) {

@@ -6,7 +6,7 @@ class Topdf extends CI_Controller
   {
     parent:: __construct();
 
-    $this->load->model('admin/report_model');
+    $this->load->model('admin/Report_model');
     $this->load->library('pdf');
   }
 
@@ -33,7 +33,7 @@ class Topdf extends CI_Controller
     $pdf->Cell(25,6,'total_harga',1,0);
     $pdf->SetFont('Arial','',10);
 
-    $report = $this->report_model->getTableContent();
+    $report = $this->Report_model->getTableContent();
     foreach ($report as $row){
       $pdf->Cell(20,6,$row->id_order,1,0);
       $pdf->Cell(20,6,$row->tgl_order,1,0);
