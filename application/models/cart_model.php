@@ -1,9 +1,10 @@
 <?php
 
-class cart_model extends CI_Model 
+class Cart_model extends CI_Model
 {
-  
-  function get_cart(){
+
+  function get_cart()
+  {
     $id_customer = $this->session->id_customer;
 
     $this->db->select('c.id_cart, p.nama_produk, c.qty_cart, p.harga_produk, (p.harga_produk * c.qty_cart) AS total_harga_produk, p.id_produk, p.url_produk, i.url_image');
@@ -54,7 +55,7 @@ class cart_model extends CI_Model
   function get_grand_total()
   {
     $query = "SELECT SUM(total) AS grand_total FROM (SELECT (qty_cart*harga_produk) total FROM cart JOIN produk ON cart.id_produk = produk.id_produk) AS total";
-    
+
     return $this->db->query($query);
   }
 

@@ -9,11 +9,17 @@ class Landing_page extends CI_Controller
     parent::__construct();
 
     $this->load->model('rum_model');
+    $this->load->model('Cart_model');
   }
 
   public function index()
   {
-    require_once('cart_header.php');
+    $cart = $this->Cart_model->get_cart();
+    $data['cart'] = $cart;
+    $grand_total = $this->Cart_model->grand_total();
+    $data['grand_total'] = $grand_total->row_array();
+    $data['num_notif'] = $this->Cart_model->count();
+
 
     $kategori = $this->rum_model->getKategori();
     $kategori = $kategori->result_array();
