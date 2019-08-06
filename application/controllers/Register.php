@@ -14,16 +14,12 @@ class Register extends CI_Controller
 
   public function index()
   {
-    require_once('cart_header.php');
-
-    $this->load->view('register', $data);
+    $this->load->view('register');
   }
 
   //func for redirect user not verifed
   public function verify($id = null)
   {
-    require_once('cart_header.php');
-
     if ($id == null) {
       $id = $this->session->id_customer;
     }

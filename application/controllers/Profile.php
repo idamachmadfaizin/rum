@@ -13,8 +13,6 @@ class Profile extends CI_Controller
 
 	public function index()
 	{
-		require_once('cart_header.php');
-
 		//get master select options    
 		// $data['agamas'] = $this->profile_model->masterAgama();
 		$data['pendidikans'] = $this->profile_model->masterPendidikan();

@@ -1,3 +1,18 @@
+<?php
+$CI = &get_instance();
+
+$CI->load->model('cart_model');
+
+$cart = $CI->cart_model->get_cart();
+$data['cart'] = $cart;
+
+$grand_total = $CI->cart_model->grand_total();
+$data['grand_total'] = $grand_total->row_array();
+
+$num_notif = $CI->cart_model->count();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -79,7 +94,7 @@
 						</ul>
 
 						<div class="header-cart-total">
-							Total: RP <?= $grand_total['grand_total'] ?>
+							Total: RP <?= $data['grand_total']['grand_total'] ?>
 						</div>
 
 						<div class="header-cart-buttons">
@@ -195,7 +210,7 @@
 								</ul>
 
 								<div class="header-cart-total">
-									Total: RP <?= $grand_total['grand_total'] ?>
+									Total: RP <?= $data['grand_total']['grand_total'] ?>
 								</div>
 
 								<div class="header-cart-buttons">
@@ -282,7 +297,7 @@
 							</ul>
 
 							<div class="header-cart-total">
-								Total: RP <?= $grand_total['grand_total'] ?>
+								Total: RP <?= $data['grand_total']['grand_total'] ?>
 							</div>
 
 							<div class="header-cart-buttons">

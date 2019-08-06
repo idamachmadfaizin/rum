@@ -13,8 +13,6 @@ class Login extends CI_Controller
 
   public function index()
   {
-    require_once('cart_header.php');
-
     $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
     $this->form_validation->set_rules('password', 'Password', 'trim|required');
 
@@ -42,6 +40,6 @@ class Login extends CI_Controller
         redirect('/login');
       }
     }
-    $this->load->view('login', $data);
+    $this->load->view('login');
   }
 }

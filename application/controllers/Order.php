@@ -13,8 +13,6 @@ class Order extends CI_Controller
 
   public function index($offset = 0)
   {
-    require_once('cart_header.php');
-
     $order = $this->order_model;
 
     $config['base_url'] = site_url('order/index');
